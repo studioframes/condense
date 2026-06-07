@@ -1,0 +1,90 @@
+name: Bug Report
+description: File a structured bug report to help us improve Condense
+title: "[BUG]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Thank you for taking the time to report a bug!
+        Please fill out the structured form below to help us reproduce and resolve the issue quickly.
+
+  - type: dropdown
+    id: integration_method
+    attributes:
+      label: Integration Method
+      description: How are you consuming the Condense package?
+      options:
+        - "Standalone CLI / Standalone Server (npx condense-api)"
+        - "Mounted Express Middleware/Router (condenseApp)"
+        - "Programmatic Utilities (optimizeText, optimizeImage, optimizeMediaStream)"
+    validations:
+      required: true
+
+  - type: input
+    id: file_format
+    attributes:
+      label: File Format / MIME Type
+      description: What type of file causes the issue?
+      placeholder: "e.g. text/html, image/png, video/mp4"
+    validations:
+      required: true
+
+  - type: input
+    id: file_size
+    attributes:
+      label: File Size
+      description: Approximate size of the uploaded file.
+      placeholder: "e.g. 15MB"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: optimization_method
+    attributes:
+      label: Optimization Method
+      options:
+        - "quality"
+        - "extreme"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the Bug
+      description: A clear and concise description of the observed issue.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Tell us how to reproduce the error. Code snippets or CLI commands are highly appreciated!
+      placeholder: |
+        1. Initialize server using ...
+        2. Send POST request with file ...
+        3. See error stack trace ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Information
+      description: Details about the system where Condense is running.
+      placeholder: |
+        - OS: [e.g. macOS Sonoma, Ubuntu 22.04]
+        - Node.js Version: [e.g. v20.11.0]
+        - FFmpeg Version: [e.g. v6.0]
+    validations:
+      required: true
