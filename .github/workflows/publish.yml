@@ -5,6 +5,7 @@ on:
     types: [published]
 
 permissions:
+  id-token: write
   contents: read
 
 jobs:
@@ -17,13 +18,21 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22' # Upgraded to LTS 22 for modern performance
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Install Dependencies
+      - name: Update npm to Latest
+        run: npm install -g npm@latest
+
+      - name: Clean Install Dependencies
         run: npm ci
 
-      - name: Publish to npm Registry
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # Pipeline Guard: Ensures no unexpected local files or logs make it into the workspace
+      - name: Pre-Publish Workspace Sanitization
+        run: |
+          rm -f .env*
+          rm -rf debug-logs/
+
+      # No tokens required. npm cryptographically verifies this runner and signs it with provenance.
+      - name: Publish to npm Registry with Provenance
+        run: npm publish --access public --provenance
