@@ -1,8 +1,10 @@
 # Exclude all testing environments and workflows
 tests/
+examples/
 node_modules/
 .github/
 .env
+.env.example
 
 # Exclude local configuration files
 config/local.json
@@ -11,6 +13,11 @@ config/local.json
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
 RELEASES.md
+CHANGELOG.md
+ROADMAP.md
 
-# Exclude ignore files
+# Exclude editor/development config
+.editorconfig
+.prettierrc
+.eslintrc.json
 .gitignore

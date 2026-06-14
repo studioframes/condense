@@ -1,3 +1,56 @@
+# Condense v0.1.4
+
+## Release Summary
+
+This patch release removes a deprecated FFmpeg wrapper dependency and replaces it with direct FFmpeg CLI invocation via Node's `child_process.spawn`. The refactoring maintains full backward compatibility while improving long-term maintainability and reducing dependency overhead. The core architectural features—such as stateless, in-memory processing via Buffers and Streams, multi-format pipelines, and flexible integration deployments—remain entirely unchanged.
+
+## Dependency Updates & Maintenance
+
+We have addressed upstream maintenance concerns and eliminated a deprecated dependency:
+
+* **Removed:** `fluent-ffmpeg@^2.1.3` — unmaintained wrapper (last update 2018)
+* **Removed:** `ffprobe-static@^3.1.0` — no longer required
+* **Retained:** `ffmpeg-static@^5.3.0` — provides platform-agnostic FFmpeg binary
+
+### Technical Details
+
+The `optimizeMediaStream()` function previously relied on the deprecated `fluent-ffmpeg` wrapper library to compose FFmpeg commands. This release refactors the media processing pipeline to invoke FFmpeg directly via spawned child processes, eliminating wrapper overhead and improving code clarity. The public function signature and streaming interface remain unchanged—consumers of the SDK see no behavioral difference.
+
+* **Before:** `require('fluent-ffmpeg')(inputStream).format('mp4')...`
+* **After:** Direct `spawn(ffmpegStatic, ['-i', 'pipe:0', '-f', 'mp4', ...])` invocation
+
+All original encoding parameters, bitrate controls, aspect ratio scaling, MP4 fragmentation flags (`frag_keyframe+empty_moov`), and error handling are preserved.
+
+## Known Vulnerabilities & Issues
+
+Following an extensive supply-chain security evaluation using Socket, the following genuine behavioral observations and structural considerations are active for this release track:
+
+### 1. Verification of Tree-Level Names (Potential Typosquat)
+
+* **Status:** Under Investigation.
+* **Details:** Automated network heuristics detected a dependency name structure (`camelcase`) deeply embedded within the transitive dependency tree that mirrors highly trafficked upstream assets. While no current malicious payload or backdoor vector has been confirmed, users are advised to audit nested lockfile distributions to verify exact import paths.
+
+### 2. Unmaintained Upstream Core Frameworks
+
+* **Status:** Monitored.
+* **Details:** A core downstream parsing utility (`html-minifier-terser`) continues to operate on a codebase baseline that has not received active maintenance updates from its upstream maintainers in over five years. While functional baseline stability remains intact for standard HTML structures, unresolved architectural edge cases or future engine-level bugs may go unaddressed by the parent project.
+
+For more info visit: [Socket](https://socket.dev/npm/package/%40studioframes%2Fcondense) or [snyk Security](https://security.snyk.io/package/npm/%2540studioframes%252Fcondense).
+
+## Bugs
+
+If any new bugs or vulnerabilities are found please read and follow the steps carefully inside [SECURITY.md](https://github.com/studioframes/Condense/blob/main/SECURITY.md).
+
+## Installation
+
+Update or install the latest patch version directly from the npm registry:
+
+```bash
+npm install @studioframes/condense@0.1.4
+```
+
+---
+
 # Condense v0.1.3
 
 ## Release Summary
