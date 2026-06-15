@@ -2,6 +2,13 @@
 
 All notable changes to Condense are documented in this file. This project follows [Semantic Versioning](https://semver.org/).
 
+## [0.1.5] - 2026-06-15
+
+### Changed
+- Updated `multer` from 2.1.1 to 2.2.0
+
+---
+
 ## [0.1.4] - 2026-06-14
 
 ### Changed
