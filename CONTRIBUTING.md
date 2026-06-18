@@ -6,8 +6,8 @@ Thank you for contributing to Condense! Please review this document before submi
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/condense-api.git
-   cd condense-api
+   git clone https://github.com/studioframes/Condense.git
+   cd Condense
    ```
 2. Install dependencies:
    ```bash
