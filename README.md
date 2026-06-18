@@ -44,19 +44,19 @@ npm i @studioframes/condense
 #### yarn
 
 ```bash
-npm add @studioframes/condense
+yarn add @studioframes/condense
 ```
 
 #### pnpm
 
 ```bash
-npm add @studioframes/condense
+pnpm add @studioframes/condense
 ```
 
 #### bun
 
 ```bash
-npm add @studioframes/condense
+bun add @studioframes/condense
 ```
 
 ## Usage
