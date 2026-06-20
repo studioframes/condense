@@ -1,3 +1,26 @@
+# Condense v0.2.1
+
+## Release Summary
+
+This patch release focuses on optimizing testing reliability and ensuring engine compatibility for `@studioframes/condense`. The core architectural features—such as stateless, in-memory processing via Buffers and Streams, multi-format pipelines, and flexible integration deployments—remain entirely unchanged.
+
+## DevDependency Updates
+
+We have updated underlying package to ensure seamless zero friction testing.
+
+* **Updated:** `types/node` bumped from `25.8.3` to `26.0.0`
+* **Updated:** `eslint` bumped from `8.57.1` to `10.5.0`
+
+## Installation
+
+Update or install the new version directly from the npm registry:
+
+```bash
+npm install @studioframes/condense@0.2.1
+```
+
+---
+
 # Condense v0.2.0
 
 ## Release Summary

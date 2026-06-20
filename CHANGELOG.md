@@ -2,6 +2,14 @@
 
 All notable changes to Condense are documented in this file. This project follows [Semantic Versioning](https://semver.org/).
 
+## [0.2.1] - 2026-06-20
+
+### Changed
+- Updated `types/node` from 25.9.3 to 26.0.0.
+- Updated `eslint` from 8.57.1 to 10.5.0.
+
+---
+
 ## [0.2.0] - 2026-06-18
 
 ### Added
