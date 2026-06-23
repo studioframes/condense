@@ -195,19 +195,27 @@ curl -X POST http://localhost:3000/v1/optimize \
 
 ## Architecture Diagram
 
-```mermaid
-flowchart TD
-    A[Client Upload]
-    B[In-Memory Buffer]
-    C[Condense Engine]
-    D[Buffer / Stream]
-    E[HTTP Response]
-
-    A -->|File Data| B
-    B -->|Process| C
-    C -->|Optimized Output| D
-    D -->|Send| E
 ```
+┌───────────────┐
+│ Client Upload │
+└───────────────┘
+        ↓
+┌───────────────┐
+│ RAM Buffer    │
+└───────────────┘
+        ↓
+┌───────────────┐
+│   Condense    │
+│ Optimization  │
+└───────────────┘
+        ↓
+┌───────────────┐
+│ Buffer/Stream │
+└───────────────┘
+        ↓
+┌───────────────┐
+│   Response    │
+└───────────────┘
 
 Short explanation: uploads are received into memory (Buffers or Streams), processed by Condense in-memory, and returned as an optimized Buffer or Stream without intermediate disk writes.
 
