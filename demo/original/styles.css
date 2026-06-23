@@ -1,0 +1,38 @@
+/* ==========================================
+   PRODUCTION APP STYLESHEET (UNOPTIMIZED)
+   ========================================== */
+
+:root {
+    --primary-brand-color-hex-value: #3b82f6;
+    --secondary-brand-color-hex-value: #1e3a8a;
+    --whitespace-padding-default-unit: 16px;
+}
+
+body {
+    background-color: #ffffff;
+    color: #333333;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0 0 0 0;
+}
+
+.button-component-primary-active {
+    background-color: var(--primary-brand-color-hex-value);
+    border-radius: 4px;
+    color: #ffffff;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    padding: var(--whitespace-padding-default-unit);
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.button-component-primary-active:hover {
+    background-color: var(--secondary-brand-color-hex-value);
+}

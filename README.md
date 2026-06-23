@@ -220,15 +220,19 @@ curl -X POST http://localhost:3000/optimize \
 
 Short explanation: uploads are received into memory (Buffers or Streams), processed by Condense in-memory, and returned as an optimized Buffer or Stream without intermediate disk writes.
 
-## Benchmarks*
+## Benchmarks
 
-| File Type | Original Size | Optimized Size |
-| --- | ---: | ---: |
-| `.png` | 4.2 MB | 1.1 MB |
-| `.mp4` | 25 MB | 9 MB |
-| `.html` | 120 KB | 42 KB |
+Below are the benchmark results of processing our sample suite through the `Condense` pipeline using the `extreme` compression method. See [`demo`](https://github.com/studioframes/Condense/tree/main/demo) directory to learn more.
 
-*These numbers are illustrative. Actual savings vary depending on content, encoding, and chosen optimization method.
+| File Type | Original Size | Condensed Size | Reduction |
+| :--- | :--- | :--- | :--- |
+| **JavaScript** (`app.js`) | 5.07 KB _(5,071 B)_ | 1.39 KB _(1,393 B)_ | **-72.5%** |
+| **JSON Data** (`data.json`) | 0.48 KB _(490 B)_ | 0.36 KB _(364 B)_ | **-25.7%** |
+| **HTML Page** (`index.html`) | 2.36 KB _(2,421 B)_ | 1.52 KB _(1,552 B)_ | **-35.9%** |
+| **CSS Styles** (`styles.css`) | 1.00 KB _(1,020 B)_ | 0.63 KB _(649 B)_ | **-36.4%** |
+| **SVG Graphic** (`demo.svg`) | 216.99 KB _(222,198 B)_ | 119.30 KB _(122,162 B)_ | **-45.0%** |
+| **PNG Image** (`demo.png`) | 116.00 KB | 28.00 KB _(WebP)_ | **-75.8%** |
+| **MP4 Video** (`demo.mp4`) | 32.00 KB | 28.00 KB | **-12.5%** |
 
 ## System Requirements
 
