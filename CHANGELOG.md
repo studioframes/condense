@@ -2,6 +2,22 @@
 
 All notable changes to Condense are documented in this file. This project follows [Semantic Versioning](https://semver.org/).
 
+## [0.3.0] - 2026-06-26
+
+### Added
+- **New `balanced` Optimization Method:** Added a middle ground between `quality` and `extreme` which provides good compression and size without excessive loss of fidelity. Supported across images, media, text, and code.
+- **TypeScript & React Support (`.ts`, `.jsx`, `.tsx`):** Added support for minifying TypeScript and React code using `esbuild`.
+- **Additional Text Formats:** Expanded text optimization to handle `.xml`, `.yaml`, `.yml`, `.graphql`, `.gql`, `.less`, and `.scss`.
+- **In-Memory LRU Cache:** Added an optional LRU cache backed by `lru-cache` for frequently optimized static assets (enabled via `CONDENSE_CACHE=true`).
+- **CLI `optimize` Subcommand:** Re-wrote the CLI to support a standalone `optimize` command with a beautiful ANSI-styled terminal UI, batch directory processing, and `-o` output flag.
+
+### Changed
+- Refactored `optimizeController.js` to intelligently handle content negotiation, cache interception, and generic MIME type fallbacks.
+- **Removed:** Markdown (`.md`) minification support.
+- Updated `types/node` from 26.0.0 to 26.0.1.
+
+---
+
 ## [0.2.2] - 2026-06-22
 
 ### Changed

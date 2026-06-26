@@ -6,13 +6,13 @@
 [![downloads](https://img.shields.io/npm/dt/@studioframes/condense?labelColor=FF0000&color=030201)](https://www.npmjs.com/package/@studioframes/condense)
 [![License](https://img.shields.io/badge/License-Apache-fff.svg?labelColor=FF0000&color=030201)](./LICENSE)
 
-**Condense is a high-performance, stateless file optimization and minification engine for [Node.js](https://nodejs.org). It optimizes images, audio, video, and code entirely in-memory using Buffers and Streams, and avoids writing temporary files to disk.**
+**Condense is a high-performance, stateless file optimization and minification engine for [Node.js](https://nodejs.org). It optimizes images, audio, video, code, and WebAssembly entirely in-memory using Buffers and Streams, and avoids writing temporary files to disk.**
 
 </div>
 
 ## Introduction
 
-Condense provides fast, in-memory optimization for media and code. It exists to offer low-latency, stateless processing for server-side and serverless environments where temporary disk I/O is undesirable or unavailable. Unlike traditional tools that rely on intermediate temporary files, Condense processes uploads and assets using Buffers and Streams, returning optimized Buffers or Streams ready to send in responses.
+Condense provides fast, in-memory optimization for media, code, and binaries. It exists to offer low-latency, stateless processing for server-side and serverless environments where temporary disk I/O is undesirable or unavailable. Unlike traditional tools that rely on intermediate temporary files, Condense processes uploads and assets using Buffers and Streams, returning optimized Buffers or Streams ready to send in responses.
 
 ### Table of Contents
 - <a href="#why-condense">Why Condense?</a>
@@ -39,11 +39,12 @@ Condense provides fast, in-memory optimization for media and code. It exists to 
 
 ## Features
 - In-memory Buffer & Stream processing (no temporary disk writes except when explicitly invoking `faststart`)
-- Image (including AVIF & GIF), audio, video, and code/markup (including SVG) optimization
+- Image (including AVIF & GIF), audio, video, code/markup (including SVG), and WebAssembly optimization
 - Intelligent Dynamic Resizing via `width`, `height`, and `fit` API parameters
 - Video Thumbnail Extraction and Standard MP4 Faststart utilities
-- Express middleware and standalone CLI options
+- Express middleware and standalone CLI with beautiful terminal UI
 - Ignore directives to opt-out specific regions or files from minification
+- Built-in LRU Cache for frequently optimized static assets (enabled via `CONDENSE_CACHE=true`)
 - System Health Diagnostics API (`/health`)
 
 ## Supported Formats
@@ -53,7 +54,7 @@ Condense provides fast, in-memory optimization for media and code. It exists to 
 | Images | `.png`, `.jpg`, `.jpeg`, `.webp`, `.avif`, `.gif`, `.svg` |
 | Audio | `.mp3`, `.wav` |
 | Video | `.mp4` |
-| Code & Markup | `.html`, `.css`, `.js`, `.json` |
+| Web | `.html`, `.css`, `.js`, `.ts`, `.jsx`, `.tsx`, `.json`, `.xml`, `.yaml`, `.yml`, `.graphql`, `.less`, `.scss` |
 
 ## Installation
 
@@ -101,13 +102,26 @@ async function simpleOptimize(rawBuffer) {
 
 ## Usage
 
-Condense can run as a standalone CLI server, be mounted as Express middleware, or be used programmatically.
+Condense can run as a standalone CLI tool, a server, be mounted as Express middleware, or be used programmatically.
 
-- CLI: `npx @studioframes/condense` (defaults to port 3000; set `PORT` to override)
-- Express: mount `condenseApp` on a route to accept uploads
-- Programmatic: use helpers such as `optimizeImage`, `optimizeText`, `optimizeMediaStream`
+- **CLI Optimization:** `npx @studioframes/condense optimize ./src -o ./dist -m balanced` (See [COMMANDS.md](./COMMANDS.md) for full CLI documentation)
+- **Server:** `npx @studioframes/condense` (defaults to port 3000; set `PORT` to override)
+- **Express:** mount `condenseApp` on a route to accept uploads
+- **Programmatic:** use helpers such as `optimizeImage`, `optimizeText`, `optimizeMediaStream`, `optimizeEsbuild`, `optimizeWasm`
 
 ### Examples
+
+#### CLI Usage
+
+Condense v0.3.0 introduced a styled, fully-featured CLI:
+
+```bash
+# Optimize a single image with extreme compression
+npx @studioframes/condense optimize photo.png -o out.webp --method extreme
+
+# Batch optimize a directory using the balanced method
+npx @studioframes/condense optimize ./src/ -o ./dist/ --method balanced
+```
 
 #### Express Middleware
 
@@ -128,24 +142,35 @@ app.listen(8080, () => {
 #### Programmatic Helper SDK
 
 ```javascript
-const { optimizeImage, optimizeText, optimizeMediaStream } = require('@studioframes/condense');
+const { optimizeImage, optimizeText, optimizeMediaStream, optimizeEsbuild } = require('@studioframes/condense');
 
 // 1. Optimize an Image Buffer (returns Buffer)
 const { buffer: imgBuffer, outMime: imgMime } = await optimizeImage(rawImageBuffer, 'image/png', 'extreme');
 
 // 2. Optimize an HTML / CSS / JS Buffer (returns Buffer)
-const { buffer: textBuffer, outMime: textMime } = await optimizeText(rawHtmlBuffer, 'text/html', 'quality');
+const { buffer: textBuffer, outMime: textMime } = await optimizeText(rawHtmlBuffer, 'text/html', 'balanced');
 
 // 3. Optimize Audio / Video (returns PassThrough Stream)
 const { stream, outMime: mediaMime } = optimizeMediaStream(rawVideoBuffer, 'video/mp4', 'quality');
+
+// 4. Optimize TypeScript/React (returns Buffer)
+const { buffer: tsBuffer, outMime: tsMime } = await optimizeEsbuild(rawTsBuffer, '.tsx', 'quality');
 ```
+
+## Optimization Methods
+
+Condense provides three primary optimization targets:
+
+- `quality` (Default): Visually lossless, safe compression, preserves maximum fidelity.
+- `balanced`: A sweet spot between file size and quality. Introduces mild lossy compression (e.g. 65% quality for JPEGs, crf 26 for video).
+- `extreme`: Maximum compression. Forces conversions to modern formats (e.g. JPEG/PNG to WebP/AVIF), drops console logs, strips WASM custom sections, downscales video.
 
 ## Ignore Directives
 
 Use ignore directives to prevent minification for a file or a specific region.
 
 - `html`: add `data-condense-ignore` to any element (or `<html>` to ignore the whole document).
-- `js`/`css`: add the comment `/* condense-ignore */` anywhere in the file to bypass minification.
+- Code (`js`, `css`, `ts`, `jsx`, `tsx`, `less`, `scss`): add the comment `/* condense-ignore */` anywhere in the file to bypass minification.
 
 ### Examples
 
@@ -159,7 +184,7 @@ Use ignore directives to prevent minification for a file or a specific region.
 </div>
 ```
 
-#### `js`
+#### `js` or `ts`
 
 ```javascript
 /* condense-ignore */
@@ -169,28 +194,19 @@ function legacyCode() {
 }
 ```
 
-#### `css`
-
-```css
-/* condense-ignore */
-p {
-  color: red;
-  text-align: center;
-}
-```
-
 ## API Reference (selected)
 
 POST `/optimize`
-- Multipart form: `file` (binary), `method` (`quality` | `extreme`)
+- Multipart form: `file` (binary), `method` (`quality` | `balanced` | `extreme`)
+- Optional form/query params: `width`, `height`, `fit`, `keepMetadata`, `keepFormat`, `targetFormat`, `faststart`, `thumbnail`.
 - Returns optimized binary in the response body with appropriate `Content-Type`.
 
 ### Example Request:
 ```bash
 curl -X POST http://localhost:3000/optimize \
   -F "file=@./photo.png;type=image/png" \
-  -F "method=extreme" \
-  --output photo-condensed.webp
+  -F "method=balanced" \
+  --output photo-condensed.png
 ```
 
 ## Architecture Diagram
@@ -218,21 +234,26 @@ curl -X POST http://localhost:3000/optimize \
 └───────────────┘
 ```
 
-Short explanation: uploads are received into memory (Buffers or Streams), processed by Condense in-memory, and returned as an optimized Buffer or Stream without intermediate disk writes.
+Short explanation: uploads are received into memory (Buffers or Streams), processed by Condense in-memory, optionally cached in LRU cache, and returned as an optimized Buffer or Stream without intermediate disk writes.
 
 ## Benchmarks
 
-Below are the benchmark results of processing our sample suite through the `Condense` pipeline using the standard `quality` method, and the aggressive `extreme` method. See [`demo`](https://github.com/studioframes/Condense/tree/main/demo) directory to learn more.
+Below are the benchmark results of processing our sample suite through the `Condense` pipeline using the `quality`, `balanced` and `extreme` methods. See [`demo`](https://github.com/studioframes/Condense/tree/main/demo) directory to learn more.
 
-| File Type | Original Size | Quality Size | Extreme Size | Max Reduction |
-| --- | --- | --- | --- | --- |
-| **JavaScript** (`app.js`) | 5.07 KB *(5,071 B)* | 1.75 KB *(1,794 B)* | 1.39 KB *(1,393 B)* | -72.5% |
-| **JSON Data** (`data.json`) | 0.48 KB *(490 B)* | 0.36 KB *(364 B)* | 0.36 KB *(364 B)* | -25.7% |
-| **HTML Page** (`index.html`) | 2.36 KB *(2,421 B)* | 1.60 KB *(1,637 B)* | 1.52 KB *(1,552 B)* | -35.9% |
-| **CSS Styles** (`styles.css`) | 1.00 KB *(1,020 B)* | 0.68 KB *(698 B)* | 0.63 KB *(649 B)* | -36.4% |
-| **SVG Graphic** (`demo.svg`) | 216.99 KB *(222,198 B)* | 119.52 KB *(122,388 B)* | 119.30 KB *(122,162 B)* | -45.0% |
-| **PNG Image** (`demo.png`) | 116.00 KB | 34.00 KB *(WebP)* | 28.00 KB *(WebP)* | -75.8% |
-| **MP4 Video** (`demo.mp4`) | 32.00 KB | 30.00 KB | 28.00 KB | -12.5% |
+| File Name | Original Size | Quality Size | Balanced Size | Extreme Size | Max Reduction |
+| --- | --- | --- | --- | --- | --- |
+| `styles.scss` | 1.3 KB | 0.3 KB | 0.3 KB | 0.3 KB | -76.2% |
+| `demo.png` | 115.3 KB | 98.9 KB | 98.9 KB | 26.7 KB | -76.8% |
+| `app.js` | 5.0 KB | 1.8 KB | 1.8 KB | 1.4 KB | -72.5% |
+| `component.tsx` | 2.6 KB | 1.8 KB | 1.8 KB | 1.0 KB | -61.0% |
+| `service.ts` | 2.2 KB | 1.5 KB | 1.5 KB | 0.9 KB | -58.0% |
+| `view.jsx` | 2.3 KB | 1.8 KB | 1.8 KB | 1.1 KB | -52.2% |
+| `demo.svg` | 217.0 KB | 119.5 KB | 119.5 KB | 119.3 KB | -45.0% |
+| `styles.css` | 1.0 KB | 0.7 KB | 0.7 KB | 0.6 KB | -36.4% |
+| `index.html` | 2.4 KB | 1.6 KB | 1.6 KB | 1.5 KB | -35.9% |
+| `config.yml` | 0.9 KB | 0.7 KB | 0.7 KB | 0.6 KB | -30.0% |
+| `data.json` | 0.5 KB | 0.4 KB | 0.4 KB | 0.4 KB | -25.7% |
+| `demo.mp4` | 30.8 KB | 31.6 KB | 29.4 KB | 25.8 KB | -16.4% |
 
 ## System Requirements
 

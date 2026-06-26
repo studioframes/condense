@@ -3,6 +3,7 @@ const CleanCSS = require('clean-css');
 const { minify: htmlMinify } = require('html-minifier-terser');
 const { Parser } = require('htmlparser2');
 const { optimize: optimizeSvg } = require('svgo');
+const yaml = require('js-yaml');
 
 function protectIgnoredTags(htmlString) {
   let output = '';
@@ -59,6 +60,7 @@ async function optimizeText(buffer, mimeType, method) {
   const input = buffer.toString('utf8');
   let output = input;
   const isExtreme = method === 'extreme';
+  const isBalanced = method === 'balanced';
 
   try {
     // --- HTML ---
@@ -67,8 +69,9 @@ async function optimizeText(buffer, mimeType, method) {
       const protectedHtml = protectIgnoredTags(input);
 
       // 2. Configure Minifier
-      const options = isExtreme
-        ? {
+      let options;
+      if (isExtreme) {
+        options = {
           collapseWhitespace: true,
           removeComments: true,
           minifyJS: true,
@@ -76,13 +79,23 @@ async function optimizeText(buffer, mimeType, method) {
           removeAttributeQuotes: true,
           removeOptionalTags: true,
           collapseBooleanAttributes: true,
-        }
-        : {
+        };
+      } else if (isBalanced) {
+        options = {
+          collapseWhitespace: true,
+          removeComments: true,
+          minifyJS: true,
+          minifyCSS: true,
+          collapseBooleanAttributes: true,
+        };
+      } else {
+        options = {
           collapseWhitespace: true,
           removeComments: true,
           minifyJS: true,
           minifyCSS: true,
         };
+      }
 
       // 3. Minify (The minifier natively skips everything between our markers)
       const minified = await htmlMinify(protectedHtml, options);
@@ -95,9 +108,14 @@ async function optimizeText(buffer, mimeType, method) {
         return { buffer, outMime: mimeType };
       }
 
-      const options = isExtreme
-        ? { compress: { passes: 2 }, mangle: { toplevel: true } }
-        : { compress: true, mangle: true };
+      let options;
+      if (isExtreme) {
+        options = { compress: { passes: 2 }, mangle: { toplevel: true } };
+      } else if (isBalanced) {
+        options = { compress: { passes: 1, dead_code: true }, mangle: true };
+      } else {
+        options = { compress: true, mangle: true };
+      }
 
       const result = await terserMinify(input, options);
       output = result.code;
@@ -107,7 +125,14 @@ async function optimizeText(buffer, mimeType, method) {
         return { buffer, outMime: mimeType };
       }
 
-      const options = isExtreme ? { level: 2 } : { level: 1 };
+      let options;
+      if (isExtreme) {
+        options = { level: 2 };
+      } else if (isBalanced) {
+        options = { level: { 1: { all: true }, 2: { restructureRules: true } } };
+      } else {
+        options = { level: 1 };
+      }
       const result = new CleanCSS(options).minify(input);
       output = result.styles;
     } else if (mimeType === 'application/json') {
@@ -116,11 +141,75 @@ async function optimizeText(buffer, mimeType, method) {
       output = JSON.stringify(parsed);
     } else if (mimeType === 'image/svg+xml') {
       // --- SVG ---
-      const result = optimizeSvg(input, {
-        multipass: isExtreme,
-        js2svg: { indent: isExtreme ? 0 : 2, pretty: !isExtreme },
-      });
+      let svgOptions;
+      if (isExtreme) {
+        svgOptions = { multipass: true, js2svg: { indent: 0, pretty: false } };
+      } else if (isBalanced) {
+        svgOptions = { multipass: true, js2svg: { indent: 0, pretty: false } };
+      } else {
+        svgOptions = { multipass: false, js2svg: { indent: 2, pretty: true } };
+      }
+      const result = optimizeSvg(input, svgOptions);
       output = result.data;
+    } else if (mimeType === 'application/xml' || mimeType === 'text/xml') {
+      // --- XML ---
+      // Strip XML comments
+      output = input.replace(/<!--[\s\S]*?-->/g, '');
+      // Collapse whitespace between tags
+      output = output.replace(/>\s+</g, '><');
+      if (isExtreme) {
+        output = output.trim().replace(/\s+/g, ' ');
+      }
+    } else if (mimeType === 'text/yaml' || mimeType === 'application/x-yaml') {
+      // --- YAML ---
+      const parsed = yaml.load(input);
+      if (isExtreme) {
+        output = yaml.dump(parsed, { flowLevel: 0, lineWidth: -1 });
+      } else {
+        output = yaml.dump(parsed, { lineWidth: -1 });
+      }
+    } else if (mimeType === 'text/less') {
+      // --- Less ---
+      if (input.includes('/* condense-ignore */')) {
+        return { buffer, outMime: mimeType };
+      }
+
+      let options;
+      if (isExtreme) {
+        options = { level: 2 };
+      } else if (isBalanced) {
+        options = { level: { 1: { all: true }, 2: { restructureRules: true } } };
+      } else {
+        options = { level: 1 };
+      }
+      const result = new CleanCSS(options).minify(input);
+      output = result.styles;
+    } else if (mimeType === 'text/x-scss') {
+      // --- SCSS ---
+      if (input.includes('/* condense-ignore */')) {
+        return { buffer, outMime: mimeType };
+      }
+
+      let options;
+      if (isExtreme) {
+        options = { level: 2 };
+      } else if (isBalanced) {
+        options = { level: { 1: { all: true }, 2: { restructureRules: true } } };
+      } else {
+        options = { level: 1 };
+      }
+      const result = new CleanCSS(options).minify(input);
+      output = result.styles;
+    } else if (mimeType === 'application/graphql') {
+      // --- GraphQL ---
+      // Strip # comments
+      output = input.replace(/#[^\n]*/g, '');
+      // Collapse whitespace
+      output = output.replace(/\s+/g, ' ').trim();
+      if (isExtreme) {
+        // Remove spaces around structural characters
+        output = output.replace(/\s*([{}():,])\s*/g, '$1');
+      }
     }
 
     return { buffer: Buffer.from(output, 'utf8'), outMime: mimeType };

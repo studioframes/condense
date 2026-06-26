@@ -36,6 +36,7 @@ async function extractVideoThumbnail(buffer) {
 
 function optimizeMediaStream(buffer, mimeType, method, options = {}) {
   const isExtreme = method === 'extreme';
+  const isBalanced = method === 'balanced';
   const isVideo = mimeType.startsWith('video/');
 
   // Create an in-memory readable stream from the buffer
@@ -67,6 +68,10 @@ function optimizeMediaStream(buffer, mimeType, method, options = {}) {
       args.push('-crf', '30');
       args.push('-b:a', '64k');
       args.push('-ac', '1'); // Mono
+    } else if (isBalanced) {
+      args.push('-crf', '26');
+      args.push('-b:a', '96k');
+      args.push('-ac', '2'); // Stereo
     } else {
       args.push('-crf', '23');
       args.push('-b:a', '128k');
@@ -79,6 +84,9 @@ function optimizeMediaStream(buffer, mimeType, method, options = {}) {
     if (isExtreme) {
       args.push('-b:a', '64k');
       args.push('-ac', '1');
+    } else if (isBalanced) {
+      args.push('-b:a', '96k');
+      args.push('-ac', '2');
     } else {
       args.push('-b:a', '128k');
       args.push('-ac', '2');

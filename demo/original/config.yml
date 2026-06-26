@@ -1,0 +1,32 @@
+# ==========================================
+# INFRASTRUCTURE DEPLOYMENT CONFIGURATION
+# ==========================================
+
+version: "3.8"
+
+services:
+  condense-core-processing-engine:
+    container_name: "condense_api_worker_node_instance"
+    image: "condense/pipeline-worker:v2.6.4-release"
+    environment:
+      - NODE_ENV=production
+      - MAXIMUM_MEMORY_ALLOCATION_LIMIT=4194304000 # 4GB in bytes
+      - ENABLE_AGGRESSIVE_COMPRESSION_STRATEGY=true
+    volumes:
+      - type: bind
+        source: ./data/cache/temporary_storage
+        target: /var/server/cache
+    ports:
+      - "8080:8080"
+    restart: "always"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+
+  telemetry-metrics-aggregator:
+    container_name: "condense_telemetry_collector"
+    image: "prom/prometheus:latest"
+    ports:
+      - "9090:9090"

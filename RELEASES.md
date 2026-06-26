@@ -1,3 +1,42 @@
+# Condense v0.3.0
+
+## Release Summary
+
+This minor release introduces major feature enhancements to Condense, focusing on broadening format capabilities, introducing a new CLI, and adding an intelligent `balanced` optimization method. The core architectural features remain intact, but powerful new capabilities like WebAssembly parsing, TypeScript minification, and in-memory LRU caching are now available.
+
+## Features & Upgrades
+
+* **New `balanced` Optimization Method:** Added a middle ground between `quality` and `extreme` which provides good compression and size without excessive loss of fidelity. Supported across images, media, text, and code.
+* **TypeScript & React Support:** Added support for minifying `.ts`, `.jsx`, and `.tsx` files using `esbuild`.
+* **Additional Text Formats:** Expanded text optimization to handle `.xml`, `.yaml`, `.yml`, `.graphql`, `.gql`, `.less`, and `.scss`.
+* **In-Memory LRU Cache:** Added an optional LRU cache backed by `lru-cache` for frequently optimized static assets (enabled via `CONDENSE_CACHE=true`).
+* **CLI `optimize` Subcommand:** Re-wrote the CLI to support a standalone `optimize` command with a beautiful ANSI-styled terminal UI, batch directory processing, and `-o` output flag.
+* **Removed:** Markdown (`.md`) minification support has been dropped to streamline text processing capabilities.
+
+## Dependency Updates
+
+We have updated underlying packages to ensure seamless native module compilation.
+
+* **Added:** `esbuild` for TypeScript/React compilation and minification.
+* **Added:** `js-yaml` for YAML parsing and formatting.
+* **Added:** `lru-cache` for high-performance in-memory asset caching.
+
+## DevDependency Updates
+
+We have updated underlying package to ensure seamless zero friction testing.
+
+* **Updated:** `types/node` bumped from `26.0.0` to `26.0.1`
+
+## Installation
+
+Update or install the new version directly from the npm registry:
+
+```bash
+npm install @studioframes/condense@0.3.0
+```
+
+---
+
 # Condense v0.2.2
 
 ## Release Summary

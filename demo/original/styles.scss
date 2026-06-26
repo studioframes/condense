@@ -1,0 +1,45 @@
+// =========================================================================
+// ENTERPRISE SCSS VARIABLES & THEME DEFINITIONS
+// =========================================================================
+
+$corporate-identity-primary-blue-color: #0284c7;
+$corporate-identity-dark-slate-background: #0f172a;
+$global-layout-border-radius-standard: 8px;
+
+@mixin flex-center-alignment-matrix {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Structural Layout Rules Component Wrapper */
+.application-navigation-sidebar-container {
+  width: 280px;
+  background-color: $corporate-identity-dark-slate-background;
+  padding: 24px 24px 24px 24px;
+  
+  .navigation-menu-list-wrapper {
+    list-style-type: none;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    
+    .navigation-item-link-active {
+      @include flex-center-alignment-matrix;
+      color: #ffffff;
+      background-color: $corporate-identity-primary-blue-color;
+      border-radius: $global-layout-border-radius-standard;
+      transition: background-color 250ms ease-in-out;
+      
+      &:hover {
+        background-color: lighten($corporate-identity-primary-blue-color, 10%);
+        text-decoration: underline;
+      }
+      
+      span.icon-descriptor-badge {
+        font-size: 12px;
+        font-weight: bold;
+        padding-left: 8px;
+      }
+    }
+  }
+}

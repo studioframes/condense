@@ -29,15 +29,19 @@ Because Condense is distributed as an npm package, you must maintain compatibili
 1. **No Local Disk Access First:** Do not write temporary files to the disk (`/tmp`, `multer.diskStorage`, etc.) by default. Use pure in-memory Buffers and Node Streams to maintain statelessness. (Exception: Very specific structural overrides like MP4 faststart which strictly require file buffering).
 2. **Keep Core Helpers Modular:** Ensure helper files inside `src/services/` are decoupled from Express HTTP objects (`req`, `res`) so they can still be safely imported programmatically.
 3. **Respect Bypass Directives:** If adding new language processors, ensure they respect bypass parameters or check for `data-condense-ignore` patterns.
-4. **Update Tests:** When modifying service functions (`optimizeImage`, `optimizeText`, `optimizeMediaStream`), add or update corresponding tests in the `tests/` folder. Run `npm test` to verify all tests pass.
+4. **Support Three Quality Tiers:** When implementing new optimizers, always handle `quality`, `balanced`, and `extreme` methods appropriately.
+5. **Update Tests:** When modifying service functions, add or update corresponding tests in the `tests/` folder. Run `npm test` to verify all tests pass.
 
 ## Testing
 
 Condense uses Node's built-in test framework. Tests live in the `tests/` directory and cover:
 
-- **imageService.test.js** — Image optimization (PNG, JPEG, quality & extreme modes)
-- **textService.test.js** — Code/markup minification (JS, CSS, HTML, ignore directives)
+- **imageService.test.js** — Image optimization (PNG, JPEG, quality/balanced/extreme modes)
+- **textService.test.js** — Code/markup minification (JS, CSS, HTML, XML, YAML, ignore directives)
 - **mediaService.test.js** — Media streaming (audio/video processing, error handling)
+- **esbuildService.test.js** — TypeScript and React minification tests
+- **wasmService.test.js** — WebAssembly stripping tests
+- **cacheService.test.js** — LRU caching tests
 - **helpers.js** — Shared test utilities
 
 Tests are development-only and excluded from published npm packages via `.npmignore`.

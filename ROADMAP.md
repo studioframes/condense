@@ -2,7 +2,7 @@
 
 This document outlines the planned evolution of Condense from current release through v1.0 and beyond.
 
-## Current Release: v0.2.2
+## Current Release: v0.3.0
 
 **Status:** Production-ready with core features complete
 **Released:** June 2026
@@ -10,24 +10,23 @@ This document outlines the planned evolution of Condense from current release th
 ### Features
 - In-memory Buffer & Stream processing (no temporary disk writes except when explicitly invoking `faststart`)
 - Image (including AVIF & GIF), audio, video, and code/markup (including SVG) optimization
+- TypeScript and React minification (`.ts`, `.jsx`, `.tsx`) via `esbuild`
+- Extended markup/styling support (`.xml`, `.yaml`, `.graphql`, `.less`, `.scss`)
+- Three optimization tiers: `quality`, `balanced`, and `extreme`
 - Intelligent Dynamic Resizing via `width`, `height`, and `fit` API parameters
 - Video Thumbnail Extraction and Standard MP4 Faststart utilities
-- Express middleware and standalone CLI options
+- Express middleware and standalone CLI with batch directory processing and styled terminal UI
 - Ignore directives to opt-out specific regions or files from minification
+- In-Memory LRU Cache for static asset performance
 - System Health Diagnostics API (`/health`)
 
-## v0.3.0 (Sep/Oct 2026)
+## v0.5.0 (Jul/Aug 2026)
 
 ### Performance & Optimization
 - **Streaming Improvements**
   - Implement adaptive chunk sizing for large files
   - Add memory pool reuse for buffer allocation
   - Benchmark against competing libraries
-
-- **Compression Tuning**
-  - New method: `balanced` (between quality and extreme)
-  - Per-format compression level configuration
-  - Dynamic optimization based on file metadata
 
 ### Developer Experience
 - **Documentation**
@@ -40,36 +39,12 @@ This document outlines the planned evolution of Condense from current release th
   - Automated dependency updates
   - Performance regression testing
 
-## v0.5.0 (Nov/Dec 2026)
+### Advanced Media Enhancements
+- Subtitle track extraction (SRT, VTT)
+- Multi-bitrate DASH/HLS preparation
+- JSON schema validation
 
-### Extended Format Support
-- **Additional Image Formats**
-  - AVIF codec support
-  - GIF frame optimization
-  - SVG minification and validation
-
-- **Media Enhancements**
-  - Subtitle track extraction (SRT, VTT)
-  - Thumbnail generation from video
-  - Multi-bitrate DASH/HLS preparation
-
-- **Code Processing**
-  - JSON schema validation
-  - GraphQL query minification
-  - YAML/TOML formatting
-
-### Advanced Features
-- **Batch Processing**
-  - Directory scanning and recursive optimization
-  - Parallel processing with worker threads
-  - Progress callbacks for UI integration
-
-- **Caching Layer**
-  - Optional in-memory LRU cache
-  - Deterministic hash-based cache keys
-  - Invalidation strategies
-
-## v1.0.0 (Early 2027)
+## v1.0.0 (Nov/Dec 2026)
 
 ### Stability & Maturity
 - **API Stability**
@@ -111,10 +86,6 @@ This document outlines the planned evolution of Condense from current release th
 ## Beyond v1.0
 
 ### v2.0+ Considerations
-- **WebAssembly Support**
-  - WASM encoders for image optimization
-  - WASM video codec support investigation
-
 - **Stream Processing**
   - Chainable transform pipeline API
   - Custom plugin system for processors
