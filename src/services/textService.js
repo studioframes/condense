@@ -153,8 +153,28 @@ async function optimizeText(buffer, mimeType, method) {
       output = result.data;
     } else if (mimeType === 'application/xml' || mimeType === 'text/xml') {
       // --- XML ---
-      // Strip XML comments
-      output = input.replace(/<!--[\s\S]*?-->/g, '');
+      // Strip XML comments safely (avoiding ReDoS and incomplete sanitization)
+      let previous;
+      do {
+        previous = output;
+        let temp = '';
+        let i = 0;
+        while (i < output.length) {
+          const start = output.indexOf('<!--', i);
+          if (start === -1) {
+            temp += output.slice(i);
+            break;
+          }
+          temp += output.slice(i, start);
+          const end = output.indexOf('-->', start + 4);
+          if (end === -1) {
+            temp += output.slice(start);
+            break;
+          }
+          i = end + 3;
+        }
+        output = temp;
+      } while (output !== previous);
       // Collapse whitespace between tags
       output = output.replace(/>\s+</g, '><');
       if (isExtreme) {

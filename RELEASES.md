@@ -1,3 +1,24 @@
+# Condense v0.3.2
+
+## Release Summary
+
+This patch release addresses two CodeQL security vulnerabilities in the text optimization service related to XML comment stripping. The core architectural features—such as stateless, in-memory processing via Buffers and Streams, multi-format pipelines, and flexible integration deployments—remain entirely unchanged.
+
+## Security Fixes
+
+* **Fixed:** Eliminated a polynomial regular expression vulnerability (ReDoS) in the XML text optimization pipeline.
+* **Fixed:** Resolved an incomplete multi-character sanitization vulnerability that could potentially allow HTML element injection by switching to a safe, index-based looping approach for stripping XML comments.
+
+## Installation
+
+Update or install the new version directly from the npm registry:
+
+```bash
+npm install @studioframes/condense@0.3.2
+```
+
+---
+
 # Condense v0.3.1
 
 ## Release Summary

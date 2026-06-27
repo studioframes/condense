@@ -2,6 +2,11 @@
 
 All notable changes to Condense are documented in this file. This project follows [Semantic Versioning](https://semver.org/).
 
+## [0.3.2] - 2026-06-27
+
+### Fixed
+- **Security:** Fixed CodeQL vulnerabilities regarding incomplete multi-character sanitization and polynomial regular expression evaluation (ReDoS) in the XML/text service by transitioning from regular expressions to a safe loop-based string `indexOf` implementation for XML comment stripping.
+
 ## [0.3.1] - 2026-06-26
 
 ### Changed
