@@ -6,8 +6,8 @@ We actively monitor and patch vulnerabilities in `@studioframes/condense`. Pleas
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 0.3.2   | :white_check_mark: |
-| <0.3.2  | :x:                |
+| 0.3.3   | :white_check_mark: |
+| <0.3.3  | :x:                |
 
 ## Our Security Guarantees
 
@@ -16,6 +16,14 @@ To ensure the safety of the JavaScript ecosystem, `@studioframes/condense` imple
 * **Immutable Releases:** All release tags (`v*`) are protected by repository rulesets preventing force-pushes, deletion, or history overwrites.
 * **Build Provenance:** Package publication to the npm registry is handled strictly via OpenID Connect (OIDC) through GitHub Actions, generating a verifiable cryptographic chain of custody.
 * **Process Sandboxing:** Media operations via `ffmpeg` are executed inside isolated background processes wrapped with short execution timeouts to mitigate Denial of Service (DoS) attacks via corrupted files.
+
+## Supply Chain Security
+
+We take proactive measures to harden our software supply chain against upstream malicious injection, typosquatting, and compromised dependencies:
+
+* **Automated Vulnerability Scanning:** Every pull request and daily branch snapshot is audited using GitHub Dependabot, Socket and `npm audit` to flag and remediate known CVEs instantly.
+* **Strict Lockfile Enforcement:** We enforce cryptographically signed lockfiles (`package-lock.json`) in CI/CD pipelines to guarantee that production builds identically match tested code, eliminating dynamic runtime dependency drift.
+* **Minimal Dependency Footprint:** We heavily vet and restrict third-party modules, preferring native Node.js APIs wherever possible to reduce the surface area available for upstream security exploitation.
 
 ## Reporting a Vulnerability
 

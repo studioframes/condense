@@ -1,3 +1,30 @@
+# Condense v0.3.3
+
+## Release Summary
+
+This patch release focuses on optimizing runtime and testing reliability, and ensuring engine compatibility for `@studioframes/condense`. The core architectural features—such as stateless, in-memory processing via Buffers and Streams, multi-format pipelines, and flexible integration deployments—remain entirely unchanged.
+
+## Dependency Updates
+
+We have updated underlying package to ensure seamless native module compilation.
+
+* **Updated:** `js-yaml` bumped from `5.1.0` to `5.2.0`
+
+## DevDependency Updates
+
+We have updated underlying package to ensure seamless zero friction testing.
+
+* **Updated:** `prettier` bumped from `3.8.4` to `3.9.4`
+* **Updated:** `eslint` bumped from `10.5.0` to `10.6.0`
+
+## Installation
+
+Update or install the new version directly from the npm registry:
+
+```bash
+npm install @studioframes/condense@0.3.3
+```
+
 # Condense v0.3.2
 
 ## Release Summary

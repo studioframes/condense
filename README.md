@@ -1,10 +1,10 @@
 <div align="center">
 
-![logo](https://github.com/user-attachments/assets/3d1be3e4-b7b8-4802-9aed-cdbfe80cca0f)
+![logo](https://github.com/user-attachments/assets/b7277c45-e2f2-4345-852b-47403b157f5d)
 
-[![npm](https://img.shields.io/npm/v/@studioframes/condense?colorA=FF0000&colorB=030201)](https://www.npmjs.com/package/@studioframes/condense)
-[![downloads](https://img.shields.io/npm/dt/@studioframes/condense?labelColor=FF0000&color=030201)](https://www.npmjs.com/package/@studioframes/condense)
-[![License](https://img.shields.io/badge/License-Apache-fff.svg?labelColor=FF0000&color=030201)](./LICENSE)
+[![npm](https://conbadges.pages.dev/api/npm/v/@studioframes/condense)](https://www.npmjs.com/package/@studioframes/condense)
+[![downloads](https://conbadges.pages.dev/api/npm/dt/@studioframes/condense)](https://www.npmjs.com/package/@studioframes/condense)
+[![License](https://conbadges.pages.dev/api/badge?label=license&value=Apache-2.0)](./LICENSE)
 
 **Condense is a high-performance, stateless file optimization and minification engine for [Node.js](https://nodejs.org). It optimizes images, audio, video, code, and WebAssembly entirely in-memory using Buffers and Streams, and avoids writing temporary files to disk.**
 
@@ -23,9 +23,10 @@ Condense provides fast, in-memory optimization for media, code, and binaries. It
 - <a href="#usage">Usage</a>
 - <a href="#ignore-directives">Ignore Directives</a>
 - <a href="#api-reference-selected">API Reference</a>
-- <a href="#architecture-diagram">Architecture Diagram</a>
 - <a href="#benchmarks">Benchmarks</a>
 - <a href="#system-requirements">System Requirements</a>
+- <a href="#code-of-conduct">Code of Conduct</a>
+- <a href="#contributing-to-condense">Contributing</a>
 - <a href="#license">License</a>
 
 ## Why Condense?
@@ -209,31 +210,6 @@ curl -X POST http://localhost:3000/optimize \
   --output photo-condensed.png
 ```
 
-## Architecture Diagram
-
-```
-┌───────────────┐
-│ Client Upload │
-└───────────────┘
-        ↓
-┌───────────────┐
-│ RAM Buffer    │
-└───────────────┘
-        ↓
-┌───────────────┐
-│   Condense    │
-│ Optimization  │
-└───────────────┘
-        ↓
-┌───────────────┐
-│ Buffer/Stream │
-└───────────────┘
-        ↓
-┌───────────────┐
-│   Response    │
-└───────────────┘
-```
-
 Short explanation: uploads are received into memory (Buffers or Streams), processed by Condense in-memory, optionally cached in LRU cache, and returned as an optimized Buffer or Stream without intermediate disk writes.
 
 ## Benchmarks
@@ -258,6 +234,14 @@ Below are the benchmark results of processing our sample suite through the `Cond
 ## System Requirements
 
 - Minimum Node.js: >= 20.9
+
+## Code of Conduct
+
+We expect the project participants to adhere to the repositories code of conduct. Please read [the full text](https://github.com/studioframes/Condense/blob/main/CODE_OF_CONDUCT.md) so that you can understand what actions will and will not be tolerated.
+
+## Contributing to Condense
+
+We welcome contributions from everyone. Read our [contributing guide](https://github.com/studioframes/Condense/blob/main/CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to Condense.
 
 ## License
 
