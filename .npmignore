@@ -3,6 +3,7 @@ tests/
 examples/
 node_modules/
 demo/
+docs/
 .github/
 .env
 .env.example
@@ -17,6 +18,7 @@ RELEASES.md
 CHANGELOG.md
 ROADMAP.md
 COMMANDS.md
+AGENTS.md
 
 # Exclude editor/development config
 .editorconfig

@@ -105,6 +105,18 @@ async function simpleOptimize(rawBuffer) {
 
 Condense can run as a standalone CLI tool, a server, be mounted as Express middleware, or be used programmatically.
 
+## Documentation
+
+Additional documentation is available in the [docs](./docs) folder, including:
+
+- [docs/overview.md](./docs/overview.md) for an overview of the project and its goals
+- [docs/development.md](./docs/development.md) for local setup and contribution guidance
+- [docs/api.md](./docs/api.md) for the main integration entry points
+- [docs/architecture.md](./docs/architecture.md) for a high-level look at the service architecture
+- [docs/cli.md](./docs/cli.md) for CLI usage examples
+- [docs/examples.md](./docs/examples.md) for practical SDK and CLI snippets
+- [docs/faq.md](./docs/faq.md) for common questions and answers
+
 - **CLI Optimization:** `npx @studioframes/condense optimize ./src -o ./dist -m balanced` (See [COMMANDS.md](./COMMANDS.md) for full CLI documentation)
 - **Server:** `npx @studioframes/condense` (defaults to port 3000; set `PORT` to override)
 - **Express:** mount `condenseApp` on a route to accept uploads
