@@ -76,8 +76,16 @@ function formatSize(bytes) {
 
 function printHeader() {
   console.log('');
-  console.log(`  ${c.bold}${c.conred}Condense v${version}${c.reset}`);
-  console.log(`  ${c.dim}${'─'.repeat(34)}${c.reset}`);
+  console.log(c.bold + c.conred +
+`  ▄████████  ▄██████▄   ███▄▄▄▄   ████████▄       ▄████████ ███▄▄▄▄       ▄████████    ▄████████ 
+  ███    ███ ███    ███ ███▀▀▀██▄ ███    ▀███     ███    ███ ███▀▀▀██▄    ███    ███    ███    ███ 
+  ███    █▀  ███    ███ ███   ███ ███     ███     ███    █▀  ███   ███    ███    █▀     ███    █▀  
+  ███        ███    ███ ███   ███ ███     ███   ▄███▄▄▄      ███   ███    ███          ▄███▄▄▄     
+  ███        ███    ███ ███   ███ ███     ███  ▀▀███▀▀▀      ███   ███  ▀███████████  ▀▀███▀▀▀     
+  ███    █▄  ███    ███ ███   ███ ███     ███     ███    █▄  ███   ███           ███    ███    █▄  
+  ███    ███ ███    ███ ███   ███ ███    ▄███     ███    ███ ███   ███     ▄█    ███    ███    ███ 
+  ████████▀   ▀██████▀   ▀█   █▀  ████████▀       ██████████  ▀█   █▀    ▄████████▀     ██████████ v${version}` + c.reset
+  );
   console.log('');
 }
 
@@ -151,11 +159,11 @@ function showHelp() {
   console.log('');
   console.log(`  ${c.bold}${c.white}OPTIONS${c.reset}`);
   console.log(`    ${c.cyan}-m, --method${c.reset}  Optimization method (default: ${c.yellow}quality${c.reset})`);
-  console.log(`                 ${c.dim}quality${c.reset}  – visually lossless, balanced`);
-  console.log(`                 ${c.dim}balanced${c.reset} – good compression and size`);
-  console.log(`                 ${c.dim}extreme${c.reset}  – maximum compression`);
+  console.log(`                  ${c.dim}quality${c.reset}  – visually lossless, balanced`);
+  console.log(`                  ${c.dim}balanced${c.reset} – good compression and size`);
+  console.log(`                  ${c.dim}extreme${c.reset}  – maximum compression`);
   console.log(`    ${c.cyan}-o, --output${c.reset}  Output path (file or directory)`);
-  console.log(`                 ${c.dim}Default: optimizes in-place${c.reset}`);
+  console.log(`                  ${c.dim}Default: optimizes in-place${c.reset}`);
   console.log(`    ${c.cyan}-h, --help${c.reset}    Show this help text`);
   console.log('');
   console.log(`  ${c.bold}${c.white}EXAMPLES${c.reset}`);
@@ -349,7 +357,7 @@ async function runOptimize(argv) {
   const avgReduction = optimized > 0 ? (totalReduction / optimized).toFixed(1) : '0.0';
 
   console.log('');
-  console.log(`  ${c.dim}${'─'.repeat(34)}${c.reset}`);
+  console.log(`  ${c.dim}${'─'.repeat(94)}${c.reset}`);
   console.log(
     `  ${c.green}✓ Done${c.reset} · ${optimized} optimized · ${errors} error${errors === 1 ? '' : 's'} · ${avgReduction}% avg reduction`
   );
