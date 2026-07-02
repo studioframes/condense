@@ -8,6 +8,33 @@ This patch release focuses on optimizing runtime and testing reliability, and en
 
 We have updated underlying package to ensure seamless native module compilation.
 
+* **Updated:** `js-yaml` bumped from `5.2.0` to `5.2.1`
+* **Updated:** `sharp` bumped from `0.35.2` to `0.35.3`
+
+## DevDependency Updates
+
+We have updated underlying package to ensure seamless zero friction testing.
+
+* **Updated:** `@types/node` bumped from `26.0.1` to `26.1.0`
+
+## Installation
+
+Update or install the new version directly from the npm registry:
+
+```bash
+npm install @studioframes/condense@0.3.3
+```
+
+# Condense v0.3.3
+
+## Release Summary
+
+This patch release focuses on optimizing runtime and testing reliability, and ensuring engine compatibility for `@studioframes/condense`. The core architectural features—such as stateless, in-memory processing via Buffers and Streams, multi-format pipelines, and flexible integration deployments—remain entirely unchanged.
+
+## Dependency Updates
+
+We have updated underlying package to ensure seamless native module compilation.
+
 * **Updated:** `js-yaml` bumped from `5.1.0` to `5.2.0`
 
 ## DevDependency Updates
