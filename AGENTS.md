@@ -16,6 +16,7 @@ Condense is a Node.js optimization engine for images, media, code, and WebAssemb
 - tests/: Node.js built-in test suite
 - demo/: example assets and sample outputs
 - examples/: small usage examples for CLI, middleware, and SDK usage
+- docs/: contains the Condense documentation
 
 ## Architectural principles
 

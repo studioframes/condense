@@ -107,15 +107,20 @@ Condense can run as a standalone CLI tool, a server, be mounted as Express middl
 
 ## Documentation
 
-Additional documentation is available in the [docs](./docs) folder, including:
+The documentation set has been expanded and is now organized for both new users and contributors. Start with the docs hub in [docs/README.md](./docs/README.md), then explore the deeper guides below:
 
 - [docs/overview.md](./docs/overview.md) for an overview of the project and its goals
-- [docs/development.md](./docs/development.md) for local setup and contribution guidance
-- [docs/api.md](./docs/api.md) for the main integration entry points
+- [docs/api.md](./docs/api.md) for integration options through the SDK, HTTP API, and CLI
 - [docs/architecture.md](./docs/architecture.md) for a high-level look at the service architecture
-- [docs/cli.md](./docs/cli.md) for CLI usage examples
+- [docs/cli.md](./docs/cli.md) for CLI usage examples and batch workflows
 - [docs/examples.md](./docs/examples.md) for practical SDK and CLI snippets
+- [docs/development.md](./docs/development.md) for local setup and contribution guidance
+- [docs/configuration.md](./docs/configuration.md) for request options and environment-based configuration
+- [docs/troubleshooting.md](./docs/troubleshooting.md) for common issues and debugging tips
+- [docs/deployment.md](./docs/deployment.md) for production deployment guidance
 - [docs/faq.md](./docs/faq.md) for common questions and answers
+- [MIGRATION_GUIDE.md](./MIGRATION_GUIDE.md) for version-to-version upgrade notes
+- [ECOSYSTEM/DEPENDENCIES.md](./ECOSYSTEM/DEPENDENCIES.md) for the dependency inventory and purpose of each package
 
 - **CLI Optimization:** `npx @studioframes/condense optimize ./src -o ./dist -m balanced` (See [COMMANDS.md](./COMMANDS.md) for full CLI documentation)
 - **Server:** `npx @studioframes/condense` (defaults to port 3000; set `PORT` to override)

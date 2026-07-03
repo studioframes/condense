@@ -8,6 +8,8 @@ The Condense CLI is available through the package entry point and can be used to
 npx @studioframes/condense optimize ./src -o ./dist -m balanced
 ```
 
+To see all commands see [COMMANDS.md](../COMMANDS.md)
+
 ## Common options
 
 - --method or -m selects the optimization mode

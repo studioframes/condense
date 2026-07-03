@@ -14,11 +14,10 @@ config/local.json
 
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
-RELEASES.md
-CHANGELOG.md
 ROADMAP.md
 COMMANDS.md
 AGENTS.md
+MIGRATION_GUIDE.md
 
 # Exclude editor/development config
 .editorconfig
