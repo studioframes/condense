@@ -2,10 +2,10 @@
 
 This document outlines the planned evolution of Condense from current release through v1.0 and beyond.
 
-## Current Release: v0.3.3
+## Current Release: v0.3.4
 
 **Status:** Production-ready with core features complete
-**Released:** June 2026
+**Released:** July 2026
 
 ### Features
 - In-memory Buffer & Stream processing (no temporary disk writes except when explicitly invoking `faststart`)
