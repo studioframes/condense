@@ -1,4 +1,4 @@
-# Condense v0.3.3
+# Condense v0.3.4
 
 ## Release Summary
 
@@ -22,7 +22,7 @@ We have updated underlying package to ensure seamless zero friction testing.
 Update or install the new version directly from the npm registry:
 
 ```bash
-npm install @studioframes/condense@0.3.3
+npm install @studioframes/condense@0.3.4
 ```
 
 # Condense v0.3.3
