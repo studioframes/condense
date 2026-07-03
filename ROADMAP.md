@@ -44,7 +44,7 @@ This document outlines the planned evolution of Condense from current release th
 - Multi-bitrate DASH/HLS preparation
 - JSON schema validation
 
-## v1.0.0 (Nov/Dec 2026)
+## v1.0.0 (Sep/Oct 2026)
 
 ### Stability & Maturity
 - **API Stability**
