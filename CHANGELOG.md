@@ -2,7 +2,7 @@
 
 All notable changes to Condense are documented in this file. This project follows [Semantic Versioning](https://semver.org/).
 
-## [0.3.4] - 2026-07-01
+## [0.3.4] - 2026-07-03
 
 ### Changed
 * Updated `js-yaml` from `5.2.0` to `5.2.1`
