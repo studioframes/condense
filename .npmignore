@@ -18,6 +18,10 @@ ROADMAP.md
 COMMANDS.md
 AGENTS.md
 MIGRATION_GUIDE.md
+SECURITY.md
+README.es.md
+README.pt-BR.md
+README.zh-CN.md
 
 # Exclude editor/development config
 .editorconfig
