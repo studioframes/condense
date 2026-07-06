@@ -8,7 +8,7 @@
 
 **O Condense é um motor de minificação e otimização de arquivos stateless de alta performance para [Node.js](https://nodejs.org). Ele otimiza imagens, áudio, vídeo, código e WebAssembly inteiramente em memória usando Buffers e Streams, evitando a escrita de arquivos temporários no disco.**
 
-[English](README.md) | [简体中文](README.zh-CN.md) | [Español](README.es.md) | [Português (Brasil)](README.pt-BR.md)
+[English](README.md) • [简体中文](README.zh-CN.md) • [Español](README.es.md) • [Português (Brasil)](README.pt-BR.md) • [Deutsch](README.de.md) • [Français](README.fr.md)
 
 </div>
 

@@ -8,7 +8,7 @@
 
 **Condense 是一款专为 [Node.js](https://nodejs.org) 打造的高性能、无状态文件优化与代码压缩引擎。它完全在内存中利用 Buffer 和 Stream 对图像、音频、视频、代码以及 WebAssembly 进行优化，彻底避免了向磁盘写入临时文件的操作。**
 
-[English](README.md) | [简体中文](README.zh-CN.md) | [Español](README.es.md) | [Português (Brasil)](README.pt-BR.md)
+[English](README.md) • [简体中文](README.zh-CN.md) • [Español](README.es.md) • [Português (Brasil)](README.pt-BR.md) • [Deutsch](README.de.md) • [Français](README.fr.md)
 
 </div>
 
