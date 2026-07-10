@@ -1,6 +1,6 @@
 <div align="center">
 
-![logo](https://github.com/user-attachments/assets/b7277c45-e2f2-4345-852b-47403b157f5d)
+![logo](https://github.com/user-attachments/assets/7c1cebfa-f186-4dab-9dc1-fee7474a30dc)
 
 [![npm](https://conbadges.pages.dev/api/npm/v/@studioframes/condense)](https://www.npmjs.com/package/@studioframes/condense)
 [![downloads](https://conbadges.pages.dev/api/npm/dt/@studioframes/condense)](https://www.npmjs.com/package/@studioframes/condense)
