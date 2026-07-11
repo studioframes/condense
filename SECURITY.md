@@ -6,13 +6,14 @@ We actively monitor and patch vulnerabilities in `@studioframes/condense`. Pleas
 
 | Version | Status | Supported | Notes |
 | --- | --- | --- | --- |
-| **0.3.4** | **Active** | :white_check_mark: |  |
-| **0.3.3** | **Unmaintained** | :white_check_mark: | No security vulnerabilities at present, but no new ones will be fixed. |
-| **0.3.2** | **Unmaintained** | :white_check_mark: | No security vulnerabilities at present, but no new ones will be fixed. |
-| **0.3.1** | **Deprecated** | :x: | Unsupported due to the version containing security vulnerabilities that have been patched in [v0.3.2](https://github.com/studioframes/Condense/releases/tag/v0.3.2) |
-| **0.3.0** | **Deprecated** | :x: | Unsupported due to the version containing security vulnerabilities that have been patched in [v0.3.2](https://github.com/studioframes/Condense/releases/tag/v0.3.2) |
-| **0.2.x** | **Unmaintained** | :white_check_mark: | No security vulnerabilities at present, but no new ones will be fixed. |
-| **0.1.x** | **Deprecated** | :x: | End of life |
+| **0.3.5** | **Active** | ✅ |  |
+| **0.3.4** | **Unmaintained** | ✅ | No security vulnerabilities at present, but no new ones will be fixed. |
+| **0.3.3** | **Unmaintained** | ✅ | No security vulnerabilities at present, but no new ones will be fixed. |
+| **0.3.2** | **Unmaintained** | ✅ | No security vulnerabilities at present, but no new ones will be fixed. |
+| **0.3.1** | **Deprecated** | ❌ | Unsupported due to the version containing security vulnerabilities that have been patched in [v0.3.2](https://github.com/studioframes/Condense/releases/tag/v0.3.2) |
+| **0.3.0** | **Deprecated** | ❌ | Unsupported due to the version containing security vulnerabilities that have been patched in [v0.3.2](https://github.com/studioframes/Condense/releases/tag/v0.3.2) |
+| **0.2.x** | **Unmaintained** | ✅ | No security vulnerabilities at present, but no new ones will be fixed. |
+| **0.1.x** | **Deprecated** | ❌ | End of life |
 
 ## Our Security Guarantees
 
