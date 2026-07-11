@@ -1,12 +1,12 @@
 <div align="center">
 
-![logo](https://github.com/user-attachments/assets/b7277c45-e2f2-4345-852b-47403b157f5d)
+[![logo](https://github.com/user-attachments/assets/7c1cebfa-f186-4dab-9dc1-fee7474a30dc)](https://condense.js.org)
 
 [![npm](https://conbadges.pages.dev/api/npm/v/@studioframes/condense)](https://www.npmjs.com/package/@studioframes/condense)
 [![downloads](https://conbadges.pages.dev/api/npm/dt/@studioframes/condense)](https://www.npmjs.com/package/@studioframes/condense)
 [![License](https://conbadges.pages.dev/api/badge?label=license&value=Apache-2.0)](./LICENSE)
 
-**Condense es un motor de minificación y optimización de archivos sin estado y de alto rendimiento para [Node.js](https://nodejs.org). Optimiza imágenes, audio, video, código y WebAssembly completamente en memoria utilizando Buffers y Streams, evitando la escritura de archivos temporales en el disco.**
+**[Condense](https://condense.js.org) es un motor de minificación y optimización de archivos sin estado y de alto rendimiento para [Node.js](https://nodejs.org). Optimiza imágenes, audio, video, código y WebAssembly completamente en memoria utilizando Buffers y Streams, evitando la escritura de archivos temporales en el disco.**
 
 [English](README.md) • [简体中文](README.zh-CN.md) • [Español](README.es.md) • [Português (Brasil)](README.pt-BR.md) • [Deutsch](README.de.md) • [Français](README.fr.md)
 

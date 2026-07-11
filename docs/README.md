@@ -2,6 +2,8 @@
 
 This folder contains the primary documentation for Condense. Use it as a practical guide for understanding the product, integrating it into an application, and contributing changes.
 
+We welcome contibutions to the documentation. All changes to the files inside this directory is directly reflected inside the [Condense website](https://condense.js.org/docs).
+
 ## Start here
 
 - [overview.md](overview.md) — What Condense does, why it exists, and the main optimization modes

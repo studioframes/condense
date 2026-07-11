@@ -1,6 +1,34 @@
 # Changelog
 
-All notable changes to Condense are documented in this file.
+All notable changes to Condense are documented here.
+
+## v0.3.5
+
+## Release Summary
+
+This patch release focuses on optimizing runtime and testing reliability, and ensuring engine compatibility for `@studioframes/condense`. The core architectural features—such as stateless, in-memory processing via Buffers and Streams, multi-format pipelines, and flexible integration deployments—remain entirely unchanged.
+
+## Dependency Updates
+
+We have updated underlying package to ensure seamless native module compilation.
+
+* **Updated:** `lru-cache` bumped from `11.5.1` to `11.5.2`
+* **Updated:** `terser` bumped from `3.9.4` to `3.9.5`
+
+## DevDependency Updates
+
+We have updated underlying package to ensure seamless zero friction testing.
+
+* **Updated:** `@types/node` bumped from `26.1.0` to `26.1.1`
+* **Updated:** `prettier` bumped from `3.9.4` to `3.9.5`
+
+## Installation
+
+Update or install the new version directly from the npm registry:
+
+```bash
+npm i @studioframes/condense@0.3.5
+```
 
 ## v0.3.4
 
@@ -26,7 +54,7 @@ We have updated underlying package to ensure seamless zero friction testing.
 Update or install the new version directly from the npm registry:
 
 ```bash
-npm install @studioframes/condense@0.3.4
+npm i @studioframes/condense@0.3.4
 ```
 
 ## v0.3.3
@@ -53,7 +81,7 @@ We have updated underlying package to ensure seamless zero friction testing.
 Update or install the new version directly from the npm registry:
 
 ```bash
-npm install @studioframes/condense@0.3.3
+npm i @studioframes/condense@0.3.3
 ```
 
 ## v0.3.2
@@ -72,7 +100,7 @@ This patch release addresses two CodeQL security vulnerabilities in the text opt
 Update or install the new version directly from the npm registry:
 
 ```bash
-npm install @studioframes/condense@0.3.2
+npm i @studioframes/condense@0.3.2
 ```
 
 ---
@@ -95,7 +123,7 @@ We have removed the directories and files that were accidentally left inside the
 Update or install the new version directly from the npm registry:
 
 ```bash
-npm install @studioframes/condense@0.3.1
+npm i @studioframes/condense@0.3.1
 ```
 
 ## v0.3.0
@@ -132,7 +160,7 @@ We have updated underlying package to ensure seamless zero friction testing.
 Update or install the new version directly from the npm registry:
 
 ```bash
-npm install @studioframes/condense@0.3.0
+npm i @studioframes/condense@0.3.0
 ```
 
 ---
@@ -154,7 +182,7 @@ We have updated underlying package to ensure seamless native module compilation.
 Update or install the new version directly from the npm registry:
 
 ```bash
-npm install @studioframes/condense@0.2.2
+npm i @studioframes/condense@0.2.2
 ```
 
 ---
@@ -177,7 +205,7 @@ We have updated underlying package to ensure seamless zero friction testing.
 Update or install the new version directly from the npm registry:
 
 ```bash
-npm install @studioframes/condense@0.2.1
+npm i @studioframes/condense@0.2.1
 ```
 
 ---
@@ -208,7 +236,7 @@ We have updated underlying package to ensure seamless native module compilation.
 Update or install the new version directly from the npm registry:
 
 ```bash
-npm install @studioframes/condense@0.2.0
+npm i @studioframes/condense@0.2.0
 ```
 
 ---
@@ -251,7 +279,7 @@ If any new bugs or vulnerabilities are found please read and follow the steps ca
 Update or install the latest patch version directly from the npm registry:
 
 ```bash
-npm install @studioframes/condense@0.1.6
+npm i @studioframes/condense@0.1.6
 ```
 
 ---
@@ -293,7 +321,7 @@ If any new bugs or vulnerabilities are found please read and follow the steps ca
 Update or install the latest patch version directly from the npm registry:
 
 ```bash
-npm install @studioframes/condense@0.1.5
+npm i @studioframes/condense@0.1.5
 ```
 
 ---
@@ -346,7 +374,7 @@ If any new bugs or vulnerabilities are found please read and follow the steps ca
 Update or install the latest patch version directly from the npm registry:
 
 ```bash
-npm install @studioframes/condense@0.1.4
+npm i @studioframes/condense@0.1.4
 ```
 
 ---
@@ -388,7 +416,7 @@ If any new bugs or vulnerabilities are found please read and follow the steps ca
 Update or install the latest patch version directly from the npm registry:
 
 ```bash
-npm install @studioframes/condense@0.1.3
+npm i @studioframes/condense@0.1.3
 ```
 
 ---
@@ -431,7 +459,7 @@ If any new bugs or vulnerabilities are found please read and follow the steps ca
 Update or install the latest patch version directly from the npm registry:
 
 ```bash
-npm install @studioframes/condense@0.1.2
+npm i @studioframes/condense@0.1.2
 
 ```
 
@@ -474,7 +502,7 @@ If any new bugs or vulnerabilities are found please read and follow the steps ca
 Update or install the latest patch version directly from the npm registry:
 
 ```bash
-npm install @studioframes/condense@0.1.1
+npm i @studioframes/condense@0.1.1
 ```
 
 ---
@@ -523,7 +551,7 @@ This package has been hardened from its initial release against software supply 
 Install the production-ready build directly from the npm registry:
 
 ```bash
-npm install @studioframes/condense
+npm i @studioframes/condense
 ```
 
 To run the standalone optimization server instance immediately:
