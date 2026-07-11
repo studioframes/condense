@@ -109,7 +109,7 @@ Condense can run as a standalone CLI tool, a server, be mounted as Express middl
 
 ## Documentation
 
-The documentation set has been expanded and is now organized for both new users and contributors. Start with the docs hub in [docs/README.md](./docs/README.md), then explore the deeper guides below:
+The documentation set has been expanded and is now organized for both new users and contributors. All of it can be found in the [Condense Website](https://condense.js.org/docs) as well as in the `/docs` directory. Start with the docs hub in [docs/README.md](./docs/README.md), then explore the deeper guides below:
 
 - [docs/overview.md](./docs/overview.md) for an overview of the project and its goals
 - [docs/api.md](./docs/api.md) for integration options through the SDK, HTTP API, and CLI
