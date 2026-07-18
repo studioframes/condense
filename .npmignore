@@ -19,12 +19,11 @@ COMMANDS.md
 AGENTS.md
 MIGRATION_GUIDE.md
 SECURITY.md
-README.es.md
-README.pt-BR.md
-README.zh-CN.md
+DEPENDENCIES.md
 
 # Exclude editor/development config
 .editorconfig
 .prettierrc
 .eslintrc.json
 .gitignore
+.gitattributes

@@ -236,17 +236,17 @@ Below are the benchmark results of processing our sample suite through the `Cond
 | File Name | Original Size | Quality Size | Balanced Size | Extreme Size | Max Reduction |
 | --- | --- | --- | --- | --- | --- |
 | `styles.scss` | 1.3 KB | 0.3 KB | 0.3 KB | 0.3 KB | -76.2% |
-| `demo.png` | 115.3 KB | 98.9 KB | 98.9 KB | 26.7 KB | -76.8% |
-| `app.js` | 5.0 KB | 1.8 KB | 1.8 KB | 1.4 KB | -72.5% |
-| `component.tsx` | 2.6 KB | 1.8 KB | 1.8 KB | 1.0 KB | -61.0% |
-| `service.ts` | 2.2 KB | 1.5 KB | 1.5 KB | 0.9 KB | -58.0% |
-| `view.jsx` | 2.3 KB | 1.8 KB | 1.8 KB | 1.1 KB | -52.2% |
-| `demo.svg` | 217.0 KB | 119.5 KB | 119.5 KB | 119.3 KB | -45.0% |
-| `styles.css` | 1.0 KB | 0.7 KB | 0.7 KB | 0.6 KB | -36.4% |
+| `demo.png` | 115.3 KB | 98.9 KB | 30.2 KB | 26.7 KB | -76.8% |
+| `app.js` | 5.0 KB | 1.8 KB | 1.8 KB| 1.4 KB | -72.5% |
+| `component.tsx` | 2.6 KB | 1.8 KB | 1.1 KB | 1.0 KB | -61.0% |
+| `service.ts` | 2.2 KB | 1.5 KB | 1.0 KB | 0.9 KB | -58.0% |
+| `view.jsx` | 2.3 KB | 1.8 KB | 1.2 KB | 1.1 KB | -52.2% |
+| `demo.svg` | 217.0 KB | 119.5 KB | 119.3 KB | 119.3 KB | -45.0% |
+| `styles.css` | 1.0 KB | 0.7 KB | 0.6 KB | 0.6 KB | -36.4% |
 | `index.html` | 2.4 KB | 1.6 KB | 1.6 KB | 1.5 KB | -35.9% |
 | `config.yml` | 0.9 KB | 0.7 KB | 0.7 KB | 0.6 KB | -30.0% |
 | `data.json` | 0.5 KB | 0.4 KB | 0.4 KB | 0.4 KB | -25.7% |
-| `demo.mp4` | 30.8 KB | 31.6 KB | 29.4 KB | 25.8 KB | -16.4% |
+| `demo.mp4` | 30.8 KB | 31.6 KB | 29.4 KB| 25.8 KB | -16.4% |
 
 ## System Requirements
 
