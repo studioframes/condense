@@ -4,21 +4,20 @@ This guide summarizes the changes developers should expect when upgrading Conden
 
 ## Security support and upgrade priority
 
-Before planning a migration, use the latest supported release. According to [SECURITY.md](./SECURITY.md), the recommended target for upgrades is the latest stable release, currently 0.3.4.
+Before planning a migration, use the latest supported release. According to [SECURITY.md](./SECURITY.md), the recommended target for upgrades is the latest stable release, currently 0.3.6.
 
-| Current version | Status | Recommended action |
-| --- | --- | --- |
-| 0.3.4 | Active | Keep using the latest stable release. |
-| 0.3.3 / 0.3.2 | Unmaintained | Upgrade to 0.3.4+ as soon as practical. |
-| 0.3.1 / 0.3.0 | Deprecated | Upgrade immediately; these releases contain security vulnerabilities that were patched in 0.3.2. |
-| 0.2.x | Unmaintained | Upgrade to 0.3.0+ before relying on it in production. |
-| 0.1.x | Deprecated | Upgrade to 0.2.0+ and re-test integrations thoroughly. |
+| Version | Status | Supported | Notes |
+| --- | --- | --- | --- |
+| **0.3.2 - 0.3.6** | **Active** | ✅ | Always upgrade to the latest patch release for maximum security. |
+| **0.3.0 - 0.3.1** | **Deprecated** | ❌ | Unsupported due to the version containing security vulnerabilities that have been patched in [v0.3.2](https://github.com/studioframes/Condense/releases/tag/v0.3.2). |
+| **0.2.x** | **Active** | ⚠️ | Upgrade to v0.3.x as soon as possible. This set of version will be deprecated at the release of the next minor/major version. |
+| **0.1.x** | **Deprecated** | ❌ | End of life |
 
 If you are still on 0.3.0 or 0.3.1, treat that as a security-sensitive migration and prioritize it above normal dependency updates.
 
 ## Current version notes
 
-### Upgrading from 0.3.x to 0.3.4
+### Upgrading from 0.3.x to 0.3.6
 
 - No breaking API changes are documented for the core optimization helpers.
 - The update is a dependency refresh and should be safe for existing integrations.

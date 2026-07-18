@@ -2,6 +2,26 @@
 
 All notable changes to Condense are documented here.
 
+## v0.3.6
+
+## Release Summary
+
+This patch release focuses on optimizing runtime reliability and ensuring engine compatibility for `@studioframes/condense`. The core architectural features—such as stateless, in-memory processing via Buffers and Streams, multi-format pipelines, and flexible integration deployments—remain entirely unchanged.
+
+## Dependency Updates
+
+We have updated underlying package to ensure seamless native module compilation.
+
+* **Updated:** `svgo` bumped from `4.0.1` to `4.0.2`
+
+## Installation
+
+Update or install the new version directly from the npm registry:
+
+```bash
+npm i @studioframes/condense@0.3.6
+```
+
 ## v0.3.5
 
 ## Release Summary
@@ -103,8 +123,6 @@ Update or install the new version directly from the npm registry:
 npm i @studioframes/condense@0.3.2
 ```
 
----
-
 ## v0.3.1
 
 ## Release Summary
@@ -163,8 +181,6 @@ Update or install the new version directly from the npm registry:
 npm i @studioframes/condense@0.3.0
 ```
 
----
-
 ## v0.2.2
 
 ## Release Summary
@@ -184,8 +200,6 @@ Update or install the new version directly from the npm registry:
 ```bash
 npm i @studioframes/condense@0.2.2
 ```
-
----
 
 ## v0.2.1
 
@@ -207,8 +221,6 @@ Update or install the new version directly from the npm registry:
 ```bash
 npm i @studioframes/condense@0.2.1
 ```
-
----
 
 ## v0.2.0
 
@@ -238,8 +250,6 @@ Update or install the new version directly from the npm registry:
 ```bash
 npm i @studioframes/condense@0.2.0
 ```
-
----
 
 ## v0.1.6
 
@@ -282,8 +292,6 @@ Update or install the latest patch version directly from the npm registry:
 npm i @studioframes/condense@0.1.6
 ```
 
----
-
 ## v0.1.5
 
 ## Release Summary
@@ -323,8 +331,6 @@ Update or install the latest patch version directly from the npm registry:
 ```bash
 npm i @studioframes/condense@0.1.5
 ```
-
----
 
 ## v0.1.4
 
@@ -377,8 +383,6 @@ Update or install the latest patch version directly from the npm registry:
 npm i @studioframes/condense@0.1.4
 ```
 
----
-
 ## v0.1.3
 
 ## Release Summary
@@ -418,8 +422,6 @@ Update or install the latest patch version directly from the npm registry:
 ```bash
 npm i @studioframes/condense@0.1.3
 ```
-
----
 
 ## v0.1.2
 
@@ -463,8 +465,6 @@ npm i @studioframes/condense@0.1.2
 
 ```
 
----
-
 ## v0.1.1
 
 ## Release Summary
@@ -504,8 +504,6 @@ Update or install the latest patch version directly from the npm registry:
 ```bash
 npm i @studioframes/condense@0.1.1
 ```
-
----
 
 ## v0.1.0
 

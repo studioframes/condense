@@ -1,6 +1,6 @@
 {
   "name": "@studioframes/condense",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Condense is a high-performance, stateless file optimization and minification engine for Node.js.",
   "main": "src/index.js",
   "bin": {
@@ -38,7 +38,7 @@
     "lru-cache": "^11.5.2",
     "multer": "^2.2.0",
     "sharp": "^0.35.3",
-    "svgo": "^4.0.1",
+    "svgo": "^4.0.2",
     "terser": "^5.49.0"
   },
   "repository": {
