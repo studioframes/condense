@@ -107,25 +107,16 @@ Condense can run as a standalone CLI tool, a server, be mounted as Express middl
 
 ## Documentation
 
-The documentation set has been expanded and is now organized for both new users and contributors. All of it can be found in the [Condense Website](https://condense.js.org/docs) as well as in the `/docs` directory. Start with the docs hub in [docs/README.md](./docs/README.md), then explore the deeper guides below:
+The documentation set has been expanded and is now organized for both new users and contributors. The complete documentation is available on the [Condense Website](https://condense.js.org/docs)—which is rendered directly from the markdown files in this repository.
 
-- [docs/overview.md](./docs/overview.md) for an overview of the project and its goals
-- [docs/api.md](./docs/api.md) for integration options through the SDK, HTTP API, and CLI
-- [docs/architecture.md](./docs/architecture.md) for a high-level look at the service architecture
-- [docs/cli.md](./docs/cli.md) for CLI usage examples and batch workflows
-- [docs/examples.md](./docs/examples.md) for practical SDK and CLI snippets
-- [docs/development.md](./docs/development.md) for local setup and contribution guidance
-- [docs/configuration.md](./docs/configuration.md) for request options and environment-based configuration
-- [docs/troubleshooting.md](./docs/troubleshooting.md) for common issues and debugging tips
-- [docs/deployment.md](./docs/deployment.md) for production deployment guidance
-- [docs/faq.md](./docs/faq.md) for common questions and answers
-- [MIGRATION_GUIDE.md](./MIGRATION_GUIDE.md) for version-to-version upgrade notes
-- [ECOSYSTEM/DEPENDENCIES.md](./ECOSYSTEM/DEPENDENCIES.md) for the dependency inventory and purpose of each package
+If you prefer to browse the source files directly here on GitHub, you can start with the docs hub in [docs/README.md](./docs/README.md).
 
-- **CLI Optimization:** `npx @studioframes/condense optimize ./src -o ./dist -m balanced` (See [COMMANDS.md](./COMMANDS.md) for full CLI documentation)
-- **Server:** `npx @studioframes/condense` (defaults to port 3000; set `PORT` to override)
-- **Express:** mount `condenseApp` on a route to accept uploads
-- **Programmatic:** use helpers such as `optimizeImage`, `optimizeText`, `optimizeMediaStream`, `optimizeEsbuild`, `optimizeWasm`
+### Quick Start Reference
+
+* **CLI Optimization:** `npx @studioframes/condense optimize ./src -o ./dist -m balanced` (See [COMMANDS.md](./COMMANDS.md) for full CLI documentation)
+* **Server:** `npx @studioframes/condense` (defaults to port 3000; set `PORT` to override)
+* **Express:** mount `condenseApp` on a route to accept uploads
+* **Programmatic:** use helpers such as `optimizeImage`, `optimizeText`, `optimizeMediaStream`, `optimizeEsbuild`, `optimizeWasm`
 
 ### Examples
 
@@ -254,7 +245,7 @@ Below are the benchmark results of processing our sample suite through the `Cond
 
 ## Code of Conduct
 
-We expect the project participants to adhere to the repositories code of conduct. Please read [the full text](https://github.com/studioframes/Condense/blob/main/CODE_OF_CONDUCT.md) so that you can understand what actions will and will not be tolerated.
+We expect all project participants to adhere to our newly established, repository-specific code of conduct. Please read [the full text](https://github.com/studioframes/Condense/blob/main/CODE_OF_CONDUCT.md) so that you can understand what actions will and will not be tolerated.
 
 ## Contributing to Condense
 
