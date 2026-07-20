@@ -113,8 +113,18 @@ If you prefer to browse the source files directly here on GitHub, you can start 
 
 ### Quick Start Reference
 
-* **CLI Optimization:** `npx @studioframes/condense optimize ./src -o ./dist -m balanced` (See [COMMANDS.md](./COMMANDS.md) for full CLI documentation)
-* **Server:** `npx @studioframes/condense` (defaults to port 3000; set `PORT` to override)
+* **CLI Optimization:**
+  ```bash
+  npx @studioframes/condense optimize ./src -o ./dist -m balanced
+  ```
+  See [COMMANDS.md](./COMMANDS.md) for full CLI documentation
+  
+* **Server:**
+  ```bash
+  npx @studioframes/condense
+  ``` 
+  defaults to port 3000; set `PORT` to override
+  
 * **Express:** mount `condenseApp` on a route to accept uploads
 * **Programmatic:** use helpers such as `optimizeImage`, `optimizeText`, `optimizeMediaStream`, `optimizeEsbuild`, `optimizeWasm`
 
@@ -124,13 +134,15 @@ If you prefer to browse the source files directly here on GitHub, you can start 
 
 Condense v0.3.0 introduced a styled, fully-featured CLI:
 
-```bash
-# Optimize a single image with extreme compression
-npx @studioframes/condense optimize photo.png -o out.webp --method extreme
+* **Optimize a single image with extreme compression:**
+  ```bash
+  npx @studioframes/condense optimize photo.png -o out.webp --method extreme
+  ```
 
-# Batch optimize a directory using the balanced method
-npx @studioframes/condense optimize ./src/ -o ./dist/ --method balanced
-```
+* **Batch optimize a directory using the balanced method:**
+  ```bash
+  npx @studioframes/condense optimize ./src/ -o ./dist/ --method balanced
+  ```
 
 #### Express Middleware
 
