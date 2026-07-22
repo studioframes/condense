@@ -1,6 +1,24 @@
 # Changelog
 
-All notable changes to Condense are documented here.
+## v0.3.7
+
+## Release Summary
+
+This patch release focuses on optimizing testing reliability and ensuring engine compatibility for `@studioframes/condense`. The core architectural features—such as stateless, in-memory processing via Buffers and Streams, multi-format pipelines, and flexible integration deployments—remain entirely unchanged.
+
+## DevDependency Updates
+
+We have updated underlying package to ensure seamless zero friction testing.
+
+* **Updated:** `prettier` bumped from `3.9.5` to `3.9.6`
+
+## Installation
+
+Update or install the new version directly from the npm registry:
+
+```bash
+npm i @studioframes/condense@0.3.7
+```
 
 ## v0.3.6
 
