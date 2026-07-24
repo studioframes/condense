@@ -2,12 +2,13 @@
 
 This document outlines the planned evolution of Condense from current release through v1.0 and beyond.
 
-## Current Release: v0.3.7
+## Current Release: v0.3.8
 
 **Status:** Production-ready with core features complete
 **Released:** July 2026
 
 ### Features
+
 - In-memory Buffer & Stream processing (no temporary disk writes except when explicitly invoking `faststart`)
 - Image (including AVIF & GIF), audio, video, and code/markup (including SVG) optimization
 - TypeScript and React minification (`.ts`, `.jsx`, `.tsx`) via `esbuild`
@@ -23,23 +24,26 @@ This document outlines the planned evolution of Condense from current release th
 ## v0.5.0 (Aug/Sep 2026)
 
 ### Performance & Optimization
+
 - **Streaming Improvements**
   - Implement adaptive chunk sizing for large files
   - Add memory pool reuse for buffer allocation
   - Benchmark against competing libraries
 
 ### Developer Experience
+
 - **Documentation**
   - API reference documentation (JSDoc → HTML)
   - Performance benchmarks vs. alternatives
   - Real-world integration examples
-  
+
 - **Tooling**
   - GitHub Actions CI/CD workflow
   - Automated dependency updates
   - Performance regression testing
 
 ### Advanced Media Enhancements
+
 - Subtitle track extraction (SRT, VTT)
 - Multi-bitrate DASH/HLS preparation
 - JSON schema validation
@@ -47,6 +51,7 @@ This document outlines the planned evolution of Condense from current release th
 ## v1.0.0 (Nov/Dec 2026)
 
 ### Stability & Maturity
+
 - **API Stability**
   - Semantic versioning guarantees
   - Deprecation warnings for future breaking changes
@@ -59,6 +64,7 @@ This document outlines the planned evolution of Condense from current release th
   - Code coverage benchmarks (>85%)
 
 ### Enterprise Features
+
 - **Scaling Support**
   - AWS Lambda layer packaging
   - Docker image with ffmpeg included
@@ -72,6 +78,7 @@ This document outlines the planned evolution of Condense from current release th
   - Request/response timing telemetry
 
 ### Production Hardening
+
 - **Reliability**
   - Enhanced error messages with recovery suggestions
   - Timeout configuration per operation type
@@ -86,6 +93,7 @@ This document outlines the planned evolution of Condense from current release th
 ## Beyond v1.0
 
 ### v2.0+ Considerations
+
 - **Stream Processing**
   - Chainable transform pipeline API
   - Custom plugin system for processors
@@ -99,6 +107,7 @@ This document outlines the planned evolution of Condense from current release th
 ## Community & Contribution
 
 ### Opportunities for Contributors
+
 - Format-specific optimization improvements
 - Platform-specific binary distribution
 - Documentation translations
@@ -106,6 +115,7 @@ This document outlines the planned evolution of Condense from current release th
 - Performance optimization proposals
 
 ### Governance
+
 - Maintain Apache 2.0 licensing
 - Transparent decision-making via issues
 - Regular community feedback sessions
