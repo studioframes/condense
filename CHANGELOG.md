@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.9 (2026-07-29)
+
+### DevDependencies
+
+- [`1c23021`](https://github.com/studioframes/condense/commit/6144350) Update `eslint` from `10.7.0` to `10.8.0`
+- [`28b0f54`](https://github.com/studioframes/condense/commit/2925a8d) Update `@types/node` from `26.1.1` to `26.1.2`
+
 ## v0.3.8 (2026-07-24)
 
 ### Dependencies
