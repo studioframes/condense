@@ -6,17 +6,24 @@ const fs = require('fs');
 const path = require('path');
 const { version } = require('../package.json');
 
-// ── ANSI escape codes ─────────────────────────────────────────────────────────
+// ── ANSI Escape Codes (Mapped to styles.css design tokens) ─────────────────────
 const c = {
   reset: '\x1b[0m',
   bold: '\x1b[1m',
   dim: '\x1b[2m',
-  red: '\x1b[31m',
-  conred: '\x1b[38;2;255;0;0m',
-  green: '\x1b[32m',
-  yellow: '\x1b[33m',
-  cyan: '\x1b[36m',
-  white: '\x1b[37m',
+
+  // Custom 24-bit TrueColor Palette from CSS
+  foreground: '\x1b[38;2;250;250;250m',       /* --foreground: #fafafa */
+  muted: '\x1b[38;2;136;136;136m',            /* --muted-foreground: rgb(136,136,136) */
+  faint: '\x1b[38;2;114;114;114m',            /* --ink-faint: rgb(114,114,114) */
+  border: '\x1b[38;2;39;39;42m',              /* --border: #27272a */
+
+  // Brand & Accent Colors from CSS
+  cyan: '\x1b[38;2;0;223;216m',               /* Cyan streak from Method Quality */
+  purple: '\x1b[38;2;124;58;237m',            /* CSS / Image tag accent */
+  green: '\x1b[38;2;134;239;172m',            /* Success Green (#86efac) */
+  amber: '\x1b[38;2;245;158;11m',             /* Amber Gold streak from Method Extreme */
+  red: '\x1b[38;2;239;68;68m',                /* Error Red */
 };
 
 // ── Extension sets ─────────────────────────────────────────────────────────────
@@ -76,16 +83,7 @@ function formatSize(bytes) {
 
 function printHeader() {
   console.log('');
-  console.log(c.bold + c.conred +
-`  ▄████████  ▄██████▄   ███▄▄▄▄   ████████▄       ▄████████ ███▄▄▄▄       ▄████████    ▄████████ 
-  ███    ███ ███    ███ ███▀▀▀██▄ ███    ▀███     ███    ███ ███▀▀▀██▄    ███    ███    ███    ███ 
-  ███    █▀  ███    ███ ███   ███ ███     ███     ███    █▀  ███   ███    ███    █▀     ███    █▀  
-  ███        ███    ███ ███   ███ ███     ███   ▄███▄▄▄      ███   ███    ███          ▄███▄▄▄     
-  ███        ███    ███ ███   ███ ███     ███  ▀▀███▀▀▀      ███   ███  ▀███████████  ▀▀███▀▀▀     
-  ███    █▄  ███    ███ ███   ███ ███     ███     ███    █▄  ███   ███           ███    ███    █▄  
-  ███    ███ ███    ███ ███   ███ ███    ▄███     ███    ███ ███   ███     ▄█    ███    ███    ███ 
-  ████████▀   ▀██████▀   ▀█   █▀  ████████▀       ██████████  ▀█   █▀    ▄████████▀     ██████████ v${version}` + c.reset
-  );
+  console.log(c.bold + c.foreground + `Condense CLI ` + c.muted + `v${version}` + c.reset);
   console.log('');
 }
 
@@ -151,24 +149,24 @@ function parseArgs(argv) {
 
 function showHelp() {
   printHeader();
-  console.log(`  ${c.bold}${c.white}USAGE${c.reset}`);
-  console.log(`    ${c.cyan}condense optimize${c.reset} <input> [options]`);
+  console.log(`  ${c.bold}${c.foreground}USAGE${c.reset}`);
+  console.log(`    ${c.cyan}condense optimize${c.reset} ${c.muted}<input> [options]${c.reset}`);
   console.log('');
-  console.log(`  ${c.bold}${c.white}ARGUMENTS${c.reset}`);
-  console.log(`    ${c.cyan}<input>${c.reset}       File or directory to optimize`);
+  console.log(`  ${c.bold}${c.foreground}ARGUMENTS${c.reset}`);
+  console.log(`    ${c.cyan}<input>${c.reset}        File or directory to optimize`);
   console.log('');
-  console.log(`  ${c.bold}${c.white}OPTIONS${c.reset}`);
-  console.log(`    ${c.cyan}-m, --method${c.reset}  Optimization method (default: ${c.yellow}quality${c.reset})`);
-  console.log(`                  ${c.dim}quality${c.reset}  – visually lossless, balanced`);
-  console.log(`                  ${c.dim}balanced${c.reset} – good compression and size`);
-  console.log(`                  ${c.dim}extreme${c.reset}  – maximum compression`);
+  console.log(`  ${c.bold}${c.foreground}OPTIONS${c.reset}`);
+  console.log(`    ${c.cyan}-m, --method${c.reset}  Optimization method (default: ${c.amber}quality${c.reset})`);
+  console.log(`                  ${c.muted}quality${c.reset}  – visually lossless, balanced`);
+  console.log(`                  ${c.muted}balanced${c.reset} – good compression and size`);
+  console.log(`                  ${c.muted}extreme${c.reset}  – maximum compression`);
   console.log(`    ${c.cyan}-o, --output${c.reset}  Output path (file or directory)`);
-  console.log(`                  ${c.dim}Default: optimizes in-place${c.reset}`);
+  console.log(`                  ${c.muted}Default: optimizes in-place${c.reset}`);
   console.log(`    ${c.cyan}-h, --help${c.reset}    Show this help text`);
   console.log('');
-  console.log(`  ${c.bold}${c.white}EXAMPLES${c.reset}`);
-  console.log(`    ${c.dim}$ condense optimize photo.png -o out.webp --method extreme${c.reset}`);
-  console.log(`    ${c.dim}$ condense optimize ./src/ -o ./dist/ --method balanced${c.reset}`);
+  console.log(`  ${c.bold}${c.foreground}EXAMPLES${c.reset}`);
+  console.log(`    ${c.faint}$ condense optimize photo.png -o out.webp --method extreme${c.reset}`);
+  console.log(`    ${c.faint}$ condense optimize ./src/ -o ./dist/ --method balanced${c.reset}`);
   console.log('');
 }
 
@@ -261,7 +259,7 @@ async function runOptimize(argv) {
 
   if (files.length === 0) {
     printHeader();
-    console.log(`  ${c.yellow}● No supported files found.${c.reset}`);
+    console.log(`  ${c.muted}● No supported files found.${c.reset}`);
     console.log('');
     return;
   }
@@ -275,7 +273,7 @@ async function runOptimize(argv) {
   }
 
   printHeader();
-  console.log(`  ${c.yellow}● Processing ${files.length} file${files.length === 1 ? '' : 's'}...${c.reset}`);
+  console.log(`  ${c.muted}● Processing ${files.length} file${files.length === 1 ? '' : 's'}...${c.reset}`);
   console.log('');
 
   // Compute max filename length for alignment
@@ -298,7 +296,7 @@ async function runOptimize(argv) {
 
       if (result.skipped) {
         console.log(
-          `  ${c.yellow}○${c.reset} ${c.white}${paddedName}${c.reset}  ${c.dim}Skipped: ${result.reason}${c.reset}`
+          `  ${c.muted}○${c.reset} ${c.foreground}${paddedName}${c.reset}  ${c.faint}Skipped: ${result.reason}${c.reset}`
         );
         continue;
       }
@@ -341,7 +339,7 @@ async function runOptimize(argv) {
       const newFormatted = formatSize(newSize).padStart(9);
 
       console.log(
-        `  ${c.green}✓${c.reset} ${c.white}${paddedName}${c.reset}  ${originalFormatted} → ${newFormatted}   ${c.green}▼ ${reduction.toFixed(1)}%${c.reset}`
+        `  ${c.green}✓${c.reset} ${c.foreground}${paddedName}${c.reset}  ${c.muted}${originalFormatted}${c.reset} → ${c.foreground}${newFormatted}${c.reset}   ${c.green}▼ ${reduction.toFixed(1)}%${c.reset}`
       );
 
       optimized++;
@@ -349,7 +347,7 @@ async function runOptimize(argv) {
     } catch (err) {
       errors++;
       console.log(
-        `  ${c.red}✗${c.reset} ${c.white}${paddedName}${c.reset}  ${c.dim}${c.red}Error: ${err.message}${c.reset}`
+        `  ${c.red}✗${c.reset} ${c.foreground}${paddedName}${c.reset}  ${c.red}Error: ${err.message}${c.reset}`
       );
     }
   }
@@ -357,9 +355,9 @@ async function runOptimize(argv) {
   const avgReduction = optimized > 0 ? (totalReduction / optimized).toFixed(1) : '0.0';
 
   console.log('');
-  console.log(`  ${c.dim}${'─'.repeat(94)}${c.reset}`);
+  console.log(`  ${c.border}${'─'.repeat(80)}${c.reset}`);
   console.log(
-    `  ${c.green}✓ Done${c.reset} · ${optimized} optimized · ${errors} error${errors === 1 ? '' : 's'} · ${avgReduction}% avg reduction`
+    `  ${c.green}✓ Done${c.reset} ${c.muted}·${c.reset} ${c.foreground}${optimized} optimized${c.reset} ${c.muted}·${c.reset} ${c.muted}${errors} error${errors === 1 ? '' : 's'}${c.reset} ${c.muted}·${c.reset} ${c.green}${avgReduction}% avg reduction${c.reset}`
   );
   console.log('');
 }
@@ -371,8 +369,8 @@ function runServer() {
   const PORT = process.env.PORT || 3000;
 
   printHeader();
-  console.log(`  ${c.yellow}● Server running on port ${PORT}${c.reset}`);
-  console.log(`  ${c.yellow}● POST /optimize to process files${c.reset}`);
+  console.log(`  ${c.cyan}● Server running on port ${PORT}${c.reset}`);
+  console.log(`  ${c.muted}● POST /optimize to process files${c.reset}`);
   console.log('');
 
   app.listen(PORT);
@@ -380,7 +378,7 @@ function runServer() {
 
 // ── Entry point ────────────────────────────────────────────────────────────────
 
-const [,, subcommand, ...rest] = process.argv;
+const [, , subcommand, ...rest] = process.argv;
 
 if (subcommand === 'optimize') {
   runOptimize(rest).catch((err) => {

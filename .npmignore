@@ -24,6 +24,6 @@ DEPENDENCIES.md
 # Exclude editor/development config
 .editorconfig
 .prettierrc
-.eslintrc.json
 .gitignore
 .gitattributes
+eslint.config.js

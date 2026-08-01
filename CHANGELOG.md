@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.10 (2026-08-01)
+
+### Removed
+
+- [``](https://github.com/studioframes/condense/commit/) Remove old Condense ASCII logo from CLI.
+- [``](https://github.com/studioframes/condense/commit/) Remove `eslint.config.js` from published package.
+
 ## v0.3.9 (2026-07-29)
 
 ### DevDependencies
