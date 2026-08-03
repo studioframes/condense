@@ -12,7 +12,7 @@
   "scripts": {
     "start": "node bin/cli.js",
     "build": "echo \"This project doesn't require building anything.\"",
-    "test": "node --test 'tests/**/*.test.js'",
+    "test": "node --test",
     "lint": "eslint src/ bin/ tests/",
     "format": "prettier --write ."
   },
