@@ -13,31 +13,45 @@ const c = {
   dim: '\x1b[2m',
 
   // Custom 24-bit TrueColor Palette from CSS
-  foreground: '\x1b[38;2;250;250;250m',       /* --foreground: #fafafa */
-  muted: '\x1b[38;2;136;136;136m',            /* --muted-foreground: rgb(136,136,136) */
-  faint: '\x1b[38;2;114;114;114m',            /* --ink-faint: rgb(114,114,114) */
-  border: '\x1b[38;2;39;39;42m',              /* --border: #27272a */
+  foreground: '\x1b[38;2;250;250;250m' /* --foreground: #fafafa */,
+  muted: '\x1b[38;2;136;136;136m' /* --muted-foreground: rgb(136,136,136) */,
+  faint: '\x1b[38;2;114;114;114m' /* --ink-faint: rgb(114,114,114) */,
+  border: '\x1b[38;2;39;39;42m' /* --border: #27272a */,
 
   // Brand & Accent Colors from CSS
-  cyan: '\x1b[38;2;0;223;216m',               /* Cyan streak from Method Quality */
-  purple: '\x1b[38;2;124;58;237m',            /* CSS / Image tag accent */
-  green: '\x1b[38;2;134;239;172m',            /* Success Green (#86efac) */
-  amber: '\x1b[38;2;245;158;11m',             /* Amber Gold streak from Method Extreme */
-  red: '\x1b[38;2;239;68;68m',                /* Error Red */
+  cyan: '\x1b[38;2;0;223;216m' /* Cyan streak from Method Quality */,
+  purple: '\x1b[38;2;124;58;237m' /* CSS / Image tag accent */,
+  green: '\x1b[38;2;134;239;172m' /* Success Green (#86efac) */,
+  amber: '\x1b[38;2;245;158;11m' /* Amber Gold streak from Method Extreme */,
+  red: '\x1b[38;2;239;68;68m' /* Error Red */,
 };
 
 // ── Extension sets ─────────────────────────────────────────────────────────────
 const IMAGE_EXTS = new Set(['.png', '.jpg', '.jpeg', '.webp', '.avif', '.gif']);
 const TEXT_EXTS = new Set([
-  '.js', '.css', '.html', '.json', '.svg', '.xml',
-  '.yaml', '.yml', '.less', '.scss', '.graphql', '.gql',
+  '.js',
+  '.css',
+  '.html',
+  '.json',
+  '.svg',
+  '.xml',
+  '.yaml',
+  '.yml',
+  '.less',
+  '.scss',
+  '.graphql',
+  '.gql',
 ]);
 const ESBUILD_EXTS = new Set(['.ts', '.jsx', '.tsx']);
 const WASM_EXTS = new Set(['.wasm']);
 const MEDIA_EXTS = new Set(['.mp3', '.wav', '.mp4']);
 
 const ALL_SUPPORTED = new Set([
-  ...IMAGE_EXTS, ...TEXT_EXTS, ...ESBUILD_EXTS, ...WASM_EXTS, ...MEDIA_EXTS,
+  ...IMAGE_EXTS,
+  ...TEXT_EXTS,
+  ...ESBUILD_EXTS,
+  ...WASM_EXTS,
+  ...MEDIA_EXTS,
 ]);
 
 // ── Extension → MIME mapping ───────────────────────────────────────────────────
@@ -83,7 +97,7 @@ function formatSize(bytes) {
 
 function printHeader() {
   console.log('');
-  console.log(c.bold + c.foreground + `Condense CLI ` + c.muted + `v${version}` + c.reset);
+  console.log(c.bold + c.foreground + 'Condense CLI ' + c.muted + `v${version}` + c.reset);
   console.log('');
 }
 
@@ -156,7 +170,9 @@ function showHelp() {
   console.log(`    ${c.cyan}<input>${c.reset}        File or directory to optimize`);
   console.log('');
   console.log(`  ${c.bold}${c.foreground}OPTIONS${c.reset}`);
-  console.log(`    ${c.cyan}-m, --method${c.reset}  Optimization method (default: ${c.amber}quality${c.reset})`);
+  console.log(
+    `    ${c.cyan}-m, --method${c.reset}  Optimization method (default: ${c.amber}quality${c.reset})`
+  );
   console.log(`                  ${c.muted}quality${c.reset}  – visually lossless, balanced`);
   console.log(`                  ${c.muted}balanced${c.reset} – good compression and size`);
   console.log(`                  ${c.muted}extreme${c.reset}  – maximum compression`);
@@ -273,7 +289,9 @@ async function runOptimize(argv) {
   }
 
   printHeader();
-  console.log(`  ${c.muted}● Processing ${files.length} file${files.length === 1 ? '' : 's'}...${c.reset}`);
+  console.log(
+    `  ${c.muted}● Processing ${files.length} file${files.length === 1 ? '' : 's'}...${c.reset}`
+  );
   console.log('');
 
   // Compute max filename length for alignment
@@ -301,7 +319,9 @@ async function runOptimize(argv) {
         continue;
       }
 
-      const outputBuffer = Buffer.isBuffer(result.buffer) ? result.buffer : Buffer.from(result.buffer);
+      const outputBuffer = Buffer.isBuffer(result.buffer)
+        ? result.buffer
+        : Buffer.from(result.buffer);
       const newSize = outputBuffer.length;
       const reduction = originalSize > 0 ? ((originalSize - newSize) / originalSize) * 100 : 0;
 

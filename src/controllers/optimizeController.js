@@ -7,9 +7,19 @@ const { optimizeWasm } = require('../services/wasmService');
 const cacheService = require('../services/cacheService');
 
 const TEXT_MIMES = [
-  'application/javascript', 'text/javascript', 'text/css', 'application/json',
-  'text/html', 'image/svg+xml', 'application/xml', 'text/xml', 'text/yaml',
-  'application/x-yaml', 'text/less', 'text/x-scss', 'application/graphql'
+  'application/javascript',
+  'text/javascript',
+  'text/css',
+  'application/json',
+  'text/html',
+  'image/svg+xml',
+  'application/xml',
+  'text/xml',
+  'text/yaml',
+  'application/x-yaml',
+  'text/less',
+  'text/x-scss',
+  'application/graphql',
 ];
 const IMAGE_MIMES = ['image/jpeg', 'image/png', 'image/webp', 'image/avif', 'image/gif'];
 const MEDIA_MIMES = ['audio/mpeg', 'audio/wav', 'audio/x-wav', 'video/mp4'];
@@ -50,15 +60,15 @@ async function optimizeFile(req, res, next) {
         mimeType = EXT_TO_MIME[originalExt];
       }
     }
-    
+
     // For esbuild we specifically need the extension
     let esbuildExt = null;
     if (originalExt === '.ts' || originalExt === '.jsx' || originalExt === '.tsx') {
-        esbuildExt = originalExt;
+      esbuildExt = originalExt;
     } else if (ESBUILD_MIMES.includes(mimeType)) {
-        if (mimeType.includes('typescript')) esbuildExt = '.ts';
-        if (mimeType.includes('jsx')) esbuildExt = '.jsx';
-        if (mimeType.includes('tsx')) esbuildExt = '.tsx';
+      if (mimeType.includes('typescript')) esbuildExt = '.ts';
+      if (mimeType.includes('jsx')) esbuildExt = '.jsx';
+      if (mimeType.includes('tsx')) esbuildExt = '.tsx';
     }
 
     // Parse Resizing & Options (allow both query parameters and body)
@@ -152,7 +162,8 @@ async function optimizeFile(req, res, next) {
     // 6. FALLBACK
     else {
       return res.status(400).json({
-        error: 'Unsupported file type. Supported: JS, CSS, JSON, HTML, SVG, XML, YAML, GraphQL, TS, JSX, TSX, WASM, JPG, PNG, WebP, AVIF, GIF, MP3, WAV, MP4.',
+        error:
+          'Unsupported file type. Supported: JS, CSS, JSON, HTML, SVG, XML, YAML, GraphQL, TS, JSX, TSX, WASM, JPG, PNG, WebP, AVIF, GIF, MP3, WAV, MP4.',
       });
     }
 
@@ -164,7 +175,6 @@ async function optimizeFile(req, res, next) {
       res.setHeader('Content-Length', resultBuffer.length);
       return res.send(resultBuffer);
     }
-
   } catch (error) {
     next(error);
   }

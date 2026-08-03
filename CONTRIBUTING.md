@@ -79,6 +79,7 @@ npm test           # All tests pass
 ```
 
 ## Submission Workflow
+
 1. Fork the repo and create your branch from `main`.
 2. Commit your changes and ensure they don't break existing package exports.
 3. Run `npm run lint` to check for code quality issues.

@@ -8,21 +8,15 @@ const fs = require('fs');
 async function extractVideoThumbnail(buffer) {
   return new Promise((resolve, reject) => {
     const inputStream = Readable.from(buffer);
-    const args = [
-      '-i', 'pipe:0',
-      '-vframes', '1',
-      '-f', 'image2',
-      '-c:v', 'webp',
-      'pipe:1',
-    ];
+    const args = ['-i', 'pipe:0', '-vframes', '1', '-f', 'image2', '-c:v', 'webp', 'pipe:1'];
 
     const ffmpegProcess = spawn(ffmpegStatic, args);
     const outChunks = [];
 
-    ffmpegProcess.stdout.on('data', chunk => outChunks.push(chunk));
+    ffmpegProcess.stdout.on('data', (chunk) => outChunks.push(chunk));
 
-    ffmpegProcess.on('error', err => reject(err));
-    ffmpegProcess.on('close', code => {
+    ffmpegProcess.on('error', (err) => reject(err));
+    ffmpegProcess.on('close', (code) => {
       if (code === 0) {
         resolve({ buffer: Buffer.concat(outChunks), outMime: 'image/webp' });
       } else {
@@ -57,7 +51,10 @@ function optimizeMediaStream(buffer, mimeType, method, options = {}) {
     if (options.faststart) {
       // For standard MP4 faststart (moov atom at beginning), FFmpeg requires disk seeking.
       args.push('-movflags', 'faststart');
-      tempPath = path.join(os.tmpdir(), `condense_${Date.now()}_${Math.random().toString(36).substring(7)}.mp4`);
+      tempPath = path.join(
+        os.tmpdir(),
+        `condense_${Date.now()}_${Math.random().toString(36).substring(7)}.mp4`
+      );
     } else {
       // Critical for streaming MP4 out of memory: frag_keyframe + empty_moov
       args.push('-movflags', 'frag_keyframe+empty_moov');

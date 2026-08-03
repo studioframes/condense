@@ -10,6 +10,6 @@ test('cacheService - handles caching properly when enabled', (_t) => {
   const cached = cacheService.getCached(key);
   assert(cached, 'Should retrieve from cache when enabled');
   assert(cached.buffer.toString() === 'opt', 'Cache content should match');
-  
+
   process.env.CONDENSE_CACHE = 'false';
 });

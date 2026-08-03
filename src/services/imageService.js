@@ -4,8 +4,9 @@ async function optimizeImage(buffer, mimeType, method, options = {}) {
   try {
     const isGif = mimeType === 'image/gif';
     // Strip metadata natively on input buffer initialization
-    let instance = sharp(buffer, { failOn: 'none', animated: isGif })
-      .withMetadata(options.keepMetadata ? true : false);
+    let instance = sharp(buffer, { failOn: 'none', animated: isGif }).withMetadata(
+      options.keepMetadata ? true : false
+    );
     const isExtreme = method === 'extreme';
     const isBalanced = method === 'balanced';
     let outMime = mimeType;

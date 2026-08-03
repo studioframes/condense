@@ -7,7 +7,10 @@ test('imageService - optimizeImage with PNG (quality)', async (_t) => {
   const result = await optimizeImage(buffer, 'image/png', 'quality');
 
   assert(Buffer.isBuffer(result.buffer), 'Should return a buffer');
-  assert(result.outMime === 'image/png' || result.outMime === 'image/webp', 'Should return valid mime');
+  assert(
+    result.outMime === 'image/png' || result.outMime === 'image/webp',
+    'Should return valid mime'
+  );
   assert(result.buffer.length > 0, 'Output buffer should not be empty');
 });
 

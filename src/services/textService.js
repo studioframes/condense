@@ -10,37 +10,40 @@ function protectIgnoredTags(htmlString) {
   let lastIndex = 0;
   let ignoreDepth = 0;
 
-  const parser = new Parser({
-    onopentag(_name, attributes) {
-      const hasIgnore = attributes['data-condense-ignore'] !== undefined;
+  const parser = new Parser(
+    {
+      onopentag(_name, attributes) {
+        const hasIgnore = attributes['data-condense-ignore'] !== undefined;
 
-      // If we hit a new ignored tag and aren't already inside one
-      if (ignoreDepth === 0 && hasIgnore) {
-        output += htmlString.substring(lastIndex, parser.startIndex);
-        output += '<!-- htmlmin:ignore -->'; // Inject opening marker
-        lastIndex = parser.startIndex;
-        ignoreDepth++;
-      } else if (ignoreDepth > 0) {
-        // If we are already inside an ignored block, just track nesting depth
-        ignoreDepth++;
-      }
-    },
-    onclosetag(_name) {
-      // Drop depth as we exit tags.
-      // (Note: htmlparser2 automatically triggers this instantly for void tags like <img>)
-      if (ignoreDepth > 0) {
-        ignoreDepth--;
-
-        // If we just exited the root ignored tag
-        if (ignoreDepth === 0) {
-          const endOfTagIndex = parser.endIndex + 1;
-          output += htmlString.substring(lastIndex, endOfTagIndex);
-          output += '<!-- htmlmin:ignore -->'; // Inject closing marker
-          lastIndex = endOfTagIndex;
+        // If we hit a new ignored tag and aren't already inside one
+        if (ignoreDepth === 0 && hasIgnore) {
+          output += htmlString.substring(lastIndex, parser.startIndex);
+          output += '<!-- htmlmin:ignore -->'; // Inject opening marker
+          lastIndex = parser.startIndex;
+          ignoreDepth++;
+        } else if (ignoreDepth > 0) {
+          // If we are already inside an ignored block, just track nesting depth
+          ignoreDepth++;
         }
-      }
+      },
+      onclosetag(_name) {
+        // Drop depth as we exit tags.
+        // (Note: htmlparser2 automatically triggers this instantly for void tags like <img>)
+        if (ignoreDepth > 0) {
+          ignoreDepth--;
+
+          // If we just exited the root ignored tag
+          if (ignoreDepth === 0) {
+            const endOfTagIndex = parser.endIndex + 1;
+            output += htmlString.substring(lastIndex, endOfTagIndex);
+            output += '<!-- htmlmin:ignore -->'; // Inject closing marker
+            lastIndex = endOfTagIndex;
+          }
+        }
+      },
     },
-  }, { lowerCaseTags: false });
+    { lowerCaseTags: false }
+  );
 
   // Execute the synchronous, memory-efficient string parse
   parser.write(htmlString);

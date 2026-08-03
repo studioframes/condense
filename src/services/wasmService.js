@@ -3,11 +3,7 @@
 const WASM_MAGIC = Buffer.from([0x00, 0x61, 0x73, 0x6d]);
 const OUT_MIME = 'application/wasm';
 
-const STRIP_NAMES = new Set([
-  'name',
-  'producers',
-  'sourceMappingURL',
-]);
+const STRIP_NAMES = new Set(['name', 'producers', 'sourceMappingURL']);
 
 function readLEB128(buf, offset) {
   let value = 0;
@@ -79,7 +75,9 @@ function optimizeWasm(buffer, method) {
       if (sectionId === 0) {
         // Custom section — read the name to decide whether to strip
         const { value: nameLen, bytesRead: nameLenBytes } = readLEB128(payload, 0);
-        const sectionName = payload.subarray(nameLenBytes, nameLenBytes + nameLen).toString('utf-8');
+        const sectionName = payload
+          .subarray(nameLenBytes, nameLenBytes + nameLen)
+          .toString('utf-8');
 
         if (shouldStripCustomSection(sectionName, method)) {
           continue;

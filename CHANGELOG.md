@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.3.11 (2026-08-03)
+
+### Changed
+
+- [``] Fix the GitHub Actions CI workflow so it executes the repository’s real verification steps (`npm test`, `npm run lint`, and `npm run build`) instead of only installing dependencies.
+- [``] Correct the package build script quoting in `package.json` so the build command remains shell-safe and CI-runnable.
+- [``] Clean up related production-facing formatting and request handling code paths to keep the runtime and lint pipeline consistent.
+
 ## v0.3.10 (2026-08-01)
 
 ### Removed

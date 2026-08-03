@@ -1,7 +1,7 @@
 name: 'Dependency review'
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 # https://docs.github.com/en/enterprise-cloud@latest/code-security/supply-chain-security/understanding-your-software-supply-chain/using-the-dependency-submission-api
 permissions:

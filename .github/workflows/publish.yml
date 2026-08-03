@@ -27,7 +27,7 @@ jobs:
       - name: Clean Install Dependencies
         run: npm ci
 
-      # Hardened Pipeline Guard: Explicitly strips sensitive/ignored files 
+      # Hardened Pipeline Guard: Explicitly strips sensitive/ignored files
       # from the runner's workspace directory before compiling the tarball.
       # This provides secondary layered security even if npm configurations shift.
       - name: Pre-Publish Workspace Sanitization

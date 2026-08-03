@@ -1,6 +1,6 @@
 {
   "name": "@studioframes/condense",
-  "version": "0.3.10",
+  "version": "0.3.11",
   "description": "Condense is a high-performance, stateless file optimization and minification engine for Node.js.",
   "main": "src/index.js",
   "bin": {
@@ -11,7 +11,7 @@
   },
   "scripts": {
     "start": "node bin/cli.js",
-    "build": "echo 'This project doesn't require building anything.'",
+    "build": "echo \"This project doesn't require building anything.\"",
     "test": "node --test tests/**/*.test.js",
     "lint": "eslint src/ bin/ tests/",
     "format": "prettier --write ."

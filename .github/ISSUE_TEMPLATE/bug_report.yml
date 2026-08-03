@@ -1,7 +1,7 @@
 name: Bug Report
 description: File a structured bug report to help us improve Condense
-title: "[BUG]: "
-labels: ["bug"]
+title: '[BUG]: '
+labels: ['bug']
 body:
   - type: markdown
     attributes:
@@ -15,9 +15,9 @@ body:
       label: Integration Method
       description: How are you consuming the Condense package?
       options:
-        - "Standalone CLI / Standalone Server (npx condense-api)"
-        - "Mounted Express Middleware/Router (condenseApp)"
-        - "Programmatic Utilities (optimizeText, optimizeImage, optimizeMediaStream)"
+        - 'Standalone CLI / Standalone Server (npx condense-api)'
+        - 'Mounted Express Middleware/Router (condenseApp)'
+        - 'Programmatic Utilities (optimizeText, optimizeImage, optimizeMediaStream)'
     validations:
       required: true
 
@@ -26,7 +26,7 @@ body:
     attributes:
       label: File Format / MIME Type
       description: What type of file causes the issue?
-      placeholder: "e.g. text/html, image/png, video/mp4"
+      placeholder: 'e.g. text/html, image/png, video/mp4'
     validations:
       required: true
 
@@ -35,7 +35,7 @@ body:
     attributes:
       label: File Size
       description: Approximate size of the uploaded file.
-      placeholder: "e.g. 15MB"
+      placeholder: 'e.g. 15MB'
     validations:
       required: false
 
@@ -44,8 +44,8 @@ body:
     attributes:
       label: Optimization Method
       options:
-        - "quality"
-        - "extreme"
+        - 'quality'
+        - 'extreme'
     validations:
       required: true
 

@@ -46,9 +46,7 @@ export function optimizeMediaStream(
   options?: MediaOptions
 ): MediaStreamResult;
 
-export function extractVideoThumbnail(
-  buffer: Buffer
-): Promise<OptimizationResult>;
+export function extractVideoThumbnail(buffer: Buffer): Promise<OptimizationResult>;
 
 export function optimizeEsbuild(
   buffer: Buffer,
