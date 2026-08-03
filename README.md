@@ -1,14 +1,10 @@
-<div align="center">
-
-[![logo](https://github.com/user-attachments/assets/185a93b7-52cc-48c6-ae30-3d70f0b16ab5)](https://condense.js.org)
+[![logo](https://github.com/user-attachments/assets/63c325d3-7511-4f56-8642-e40eab63ffd2)](https://condense.js.org)
 
 [![npm](https://conbadges.pages.dev/api/npm/v/@studioframes/condense)](https://www.npmjs.com/package/@studioframes/condense)
 [![downloads](https://conbadges.pages.dev/api/npm/dt/@studioframes/condense)](https://www.npmjs.com/package/@studioframes/condense)
 [![License](https://conbadges.pages.dev/api/badge?label=license&value=Apache-2.0)](./LICENSE)
 
 **[Condense](https://condense.js.org) is a high-performance, stateless file optimization and minification engine for [Node.js](https://nodejs.org). It optimizes images, audio, video, code, and WebAssembly entirely in-memory using Buffers and Streams, and avoids writing temporary files to disk.**
-
-</div>
 
 ## Introduction
 
