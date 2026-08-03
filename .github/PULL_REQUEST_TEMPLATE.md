@@ -13,11 +13,11 @@ Fixes # (issue)
 
 ## Integration Verification
 
-Because this is published as an npm package, please confirm you have verified your changes against the following:
+Because this package is published as an npm package, please confirm you have verified your changes against the following:
 
-- [ ] Tested via Standalone CLI (`npx condense-api` or `npm start`)
+- [ ] Tested via the standalone CLI (`npx @studioframes/condense` or `npm start`)
 - [ ] Tested as an Express middleware import (`condenseApp`)
-- [ ] Tested programmatically (`optimizeImage`, `optimizeText`, or `optimizeMediaStream`)
+- [ ] Tested programmatically (`optimizeImage`, `optimizeText`, `optimizeMediaStream`, or `optimizeEsbuild`)
 
 ## Architecture Checklist
 

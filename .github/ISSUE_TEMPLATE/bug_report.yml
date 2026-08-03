@@ -6,54 +6,66 @@ body:
   - type: markdown
     attributes:
       value: |
-        ### Thank you for taking the time to report a bug!
-        Please fill out the structured form below to help us reproduce and resolve the issue quickly.
+        ### Thanks for reporting a Condense issue
+        Please fill out the form below with the real usage mode, asset type, and reproduction steps so we can investigate quickly.
 
   - type: dropdown
-    id: integration_method
+    id: usage_mode
     attributes:
-      label: Integration Method
-      description: How are you consuming the Condense package?
+      label: How are you using Condense?
+      description: Select the integration style that matches your setup.
       options:
-        - 'Standalone CLI / Standalone Server (npx condense-api)'
-        - 'Mounted Express Middleware/Router (condenseApp)'
-        - 'Programmatic Utilities (optimizeText, optimizeImage, optimizeMediaStream)'
+        - 'CLI'
+        - 'Standalone server / API'
+        - 'Express middleware'
+        - 'Programmatic SDK'
     validations:
       required: true
 
   - type: input
-    id: file_format
+    id: package_version
     attributes:
-      label: File Format / MIME Type
-      description: What type of file causes the issue?
-      placeholder: 'e.g. text/html, image/png, video/mp4'
+      label: Package Version
+      description: Which version of Condense are you using?
+      placeholder: 'e.g. 0.3.11'
+    validations:
+      required: false
+
+  - type: input
+    id: asset_type
+    attributes:
+      label: Asset Type / MIME Type
+      description: What file or MIME type causes the issue?
+      placeholder: 'e.g. image/png, text/html, video/mp4'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: optimization_method
+    attributes:
+      label: Optimization Method
+      description: Which optimization mode was selected when the bug appeared?
+      options:
+        - 'quality'
+        - 'balanced'
+        - 'extreme'
     validations:
       required: true
 
   - type: input
     id: file_size
     attributes:
-      label: File Size
-      description: Approximate size of the uploaded file.
+      label: Approximate File Size
+      description: Optional size hint for faster triage.
       placeholder: 'e.g. 15MB'
     validations:
       required: false
-
-  - type: dropdown
-    id: optimization_method
-    attributes:
-      label: Optimization Method
-      options:
-        - 'quality'
-        - 'extreme'
-    validations:
-      required: true
 
   - type: textarea
     id: description
     attributes:
       label: Describe the Bug
-      description: A clear and concise description of the observed issue.
+      description: A clear and concise summary of the observed issue.
     validations:
       required: true
 
@@ -61,11 +73,11 @@ body:
     id: reproduction
     attributes:
       label: Steps to Reproduce
-      description: Tell us how to reproduce the error. Code snippets or CLI commands are highly appreciated!
+      description: Share the exact commands, code, or request flow that reproduce the bug.
       placeholder: |
-        1. Initialize server using ...
-        2. Send POST request with file ...
-        3. See error stack trace ...
+        1. Run ...
+        2. Optimize ...
+        3. Observe ...
     validations:
       required: true
 
@@ -73,7 +85,7 @@ body:
     id: expected_behavior
     attributes:
       label: Expected Behavior
-      description: What did you expect to happen?
+      description: What did you expect to happen instead?
     validations:
       required: true
 
@@ -81,9 +93,9 @@ body:
     id: environment
     attributes:
       label: Environment Information
-      description: Details about the system where Condense is running.
+      description: Include the runtime details most relevant to debugging.
       placeholder: |
-        - OS: [e.g. macOS Sonoma, Ubuntu 22.04]
+        - OS: [e.g. Ubuntu 24.04]
         - Node.js Version: [e.g. v20.11.0]
         - FFmpeg Version: [e.g. v6.0]
     validations:

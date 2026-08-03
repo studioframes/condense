@@ -13,10 +13,11 @@ Thank you for contributing to Condense! Please review this document before submi
    ```bash
    npm install
    ```
-3. Test your standalone CLI locally:
+3. Smoke-test the published CLI entry point locally:
    ```bash
-   npm start
+   npx @studioframes/condense
    ```
+   You can also use `npm start` as a local shorthand for the same CLI runner.
 4. Run the test suite:
    ```bash
    npm test
@@ -24,11 +25,11 @@ Thank you for contributing to Condense! Please review this document before submi
 
 ## Development Guidelines
 
-Because Condense is distributed as an npm package, you must maintain compatibility across all three distribution paths:
+Because Condense is distributed as an npm package, you must maintain compatibility across its public integration paths:
 
 1. **No Local Disk Access First:** Do not write temporary files to the disk (`/tmp`, `multer.diskStorage`, etc.) by default. Use pure in-memory Buffers and Node Streams to maintain statelessness. (Exception: Very specific structural overrides like MP4 faststart which strictly require file buffering).
 2. **Keep Core Helpers Modular:** Ensure helper files inside `src/services/` are decoupled from Express HTTP objects (`req`, `res`) so they can still be safely imported programmatically.
-3. **Respect Bypass Directives:** If adding new language processors, ensure they respect bypass parameters or check for `data-condense-ignore` patterns.
+3. **Respect Bypass Directives:** If adding new language processors, ensure they respect bypass parameters or check for `data-condense-ignore` / `/* condense-ignore */` patterns.
 4. **Support Three Quality Tiers:** When implementing new optimizers, always handle `quality`, `balanced`, and `extreme` methods appropriately.
 5. **Update Tests:** When modifying service functions, add or update corresponding tests in the `tests/` folder. Run `npm test` to verify all tests pass.
 
@@ -76,6 +77,7 @@ Before submitting a PR, ensure:
 npm run lint       # No linting errors
 npm run format     # Code is formatted
 npm test           # All tests pass
+npm run build      # Current repository build step remains valid
 ```
 
 ## Submission Workflow

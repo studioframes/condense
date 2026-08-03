@@ -41,7 +41,7 @@ Before considering work complete, verify the relevant behavior with fresh eviden
 - npm run lint
 - npm run build
 
-When changing service behavior, add or update tests in tests/ and prefer targeted test runs while iterating.
+When changing service behavior, add or update tests in tests/ and prefer targeted test runs while iterating. Keep the package root exports and TypeScript declarations aligned with the public SDK surface.
 
 ## Coding guidelines
 

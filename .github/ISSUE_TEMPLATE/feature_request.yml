@@ -7,14 +7,14 @@ body:
     attributes:
       value: |
         ### Suggest an Enhancement
-        Have an idea to make Condense faster, support more formats, or be more flexible? Let us know!
+        Share the workflow gap, the proposed behavior, and any constraints that would help us judge the change.
 
   - type: textarea
     id: problem_statement
     attributes:
       label: Problem Statement
-      description: Is your feature request related to a problem? Please describe.
-      placeholder: 'e.g. I am frustrated when trying to optimize...'
+      description: What user workflow or platform limitation is driving this request?
+      placeholder: 'e.g. I need Condense to support ... when optimizing ...'
     validations:
       required: true
 
@@ -22,15 +22,23 @@ body:
     id: proposed_solution
     attributes:
       label: Proposed Solution
-      description: Describe the solution you would like implemented.
+      description: Describe the behavior or API shape you would like to see.
     validations:
       required: true
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints or Compatibility Notes
+      description: Mention any compatibility, performance, security, or API concerns that should be considered.
+    validations:
+      required: false
 
   - type: textarea
     id: alternatives
     attributes:
       label: Alternatives Considered
-      description: Any alternative solutions, workarounds, or libraries you have evaluated.
+      description: Any workarounds, existing libraries, or partial solutions you have evaluated.
     validations:
       required: false
 
@@ -38,6 +46,6 @@ body:
     id: additional_context
     attributes:
       label: Additional Context
-      description: Add any other context, performance benchmarks, or screenshots here.
+      description: Add benchmarks, screenshots, links, or any supporting information.
     validations:
       required: false
