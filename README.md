@@ -134,7 +134,7 @@ If you prefer to browse the source files directly here on GitHub, you can start 
 
 #### CLI Usage
 
-Condense v0.3.0 introduced a styled, fully-featured CLI:
+Condense has a styled, fully-featured CLI:
 
 - **Optimize a single image with extreme compression:**
 

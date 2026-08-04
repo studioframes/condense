@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.12 (2026-08-04)
+
+### Dependencies
+
+- [`6fdffd3`](https://github.com/studioframes/condense/commit/6fdffd3) Update `js-yaml` from `5.2.2` to `5.2.3`
+
 ## v0.3.11 (2026-08-03)
 
 ### Changed
