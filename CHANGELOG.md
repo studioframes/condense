@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.13 (2026-08-07)
+
+### Dependencies
+
+- [`a2a1f16`](https://github.com/studioframes/condense/commit/a2a1f16) Update `terser` from `5.49.0` to `5.49.1`
+
 ## v0.3.12 (2026-08-04)
 
 ### Dependencies
