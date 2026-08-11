@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.3.14 (2026-08-11)
+
+### Dependencies
+
+- [`e0545ca`](https://github.com/studioframes/condense/commit/e0545ca) Update `terser` from `5.49.1` to `5.49.2`
+
+### DevDependencies
+
+- [`d4bc664`](https://github.com/studioframes/condense/commit/d4bc664) Update `eslint` from `10.8.0` to `10.8.1`
+- [`2c8e067`](https://github.com/studioframes/condense/commit/2c8e067) Update `@types/node` from `26.1.2` to `26.1.1`
+
 ## v0.3.13 (2026-08-07)
 
 ### Dependencies
