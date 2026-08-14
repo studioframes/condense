@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.15 (2026-08-14)
+
+### Dependencies
+
+- [`f9164e3`](https://github.com/studioframes/condense/commit/f9164e3) Update `esbuild` from `0.28.1` to `0.28.2`
+
 ## v0.3.14 (2026-08-11)
 
 ### Dependencies
