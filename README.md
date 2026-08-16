@@ -71,6 +71,7 @@ bun add @studioframes/condense
 **Table of Contents:**
 - [Introduction](#introduction)
 - [Install](#install)
+  - [System Requirements](#system-requirements)
 - [Why Condense?](#why-condense)
 - [Features](#features)
   - [In-Memory Processing](#in-memory-processing)
