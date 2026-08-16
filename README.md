@@ -41,6 +41,12 @@ pnpm add @studioframes/condense
 ```bash
 bun add @studioframes/condense
 ```
+### System Requirements
+
+- **Node.js** ≥ 20.9.0
+- **Memory** ~50MB base + file size
+- **CPU** Single-threaded; use clustering for parallelism
+- **OS** Linux/macOS/Windows
 
 ## Quick Links
 
@@ -96,13 +102,6 @@ bun add @studioframes/condense
 - [Code of Conduct](#code-of-conduct)
 - [Contributing](#contributing-to-condense)
 - [License](#license)
-
-### System Requirements
-
-- **Node.js** ≥ 20.9.0
-- **Memory** ~50MB base + file size
-- **CPU** Single-threaded; use clustering for parallelism
-- **OS** Linux/macOS/Windows
 
 ## Why Condense?
 
