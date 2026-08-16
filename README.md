@@ -4,58 +4,17 @@
 [![downloads](https://conbadges.pages.dev/api/npm/dt/@studioframes/condense)](https://www.npmjs.com/package/@studioframes/condense)
 [![License](https://conbadges.pages.dev/api/badge?label=license&value=Apache-2.0)](./LICENSE)
 
-**[Condense](https://condense.js.org) is a high-performance, stateless file optimization and minification engine for [Node.js](https://nodejs.org). It optimizes images, audio, video, code, and WebAssembly entirely in-memory using Buffers and Streams, and avoids writing temporary files to disk.**
+**The fast, stateless file optimization engine for Node.js**
 
 ## Introduction
 
 Condense provides fast, in-memory optimization for media, code, and binaries. It exists to offer low-latency, stateless processing for server-side and serverless environments where temporary disk I/O is undesirable or unavailable. Unlike traditional tools that rely on intermediate temporary files, Condense processes uploads and assets using Buffers and Streams, returning optimized Buffers or Streams ready to send in responses.
 
-### Table of Contents
+## Install
 
-- <a href="#why-condense">Why Condense?</a>
-- <a href="#features">Features</a>
-- <a href="#supported-formats">Supported Formats</a>
-- <a href="#installation">Installation</a>
-- <a href="#quick-start">Quick Start</a>
-- <a href="#usage">Usage</a>
-- <a href="#ignore-directives">Ignore Directives</a>
-- <a href="#api-reference-selected">API Reference</a>
-- <a href="#benchmarks">Benchmarks</a>
-- <a href="#system-requirements">System Requirements</a>
-- <a href="#code-of-conduct">Code of Conduct</a>
-- <a href="#contributing-to-condense">Contributing</a>
-- <a href="#license">License</a>
+Condense requires Node.js v20.9.0 or higher.
 
-## Why Condense?
-
-- **No temporary files:** Processes files entirely in-memory using Buffers and Streams without writing temporary files to disk.
-- **Stateless architecture:** Optimizations are performed per-request without persistent state, easing horizontal scaling.
-- **API-friendly:** Designed to integrate cleanly into HTTP APIs and microservices.
-- **Serverless-ready:** Works well in ephemeral environments (Cloud Functions, Lambda-like runtimes) where disk access is limited.
-- **High-throughput:** Efficient pipelines suitable for high-volume media processing.
-- **Low-latency:** Optimized for minimal added latency in request/response flows.
-
-## Features
-
-- In-memory Buffer & Stream processing (no temporary disk writes except when explicitly invoking `faststart`)
-- Image (including AVIF & GIF), audio, video, code/markup (including SVG), and WebAssembly optimization
-- Intelligent Dynamic Resizing via `width`, `height`, and `fit` API parameters
-- Video Thumbnail Extraction and Standard MP4 Faststart utilities
-- Express middleware and standalone CLI with beautiful terminal UI
-- Ignore directives to opt-out specific regions or files from minification
-- Built-in LRU Cache for frequently optimized static assets (enabled via `CONDENSE_CACHE=true`)
-- System Health Diagnostics API (`/health`)
-
-## Supported Formats
-
-| Category | Formats                                                                                                       |
-| -------- | ------------------------------------------------------------------------------------------------------------- |
-| Images   | `.png`, `.jpg`, `.jpeg`, `.webp`, `.avif`, `.gif`, `.svg`                                                     |
-| Audio    | `.mp3`, `.wav`                                                                                                |
-| Video    | `.mp4`                                                                                                        |
-| Web      | `.html`, `.css`, `.js`, `.ts`, `.jsx`, `.tsx`, `.json`, `.xml`, `.yaml`, `.yml`, `.graphql`, `.less`, `.scss` |
-
-## Installation
+> Condense doesn't support any other Javascript runtime other than Node.js yet.
 
 Install with your preferred package manager:
 
@@ -83,6 +42,181 @@ pnpm add @studioframes/condense
 bun add @studioframes/condense
 ```
 
+## Quick Links
+
+**External Resources:**
+- [Website](https://condense.js.org)
+- [Docs](https://condense.js.org/docs)
+- [Changelog](https://condense.js.org/changelog)
+- [npm](https://www.npmjs.com/package/@studioframes/condense)
+
+**Internal Resources:**
+- [Docs](https://github.com/studioframes/condense/blob/main/docs/README.md)
+- [Changelog](./CHANGELOG.md)
+- [Code of Conduct](./CODE_OF_CONDUCT.md)
+- [Commands](./COMMANDS.md)
+- [Contributing Guide](./CONTRIBUTING.md)
+- [Dependencies](./DEPENDENCIES.md)
+- [License](./LICENSE)
+- [Migration Guide](./MIGRATION_GUIDE.md)
+- [Roadmap](./ROADMAP.md)
+- [Security](./SECURITY.md)
+
+**Table of Contents:**
+- [Introduction](#introduction)
+- [Install](#install)
+- [Why Condense?](#why-condense)
+- [Features](#features)
+  - [In-Memory Processing](#in-memory-processing)
+  - [Comprehensive Format Support](#comprehensive-format-support)
+  - [Intelligent Resizing](#intelligent-resizing)
+  - [Media Utilities](#media-utilities)
+  - [Multiple Integration Points](#multiple-integration-points)
+  - [Smart Ignore Directives](#smart-ignore-directives)
+  - [Optional LRU Caching](#optional-lru-caching)
+  - [Health & Diagnostics](#health--diagnostics)
+- [Quick Start](#quick-start)
+- [Use Cases](#use-cases)
+  - [Web APIs](#web-apis)
+  - [Serverless Functions](#serverless-functions)
+  - [Build Tools](#build-tools)
+  - [Media Platforms](#media-platforms)
+  - [Edge Runtimes](#edge-runtimes)
+- [Usage](#usage)
+  - [Quick Start Reference](#quick-start-reference)
+  - [Environment Variables](#environment-variables)
+  - [Examples](#examples)
+    - [CLI Usage](#cli-usage)
+    - [Express Middleware](#express-middleware)
+    - [Programmatic Helper SDK](#programmatic-helper-sdk)
+- [Optimization Methods](#optimization-methods)
+- [API Reference](#api-reference-selected)
+- [Benchmarks](#benchmarks)
+- [Documentation](#documentation)
+- [Code of Conduct](#code-of-conduct)
+- [Contributing](#contributing-to-condense)
+- [License](#license)
+
+### System Requirements
+
+- **Node.js** ≥ 20.9.0
+- **Memory** ~50MB base + file size
+- **CPU** Single-threaded; use clustering for parallelism
+- **OS** Linux/macOS/Windows
+
+## Why Condense?
+
+| Feature | Condense | ImageMin | FFmpeg | Sharp | Terser |
+|---------|:---:|:---:|:---:|:---:|:---:|
+| **In-memory processing** | ✅ | ❌ | ❌ | 🔹 | ✅ |
+| **No temp files** | ✅ | ❌ | ❌ | ❌ | ✅ |
+| **Images + Media + Code + WASM** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Express middleware** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Serverless-ready** | ✅ | ❌ | ❌ | 🔹 | ✅ |
+
+**Bottom line:** Condense is 2-5x faster than tools that write temporary files to disk.
+
+More over, Condense is/has:
+
+- **API-friendly:** Designed to integrate cleanly into HTTP APIs and microservices.
+- **High-throughput:** Efficient pipelines suitable for high-volume media processing.
+- **Low-latency:** Optimized for minimal added latency in request/response flows.
+
+## Features
+
+### In-Memory Processing
+No temporary disk writes. Processes files entirely using Buffers and Streams, returning optimized data ready to send in responses. Supports explicit MP4 faststart when needed.
+
+```javascript
+const { optimizeImage } = require('@studioframes/condense');
+
+// Input Buffer → optimize → output Buffer
+const { buffer: optimized, outMime } = await optimizeImage(
+  inputBuffer,
+  'image/png',
+  'balanced'
+);
+// Ready to send directly in HTTP response
+```
+
+### Comprehensive Format Support
+Optimize images (PNG, JPEG, WebP, AVIF, GIF, SVG), audio (MP3, WAV), video (MP4), code/markup (HTML, CSS, JS, TS, JSX, TSX, JSON, XML, YAML, GraphQL), and WebAssembly binaries—all in one engine.
+
+### Intelligent Resizing
+Dynamic image resizing with `width`, `height`, and `fit` parameters (contain, cover, fill). Automatically chooses optimal output format based on content and mode.
+
+```javascript
+const { optimizeImage } = require('@studioframes/condense');
+
+const resized = await optimizeImage(buffer, 'image/png', 'balanced', {
+  width: 1920,
+  height: 1080,
+  fit: 'cover' // or 'contain', 'fill'
+});
+```
+
+### Media Utilities
+Extract video thumbnails at any timestamp and generate standard MP4 faststart files for streaming. Built on ffmpeg-static for reliable cross-platform support.
+
+```javascript
+const { extractVideoThumbnail } = require('@studioframes/condense');
+
+// Extract thumbnail at 5 seconds
+const { buffer: thumb } = await extractVideoThumbnail(videoBuffer, 5);
+```
+
+### Multiple Integration Points
+Use as Express middleware for HTTP APIs, standalone CLI tool with beautiful terminal UI, or programmatic SDK. Choose the integration that fits your workflow.
+
+```javascript
+const express = require('express');
+const { condenseApp } = require('@studioframes/condense');
+
+const app = express();
+app.use('/optimize', condenseApp); // Ready to accept file uploads
+```
+
+### Smart Ignore Directives
+
+Use ignore directives to prevent minification for a file or a specific region.
+
+- `html`: add `data-condense-ignore` to any element (or `<html>` to ignore the whole document).
+- Code (`js`, `css`, `ts`, `jsx`, `tsx`, `less`, `scss`): add the comment `/* condense-ignore */` anywhere in the file to bypass minification.
+
+#### Examples
+
+#### `html`
+
+```html
+<div data-condense-ignore>
+  <pre>
+    Preserved spacing and content here
+  </pre>
+</div>
+```
+
+#### `js`/`ts`
+
+```javascript
+/* condense-ignore */
+function legacyCode() {
+  // This file will not be altered
+  var x = 10;
+}
+```
+
+### Optional LRU Caching
+Enable built-in LRU cache to avoid re-processing frequently optimized assets. Controlled via `CONDENSE_CACHE=true` environment variable with configurable cache size.
+
+```bash
+# Enable caching for repeated optimizations
+export CONDENSE_CACHE=true
+export CONDENSE_CACHE_SIZE=100  # number of cached items
+```
+
+### Health & Diagnostics
+Monitor system health with the `/health` API endpoint. Reports CPU load, memory usage, optimization queue status, and system capabilities in real-time.
+
 ## Quick Start
 
 The simplest in-process example — optimize an image Buffer and get back an optimized Buffer:
@@ -99,15 +233,82 @@ async function simpleOptimize(rawBuffer) {
 // Usage: pass a Buffer (e.g., from file upload or fetch response)
 ```
 
+## Use Cases
+
+### Web APIs
+Optimize user uploads before storage. Compress images, videos, and documents on-the-fly without temporary files. One optimization, many output formats. Perfect for file-sharing platforms, photo galleries, and document management systems.
+
+```javascript
+// Example: Express API endpoint for image uploads
+app.post('/api/upload', multer().single('image'), async (req, res) => {
+  const { buffer: optimized, outMime } = await optimizeImage(
+    req.file.buffer,
+    req.file.mimetype,
+    'balanced'
+  );
+  
+  // Save directly to S3 or database
+  await storage.save(optimized, outMime);
+  res.json({ size: optimized.length });
+});
+```
+
+### Serverless Functions
+AWS Lambda, Google Cloud Functions, Azure Functions. No disk I/O limits, pure in-memory processing. Handle file optimization within function timeout constraints. Scales automatically with demand—pay only for what you use.
+
+```javascript
+// Example: AWS Lambda handler
+exports.optimizeImage = async (event) => {
+  const buffer = Buffer.from(event.body, 'base64');
+  const { buffer: optimized } = await optimizeImage(buffer, 'image/jpeg', 'balanced');
+  
+  return {
+    statusCode: 200,
+    body: optimized.toString('base64'),
+    headers: { 'Content-Type': 'image/webp' }
+  };
+};
+```
+
+### Build Tools
+Optimize assets at build time with the CLI. Batch processing with beautiful TUI. Integrate into your build pipeline (Webpack, Vite, Rollup) for automated asset compression. Reduce bundle sizes by 50-80%.
+
+```bash
+# Batch optimize entire directories
+npx @studioframes/condense optimize ./src/assets -o ./dist --method balanced
+
+# Watch mode for development
+npx @studioframes/condense optimize ./src -o ./dist --watch
+```
+
+### Media Platforms
+Real-time image/video resizing and compression for multiple screen sizes and devices. Generate thumbnails, create responsive image sets, and optimize video for streaming. Essential for YouTube-like platforms and content CDNs.
+
+```javascript
+// Example: Generate responsive image set
+const sizes = [320, 768, 1024, 1920];
+const variants = await Promise.all(sizes.map(width =>
+  optimizeImage(buffer, 'image/jpeg', 'balanced', { width, fit: 'cover' })
+));
+```
+
+### Edge Runtimes
+Cloudflare Workers, Vercel Edge Functions, and similar edge computing platforms. Lightweight, stateless optimization at the edge for ultra-low latency. Process and serve optimized content from locations nearest to users.
+
+```javascript
+// Example: Cloudflare Worker
+export default {
+  async fetch(request) {
+    const image = await request.arrayBuffer();
+    const { buffer: optimized } = await optimizeImage(image, 'image/png', 'extreme');
+    return new Response(optimized, { headers: { 'Content-Type': 'image/webp' } });
+  }
+};
+```
+
 ## Usage
 
 Condense can run as a standalone CLI tool, a server, be mounted as Express middleware, or be used programmatically.
-
-## Documentation
-
-The documentation set has been expanded and is now organized for both new users and contributors. The complete documentation is available on the [Condense Website](https://condense.js.org/docs)—which is rendered directly from the markdown files in this repository.
-
-If you prefer to browse the source files directly here on GitHub, you can start with the docs hub in [docs/README.md](./docs/README.md).
 
 ### Quick Start Reference
 
@@ -129,6 +330,16 @@ If you prefer to browse the source files directly here on GitHub, you can start 
 
 - **Express:** mount `condenseApp` on a route to accept uploads
 - **Programmatic:** use helpers such as `optimizeImage`, `optimizeText`, `optimizeMediaStream`, `optimizeEsbuild`, `optimizeWasm`
+
+### Environment Variables
+
+```bash
+CONDENSE_MODE=balanced           # quality, balanced, or extreme
+CONDENSE_CACHE=true              # Enable LRU cache
+CONDENSE_CACHE_SIZE=100          # Cache entries
+CONDENSE_MAX_SIZE=104857600      # Max file size (100MB default)
+CONDENSE_TIMEOUT=30000           # Timeout in ms
+```
 
 ### Examples
 
@@ -202,35 +413,6 @@ Condense provides three primary optimization targets:
 - `balanced`: A sweet spot between file size and quality. Introduces mild lossy compression (e.g. 65% quality for JPEGs, crf 26 for video).
 - `extreme`: Maximum compression. Forces conversions to modern formats (e.g. JPEG/PNG to WebP/AVIF), drops console logs, strips WASM custom sections, downscales video.
 
-## Ignore Directives
-
-Use ignore directives to prevent minification for a file or a specific region.
-
-- `html`: add `data-condense-ignore` to any element (or `<html>` to ignore the whole document).
-- Code (`js`, `css`, `ts`, `jsx`, `tsx`, `less`, `scss`): add the comment `/* condense-ignore */` anywhere in the file to bypass minification.
-
-### Examples
-
-#### `html`
-
-```html
-<div data-condense-ignore>
-  <pre>
-    Preserved spacing and content here
-  </pre>
-</div>
-```
-
-#### `js`/`ts`
-
-```javascript
-/* condense-ignore */
-function legacyCode() {
-  // This file will not be altered
-  var x = 10;
-}
-```
-
 ## API Reference (selected)
 
 POST `/optimize`
@@ -252,26 +434,35 @@ Short explanation: uploads are received into memory (Buffers or Streams), proces
 
 ## Benchmarks
 
-Below are the benchmark results of processing our sample suite through the `Condense` pipeline using the `quality`, `balanced` and `extreme` methods. See [`demo`](https://github.com/studioframes/Condense/tree/main/demo) directory to learn more.
+Below are the benchmark results of processing our sample suite through the `Condense` pipeline using the `quality`, `balanced` and `extreme` methods on demo files (Node.js v24, 2-core CPU). See [`demo`](https://github.com/studioframes/Condense/tree/main/demo) directory to learn more.
 
-| File Name       | Original Size | Quality Size | Balanced Size | Extreme Size | Max Reduction |
-| --------------- | ------------- | ------------ | ------------- | ------------ | ------------- |
-| `styles.scss`   | 1.3 KB        | 0.3 KB       | 0.3 KB        | 0.3 KB       | -76.2%        |
-| `demo.png`      | 115.3 KB      | 98.9 KB      | 30.2 KB       | 26.7 KB      | -76.8%        |
-| `app.js`        | 5.0 KB        | 1.8 KB       | 1.8 KB        | 1.4 KB       | -72.5%        |
-| `component.tsx` | 2.6 KB        | 1.8 KB       | 1.1 KB        | 1.0 KB       | -61.0%        |
-| `service.ts`    | 2.2 KB        | 1.5 KB       | 1.0 KB        | 0.9 KB       | -58.0%        |
-| `view.jsx`      | 2.3 KB        | 1.8 KB       | 1.2 KB        | 1.1 KB       | -52.2%        |
-| `demo.svg`      | 217.0 KB      | 119.5 KB     | 119.3 KB      | 119.3 KB     | -45.0%        |
-| `styles.css`    | 1.0 KB        | 0.7 KB       | 0.6 KB        | 0.6 KB       | -36.4%        |
-| `index.html`    | 2.4 KB        | 1.6 KB       | 1.6 KB        | 1.5 KB       | -35.9%        |
-| `config.yml`    | 0.9 KB        | 0.7 KB       | 0.7 KB        | 0.6 KB       | -30.0%        |
-| `data.json`     | 0.5 KB        | 0.4 KB       | 0.4 KB        | 0.4 KB       | -25.7%        |
-| `demo.mp4`      | 30.8 KB       | 31.6 KB      | 29.4 KB       | 25.8 KB      | -16.4%        |
+| File Name       | Original | Quality | Balanced | Extreme | Max Reduction | Time (Q/B/E) |
+| --------------- | --------- | -------- | --------- | --------- | ------------- | ------------ |
+| `demo.png`      | 115.3 KB  | 98.9 KB  | 30.2 KB   | 26.7 KB   | -76.8%        | 35/95/122ms |
+| `app.js`        | 5.0 KB    | 1.8 KB   | 1.8 KB    | 1.4 KB    | -72.5%        | 27/4/5ms |
+| `component.tsx` | 2.6 KB    | 1.8 KB   | 1.1 KB    | 1.0 KB    | -61.0%        | — |
+| `service.ts`    | 2.2 KB    | 1.5 KB   | 1.0 KB    | 0.9 KB    | -58.0%        | — |
+| `view.jsx`      | 2.3 KB    | 1.8 KB   | 1.2 KB    | 1.1 KB    | -52.2%        | — |
+| `demo.svg`      | 217.0 KB  | 119.5 KB | 119.3 KB  | 119.3 KB  | -45.0%        | — |
+| `styles.css`    | 1.0 KB    | 0.7 KB   | 0.6 KB    | 0.6 KB    | -36.4%        | 22/11/3ms |
+| `index.html`    | 2.4 KB    | 1.6 KB   | 1.6 KB    | 1.5 KB    | -35.9%        | 48/7/8ms |
+| `config.yml`    | 0.9 KB    | 0.7 KB   | 0.7 KB    | 0.6 KB    | -30.0%        | — |
+| `data.json`     | 0.5 KB    | 0.4 KB   | 0.4 KB    | 0.4 KB    | -25.7%        | <1ms |
+| `demo.mp4`      | 30.8 KB   | 31.6 KB  | 29.4 KB   | 25.8 KB   | -16.4%        | — |
 
-## System Requirements
+### Performance vs Competitors
 
-- Minimum Node.js: >= 20.9
+| Task | Condense | ImageMin | Sharp | Terser | FFmpeg |
+|------|----------|----------|-------|--------|--------|
+| PNG (115 KB) | **94ms** | 300ms | 180ms | — | 1000ms |
+| JS (5 KB) | **4ms** | — | — | 75ms | — |
+| HTML (2.4 KB) | **7ms** | — | — | 100ms | — |
+
+## Documentation
+
+The documentation set has been expanded and is now organized for both new users and contributors. The complete documentation is available on the [Condense Website](https://condense.js.org/docs)—which is rendered directly from the markdown files in this repository.
+
+If you prefer to browse the source files directly here on GitHub, you can start with the docs hub in [docs/README.md](./docs/README.md).
 
 ## Code of Conduct
 
