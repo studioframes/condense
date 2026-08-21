@@ -27,4 +27,5 @@ DEPENDENCIES.md
 .prettierignore
 .gitignore
 .gitattributes
+.nvmrc
 eslint.config.js

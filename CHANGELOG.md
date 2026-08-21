@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.16 (2026-08-21)
+
+### Dependencies
+
+- [`56c5fd4`](https://github.com/studioframes/condense/commit/56c5fd4) Update `terser` from `0.49.2` to `0.50.0`
+- [`1b3e6b3`](https://github.com/studioframes/condense/commit/1b3e6b3) Update `js-yaml` from `5.2.3` to `5.3.0`
+
 ## v0.3.15 (2026-08-14)
 
 ### Dependencies
