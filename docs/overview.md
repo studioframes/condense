@@ -1,43 +1,48 @@
 # Overview
 
-Condense is a stateless Node.js optimization engine for images, media, code, and WebAssembly. It is designed to run entirely in memory whenever possible so that it can fit into APIs, edge runtimes, containers, and serverless platforms without depending on temporary disk writes.
+Condense is a high-performance, stateless Node.js optimization engine for images, media, code, WebAssembly, fonts, and binary archives. Designed from first principles to operate entirely in-memory, Condense eliminates temporary disk I/O and easily integrates into high-throughput web services, serverless microservices, containers, and edge runtimes.
 
-## What Condense optimizes
+## Supported Asset Formats
 
-Condense can improve the size and delivery characteristics of:
+Condense provides specialized optimization pipelines for:
 
-- Raster and vector images such as PNG, JPEG, WebP, AVIF, GIF, and SVG
-- Audio and video streams, including MP3, WAV, and MP4
-- HTML, CSS, JavaScript, TypeScript, JSON, YAML, GraphQL, and related text assets
-- WebAssembly binaries
+- **Raster & Vector Images:** PNG, JPEG, WebP, AVIF, GIF, and SVG with perceptual SSIM/PSNR tuning and responsive ladder generation.
+- **SVG Sprites:** In-memory batch packing into consolidated `<symbol>` spritesheets.
+- **Audio & Video Streams:** MP4, MP3, WAV, OGG with direct stream piping, thumbnail extraction, and faststart support.
+- **Code & Modern Text:** HTML, CSS, JavaScript, TypeScript, JSX/TSX (via `esbuild`), JSON, YAML, GraphQL, SCSS, LESS, and cross-document coordinated token mangling.
+- **OpenType / TrueType Fonts:** SFNT & WOFF metadata table stripping (`DSIG`, `hdmx`, `LTSH`, `PCLT`).
+- **PDF Documents:** In-memory comment stripping, metadata removal, and text/stream recompression.
+- **ZIP Archives:** Pure in-memory recursive decompression, asset optimization, and maximum-ratio repacking with `fflate`.
+- **WebAssembly:** Custom section and debug symbol stripping for `.wasm` binaries.
 
-## Core principles
+## Architectural Pillars (v1.0.0)
 
-- In-memory processing by default
-- Stateless request handling for easy horizontal scaling
-- Three optimization modes: quality, balanced, and extreme
-- Compatibility with bypass directives such as data-condense-ignore and /* condense-ignore */
-- A lightweight API surface that can be used from the CLI, an HTTP server, or application code
+1. **Pillar 1: Next-Gen Intelligence & Perceptual Compression**
+   - Perceptual image optimization (`optimizePerceptualImage`) via binary-search SSIM/PSNR targeting.
+   - Responsive multi-breakpoint image matrix generation with `<picture>` markup helpers (`generateResponsiveMatrix`).
+   - Cross-document HTML/CSS/JS token shortening (`mangleTokens`).
 
-## Optimization modes
+2. **Pillar 2: Enterprise Binary & Asset Processors**
+   - In-memory SVG spritesheet consolidation (`packSvgSprites`).
+   - In-memory recursive ZIP archive compression (`optimizeZip`).
+   - SFNT & WOFF font table stripping (`optimizeFont`).
+   - In-memory PDF minification (`optimizePdf`).
 
-- quality: best fidelity with conservative compression
-- balanced: a practical middle ground for most production workloads
-- extreme: maximum compression with more aggressive transformations
+3. **Pillar 3: Developer Platform & Enterprise Telemetry**
+   - Fluent Chainable Pipeline API (`createPipeline`).
+   - Multi-threaded Worker Pool leveraging Node `worker_threads` (`WorkerPool`, `getWorkerPool`).
+   - Production preset management engine (`presetService`).
+   - Real-time bandwidth, financial ROI, and carbon savings tracking (`telemetryService`).
 
-## Typical use cases
+## Optimization Modes
 
-- Optimizing uploaded image assets before storage or delivery
-- Shrinking HTML, CSS, and JavaScript bundles for faster page loads
-- Transforming media files for mobile or bandwidth-constrained clients
-- Integrating optimization into a custom API or middleware layer
+- **quality:** Best perceptual fidelity with visually lossless, conservative compression.
+- **balanced:** Practical sweet spot for production environments balancing speed, size, and fidelity.
+- **extreme:** Maximum compression prioritizing file size reduction with aggressive transformations.
 
-## Entry points
+## Entry Points
 
-- [src/index.js](../src/index.js) exports the public SDK helpers
-- [bin/cli.js](../bin/cli.js) provides the command-line experience
-- [src/app.js](../src/app.js) wires the Express-based HTTP server
+- `src/index.js`: Comprehensive public SDK, fluent pipeline, and Express middleware exports.
+- `bin/cli.js`: Standalone CLI for single-file, batch directory, and server execution.
+- `src/app.js`: Stateless HTTP Express application.
 
-## Where to start
-
-If you are new to Condense, begin with the SDK examples in [examples.md](examples.md), then move to [api.md](api.md) for integration details and [cli.md](cli.md) for batch workflows.

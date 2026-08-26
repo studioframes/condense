@@ -4,27 +4,49 @@ This guide summarizes the changes developers should expect when upgrading Conden
 
 ## Security support and upgrade priority
 
-Before planning a migration, use the latest supported release. According to [SECURITY.md](./SECURITY.md), the recommended target for upgrades is the latest stable release, currently 0.3.17.
+Before planning a migration, use the latest supported release. According to [SECURITY.md](./SECURITY.md), the recommended target for upgrades is the latest stable release, currently **1.0.0**.
 
 | Version            | Status         | Supported | Notes                                                                                                                                                                |
 | ------------------ | -------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **0.3.2 - 0.3.17** | **Active**     | ✅        | Always upgrade to the latest patch release for maximum security.                                                                                                     |
-| **0.3.0 - 0.3.1**  | **Deprecated** | ❌        | Unsupported due to the version containing security vulnerabilities that have been patched in [v0.3.2](https://github.com/studioframes/Condense/releases/tag/v0.3.2). |
-| **0.2.x**          | **Active**     | ⚠️        | Upgrade to v0.3.x as soon as possible. This set of version will be deprecated at the release of the next set of minor/major version.                                        |
-| **0.1.x**          | **Deprecated** | ❌        | End of life                                                                                                                                                          |
+| **1.0.x**          | **Active**     | ✅        | Current stable major release. Features Pillars 1, 2, 3, Perceptual Tuning, Worker Pools, Pipelines, SVG Sprites, and Archive Optimizers.                             |
+| **0.3.2 - 0.3.17** | **Maintenance**| ✅        | Supported for security fixes. Users are encouraged to upgrade to v1.0.0.                                                                                            |
+| **0.3.0 - 0.3.1**  | **Deprecated** | ❌        | Unsupported due to security vulnerabilities patched in [v0.3.2](https://github.com/studioframes/Condense/releases/tag/v0.3.2).                                      |
+| **0.2.x**          | **Deprecated** | ❌        | End of life. Please migrate directly to v1.0.0.                                                                                                                      |
+| **0.1.x**          | **Deprecated** | ❌        | End of life.                                                                                                                                                         |
 
-If you are still on 0.3.0 or 0.3.1, treat that as a security-sensitive migration and prioritize it above normal dependency updates.
+## Upgrading from 0.3.x to 1.0.0
 
-## Current version notes
+### Key Highlights
+- **100% Backward-Compatible SDK**: All existing function signatures (`optimizeImage`, `optimizeText`, `optimizeMediaStream`, `optimizeEsbuild`, `optimizeWasm`, `condenseApp`) continue to work seamlessly.
+- **New Fluent Pipeline API**: You can now chain optimization steps with `createPipeline()`.
+- **Perceptual Compression (`optimizePerceptualImage`)**: You can now target specific SSIM quality levels (e.g. `ssim: 0.95`).
+- **New Binary Processors**: Added native in-memory optimizers for ZIP archives (`optimizeZip`), SVG Spritesheets (`packSvgSprites`), Fonts (`optimizeFont`), and PDFs (`optimizePdf`).
+- **Multi-Threaded Worker Pool**: Use `WorkerPool` or `getWorkerPool()` for CPU-intensive background batch processing across worker threads.
 
-### Upgrading from 0.3.x to 0.3.17
+### Example: Adopting the Fluent Pipeline
 
-- No breaking API changes are documented for the core optimization helpers.
-- The update is a dependency refresh and should be safe for existing integrations.
-- If you use the CLI, the supported entry point remains:
+```javascript
+// Before (v0.3.x):
+const { optimizeImage } = require('@studioframes/condense');
+const { buffer } = await optimizeImage(rawImage, 'image/jpeg', 'balanced');
 
-```bash
-npx @studioframes/condense optimize ./path/to/input -o ./path/to/output --method balanced
+// In v1.0.0 (Fluent Pipeline with Presets):
+const { createPipeline } = require('@studioframes/condense');
+const resultBuffer = await createPipeline(rawImage, 'image/jpeg')
+  .preset('web-hero')
+  .toBuffer();
+```
+
+### Example: Upgrading Image Optimization with Perceptual SSIM Tuning
+
+```javascript
+const { optimizePerceptualImage } = require('@studioframes/condense');
+
+const { buffer, ssim, finalQuality } = await optimizePerceptualImage(rawImage, 'image/jpeg', {
+  targetSsim: 0.95,
+  format: 'webp',
+});
+console.log(`Optimized to WebP at quality ${finalQuality} with SSIM ${ssim}`);
 ```
 
 ## 0.2.x to 0.3.0

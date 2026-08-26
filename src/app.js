@@ -1,9 +1,17 @@
+'use strict';
+
 const express = require('express');
 const os = require('os');
 const optimizeController = require('./controllers/optimizeController');
 const upload = require('./middleware/upload');
+const telemetry = require('./services/telemetryService');
+const { listPresets } = require('./services/presetService');
 
 const app = express();
+
+// Body parsers for JSON and URL-encoded bodies
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Strict Timeout Middleware (30 seconds)
 app.use((req, res, next) => {
@@ -41,7 +49,27 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Primary Endpoint (Exposed as standard router path)
+// Telemetry & ROI Metrics
+app.get('/metrics', (req, res) => {
+  res.json(telemetry.getMetrics());
+});
+
+app.get('/telemetry', (req, res) => {
+  res.json(telemetry.getMetrics());
+});
+
+// Presets Registry
+app.get('/presets', (req, res) => {
+  res.json(listPresets());
+});
+
+// Coordinated Token Mangling Endpoint
+app.post('/mangle', optimizeController.handleMangleTokens);
+
+// SVG Spritesheet Packing Endpoint
+app.post('/sprites', optimizeController.handleSvgSprites);
+
+// Primary Optimization Endpoint
 app.post('/optimize', upload.single('file'), optimizeController.optimizeFile);
 
 // Global Error Handler

@@ -1,108 +1,58 @@
 # Condense Roadmap
 
-This document outlines the planned evolution of Condense from current release through v1.0 and beyond.
+This document outlines the evolution of Condense from v1.0 through future milestones.
 
-## Current Release: v0.3.17
+## Current Release: v1.0.0
 
-**Status:** Production-ready with core features complete
+**Status:** Production-ready major milestone release
 **Released:** August 2026
 
-### Features
+### Delivered in v1.0.0
 
-- In-memory Buffer & Stream processing (no temporary disk writes except when explicitly invoking `faststart`)
-- Image (including AVIF & GIF), audio, video, and code/markup (including SVG) optimization
-- TypeScript and React minification (`.ts`, `.jsx`, `.tsx`) via `esbuild`
-- Extended markup/styling support (`.xml`, `.yaml`, `.graphql`, `.less`, `.scss`)
-- Three optimization tiers: `quality`, `balanced`, and `extreme`
-- Intelligent Dynamic Resizing via `width`, `height`, and `fit` API parameters
-- Video Thumbnail Extraction and Standard MP4 Faststart utilities
-- Express middleware and standalone CLI with batch directory processing and styled terminal UI
-- Ignore directives to opt-out specific regions or files from minification
-- In-Memory LRU Cache for static asset performance
-- System Health Diagnostics API (`/health`)
+- **Pillar 1 — Next-Gen Intelligence & Perceptual Compression**
+  - Perceptual SSIM & PSNR binary-search quality tuning (`optimizePerceptualImage`)
+  - Automated Responsive Image Matrix generation with multi-breakpoint AVIF/WebP output and `<picture>` markup helpers (`generateResponsiveMatrix`)
+  - Cross-Document Token Mangling across HTML, CSS, and JS (`mangleTokens`)
+- **Pillar 2 — Enterprise Binary & Asset Processors**
+  - In-Memory SVG Spritesheet Packer (`packSvgSprites`)
+  - In-Memory ZIP & Archive recursive optimizer with pure RAM decompression/repacking (`optimizeZip`)
+  - SFNT & WOFF Font Table Stripper for TTF/OTF binaries (`optimizeFont`)
+  - In-Memory PDF minification and stream optimization (`optimizePdf`)
+- **Pillar 3 — Developer Platform & Enterprise Telemetry**
+  - Fluent Chainable Pipeline API (`createPipeline`)
+  - Multi-Threaded Worker Pool leveraging `worker_threads` (`WorkerPool`, `getWorkerPool`)
+  - Production Preset Engine with built-in recipes and custom registration (`presetService`)
+  - Real-Time Bandwidth, Financial ROI, and Carbon Reduction Telemetry (`telemetryService`)
+- **Core Engine & Platform**
+  - In-memory Buffer & Stream processing (zero temporary disk writes by default)
+  - Full support for raster/vector images, audio/video streams, TypeScript/TSX, markup/styles, and WebAssembly
+  - Three standardized optimization tiers: `quality`, `balanced`, and `extreme`
+  - LRU caching, Express middleware, and standalone CLI
 
-## v0.5.0 (N/A)
+## v1.1.0 (Q4 2026)
 
-### Performance & Optimization
-
-- **Streaming Improvements**
-  - Implement adaptive chunk sizing for large files
-  - Add memory pool reuse for buffer allocation
-  - Benchmark against competing libraries
+### Media & Binary Enhancements
+- Hardware acceleration detection for FFmpeg transcoding where supported
+- WebP animation frame optimization and GIF-to-Animated WebP conversion
+- Extended WOFF2 brotli compression pipeline
 
 ### Developer Experience
+- Official GitHub Action for CI/CD asset compression
+- Plugin interface for custom pipeline steps
+- VS Code and JetBrains IDE extensions for one-click asset condensation
 
-- **Documentation**
-  - API reference documentation (JSDoc → HTML)
-  - Performance benchmarks vs. alternatives
-  - Real-world integration examples
+## v1.2.0 (Q1 2027)
 
-- **Tooling**
-  - GitHub Actions CI/CD workflow
-  - Automated dependency updates
-  - Performance regression testing
+### Enterprise Scaling & Observability
+- OpenTelemetry exporter for telemetry metrics
+- S3/GCS direct stream connector for cloud-native asset ingestion
+- Docker container images with FFmpeg and native bindings optimized for Alpine / distroless
 
-### Advanced Media Enhancements
+## v2.0+ Considerations
 
-- Subtitle track extraction (SRT, VTT)
-- Multi-bitrate DASH/HLS preparation
-- JSON schema validation
-
-## v1.0.0 (Aug 2026)
-
-### Stability & Maturity
-
-- **API Stability**
-  - Semantic versioning guarantees
-  - Deprecation warnings for future breaking changes
-  - Long-term support policy documentation
-
-- **Security & Compliance**
-  - Formal security audit
-  - SBOM (Software Bill of Materials) generation
-  - Vulnerability disclosure policy
-  - Code coverage benchmarks (>85%)
-
-### Enterprise Features
-
-- **Scaling Support**
-  - AWS Lambda layer packaging
-  - Docker image with ffmpeg included
-  - Kubernetes deployment manifests
-  - Cloud provider integration guides (Google Cloud, Azure)
-
-- **Advanced Monitoring**
-  - Health check endpoint standardization
-  - Metrics export (Prometheus-compatible)
-  - Structured logging with log levels
-  - Request/response timing telemetry
-
-### Production Hardening
-
-- **Reliability**
-  - Enhanced error messages with recovery suggestions
-  - Timeout configuration per operation type
-  - Graceful degradation strategies
-  - Input validation best practices documentation
-
-- **Performance Certifications**
-  - Minimum throughput benchmarks published
-  - Memory usage guarantees documented
-  - Concurrent request scalability tested
-
-## Beyond v1.0
-
-### v2.0+ Considerations
-
-- **Stream Processing**
-  - Chainable transform pipeline API
-  - Custom plugin system for processors
-  - Hot-reloading handler registration
-
-- **Alternative Runtimes**
-  - Deno compatibility assessment
-  - Bun runtime support investigation
-  - Edge runtime (Cloudflare Workers, Vercel Edge)
+- Alternative runtime certifications (Bun, Deno, Cloudflare Workers via pure WASM builds)
+- Distributed worker cluster orchestration for terabyte-scale asset optimization queues
+- Chainable stream transform plugins and custom third-party format modules
 
 ## Community & Contribution
 

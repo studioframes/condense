@@ -6,23 +6,23 @@ const fs = require('fs');
 const path = require('path');
 const { version } = require('../package.json');
 
-// ── ANSI Escape Codes (Mapped to styles.css design tokens) ─────────────────────
+// ── ANSI Escape Codes ─────────────────────────────────────────────────────────
 const c = {
   reset: '\x1b[0m',
   bold: '\x1b[1m',
   dim: '\x1b[2m',
 
   // Custom 24-bit TrueColor Palette from CSS
-  foreground: '\x1b[38;2;250;250;250m' /* --foreground: #fafafa */,
-  muted: '\x1b[38;2;136;136;136m' /* --muted-foreground: rgb(136,136,136) */,
-  faint: '\x1b[38;2;114;114;114m' /* --ink-faint: rgb(114,114,114) */,
-  border: '\x1b[38;2;39;39;42m' /* --border: #27272a */,
+  foreground: '\x1b[38;2;250;250;250m' /* #fafafa */,
+  muted: '\x1b[38;2;136;136;136m' /* rgb(136,136,136) */,
+  faint: '\x1b[38;2;114;114;114m' /* rgb(114,114,114) */,
+  border: '\x1b[38;2;39;39;42m' /* #27272a */,
 
-  // Brand & Accent Colors from CSS
-  cyan: '\x1b[38;2;0;223;216m' /* Cyan streak from Method Quality */,
-  purple: '\x1b[38;2;124;58;237m' /* CSS / Image tag accent */,
-  green: '\x1b[38;2;134;239;172m' /* Success Green (#86efac) */,
-  amber: '\x1b[38;2;245;158;11m' /* Amber Gold streak from Method Extreme */,
+  // Brand & Accent Colors
+  cyan: '\x1b[38;2;0;223;216m' /* Cyan streak */,
+  purple: '\x1b[38;2;124;58;237m' /* Accent */,
+  green: '\x1b[38;2;134;239;172m' /* Success Green */,
+  amber: '\x1b[38;2;245;158;11m' /* Amber Gold */,
   red: '\x1b[38;2;239;68;68m' /* Error Red */,
 };
 
@@ -30,8 +30,11 @@ const c = {
 const IMAGE_EXTS = new Set(['.png', '.jpg', '.jpeg', '.webp', '.avif', '.gif']);
 const TEXT_EXTS = new Set([
   '.js',
+  '.mjs',
+  '.cjs',
   '.css',
   '.html',
+  '.htm',
   '.json',
   '.svg',
   '.xml',
@@ -44,6 +47,9 @@ const TEXT_EXTS = new Set([
 ]);
 const ESBUILD_EXTS = new Set(['.ts', '.jsx', '.tsx']);
 const WASM_EXTS = new Set(['.wasm']);
+const ARCHIVE_EXTS = new Set(['.zip']);
+const FONT_EXTS = new Set(['.ttf', '.otf', '.woff', '.woff2']);
+const PDF_EXTS = new Set(['.pdf']);
 const MEDIA_EXTS = new Set(['.mp3', '.wav', '.mp4']);
 
 const ALL_SUPPORTED = new Set([
@@ -51,14 +57,20 @@ const ALL_SUPPORTED = new Set([
   ...TEXT_EXTS,
   ...ESBUILD_EXTS,
   ...WASM_EXTS,
+  ...ARCHIVE_EXTS,
+  ...FONT_EXTS,
+  ...PDF_EXTS,
   ...MEDIA_EXTS,
 ]);
 
 // ── Extension → MIME mapping ───────────────────────────────────────────────────
 const EXT_TO_MIME = {
   '.js': 'application/javascript',
+  '.mjs': 'application/javascript',
+  '.cjs': 'application/javascript',
   '.css': 'text/css',
   '.html': 'text/html',
+  '.htm': 'text/html',
   '.json': 'application/json',
   '.svg': 'image/svg+xml',
   '.xml': 'application/xml',
@@ -75,6 +87,12 @@ const EXT_TO_MIME = {
   '.avif': 'image/avif',
   '.gif': 'image/gif',
   '.wasm': 'application/wasm',
+  '.zip': 'application/zip',
+  '.ttf': 'font/ttf',
+  '.otf': 'font/otf',
+  '.woff': 'font/woff',
+  '.woff2': 'font/woff2',
+  '.pdf': 'application/pdf',
 };
 
 // ── MIME → preferred extension (for format changes) ────────────────────────────
@@ -131,6 +149,8 @@ function parseArgs(argv) {
   const args = {
     input: null,
     method: 'quality',
+    preset: null,
+    perceptual: false,
     output: null,
     help: false,
   };
@@ -144,6 +164,12 @@ function parseArgs(argv) {
       i++;
     } else if (arg === '--method' || arg === '-m') {
       args.method = argv[++i] || 'quality';
+      i++;
+    } else if (arg === '--preset' || arg === '-p') {
+      args.preset = argv[++i] || null;
+      i++;
+    } else if (arg === '--perceptual') {
+      args.perceptual = true;
       i++;
     } else if (arg === '--output' || arg === '-o') {
       args.output = argv[++i] || null;
@@ -171,35 +197,43 @@ function showHelp() {
   console.log('');
   console.log(`  ${c.bold}${c.foreground}OPTIONS${c.reset}`);
   console.log(
-    `    ${c.cyan}-m, --method${c.reset}  Optimization method (default: ${c.amber}quality${c.reset})`
+    `    ${c.cyan}-m, --method${c.reset}     Optimization method (default: ${c.amber}quality${c.reset})`
   );
-  console.log(`                  ${c.muted}quality${c.reset}  – visually lossless, balanced`);
-  console.log(`                  ${c.muted}balanced${c.reset} – good compression and size`);
-  console.log(`                  ${c.muted}extreme${c.reset}  – maximum compression`);
-  console.log(`    ${c.cyan}-o, --output${c.reset}  Output path (file or directory)`);
-  console.log(`                  ${c.muted}Default: optimizes in-place${c.reset}`);
-  console.log(`    ${c.cyan}-h, --help${c.reset}    Show this help text`);
+  console.log(`                     ${c.muted}quality${c.reset}  – visually lossless, balanced`);
+  console.log(`                     ${c.muted}balanced${c.reset} – good compression and size`);
+  console.log(`                     ${c.muted}extreme${c.reset}  – maximum compression`);
+  console.log(`    ${c.cyan}-p, --preset${c.reset}     Built-in recipe (e.g. web-hero, avatar, thumbnail, podcast-audio)`);
+  console.log(`    ${c.cyan}--perceptual${c.reset}     Adaptive SSIM perceptual tuning for images`);
+  console.log(`    ${c.cyan}-o, --output${c.reset}     Output path (file or directory)`);
+  console.log(`                     ${c.muted}Default: optimizes in-place${c.reset}`);
+  console.log(`    ${c.cyan}-h, --help${c.reset}       Show this help text`);
   console.log('');
   console.log(`  ${c.bold}${c.foreground}EXAMPLES${c.reset}`);
   console.log(`    ${c.faint}$ condense optimize photo.png -o out.webp --method extreme${c.reset}`);
   console.log(`    ${c.faint}$ condense optimize ./src/ -o ./dist/ --method balanced${c.reset}`);
+  console.log(`    ${c.faint}$ condense optimize bundle.zip --preset lossless-archive${c.reset}`);
   console.log('');
 }
 
 // ── Optimize a single file ─────────────────────────────────────────────────────
 
-async function optimizeFile(filePath, method) {
+async function optimizeFile(filePath, options = {}) {
   const ext = path.extname(filePath).toLowerCase();
   const mime = EXT_TO_MIME[ext];
   const buffer = fs.readFileSync(filePath);
+  const method = options.method || 'quality';
 
   if (MEDIA_EXTS.has(ext)) {
     return { skipped: true, reason: 'Streaming media not suitable for CLI batch processing' };
   }
 
   if (IMAGE_EXTS.has(ext)) {
-    const { optimizeImage } = require('../src/services/imageService');
-    const result = await optimizeImage(buffer, mime, method);
+    const { optimizeImage, optimizePerceptualImage } = require('../src/services/imageService');
+    if (options.perceptual) {
+      const result = await optimizePerceptualImage(buffer, mime, options);
+      return { buffer: result.buffer, outMime: result.outMime };
+    }
+    const result = await optimizeImage(buffer, mime, method, options);
     return { buffer: result.buffer, outMime: result.outMime };
   }
 
@@ -221,13 +255,27 @@ async function optimizeFile(filePath, method) {
     return { buffer: result.buffer, outMime: result.outMime };
   }
 
+  if (ARCHIVE_EXTS.has(ext)) {
+    const { optimizeZip } = require('../src/services/archiveService');
+    const result = await optimizeZip(buffer, { method, ...options });
+    return { buffer: result.buffer, outMime: result.outMime };
+  }
+
+  if (FONT_EXTS.has(ext)) {
+    const { optimizeFont } = require('../src/services/fontService');
+    const result = optimizeFont(buffer, { method, ...options });
+    return { buffer: result.buffer, outMime: result.outMime };
+  }
+
+  if (PDF_EXTS.has(ext)) {
+    const { optimizePdf } = require('../src/services/pdfService');
+    const result = optimizePdf(buffer, { method, ...options });
+    return { buffer: result.buffer, outMime: result.outMime };
+  }
+
   return { skipped: true, reason: 'Unsupported file type' };
 }
 
-/**
- * Determine the output extension when the image service changes format
- * (e.g., PNG → WebP in extreme mode).
- */
 function resolveOutputExt(originalExt, outMime) {
   if (!outMime) return originalExt;
   const newExt = MIME_TO_EXT[outMime];
@@ -265,7 +313,6 @@ async function runOptimize(argv) {
   const stat = fs.statSync(inputPath);
   const isDir = stat.isDirectory();
 
-  // Collect files to process
   let files;
   if (isDir) {
     files = collectFiles(inputPath);
@@ -280,7 +327,6 @@ async function runOptimize(argv) {
     return;
   }
 
-  // Resolve output directory (if provided and input is a directory)
   const outputDir = args.output && isDir ? path.resolve(args.output) : null;
   const outputFile = args.output && !isDir ? path.resolve(args.output) : null;
 
@@ -294,28 +340,29 @@ async function runOptimize(argv) {
   );
   console.log('');
 
-  // Compute max filename length for alignment
   const baseNames = files.map((f) => path.basename(f));
   const maxNameLen = Math.max(...baseNames.map((n) => n.length));
 
   let optimized = 0;
   let errors = 0;
-  let totalReduction = 0;
+  let totalOriginalBytes = 0;
+  let totalOptimizedBytes = 0;
 
-  // Process files sequentially
   for (let i = 0; i < files.length; i++) {
     const filePath = files[i];
     const baseName = baseNames[i];
     const paddedName = baseName.padEnd(maxNameLen);
     const originalSize = fs.statSync(filePath).size;
+    totalOriginalBytes += originalSize;
 
     try {
-      const result = await optimizeFile(filePath, args.method);
+      const result = await optimizeFile(filePath, args);
 
       if (result.skipped) {
         console.log(
           `  ${c.muted}○${c.reset} ${c.foreground}${paddedName}${c.reset}  ${c.faint}Skipped: ${result.reason}${c.reset}`
         );
+        totalOptimizedBytes += originalSize;
         continue;
       }
 
@@ -323,23 +370,19 @@ async function runOptimize(argv) {
         ? result.buffer
         : Buffer.from(result.buffer);
       const newSize = outputBuffer.length;
+      totalOptimizedBytes += newSize;
       const reduction = originalSize > 0 ? ((originalSize - newSize) / originalSize) * 100 : 0;
 
-      // Determine output path
       let destPath;
       if (outputFile) {
-        // Single file → explicit output path
         destPath = outputFile;
       } else if (outputDir) {
-        // Directory mode → mirror relative path in output dir
         const relativePath = path.relative(inputPath, filePath);
         destPath = path.join(outputDir, relativePath);
       } else {
-        // In-place
         destPath = filePath;
       }
 
-      // Handle image format changes (e.g., PNG → WebP in extreme mode)
       if (result.outMime) {
         const originalExt = path.extname(destPath).toLowerCase();
         const newExt = resolveOutputExt(originalExt, result.outMime);
@@ -348,11 +391,9 @@ async function runOptimize(argv) {
         }
       }
 
-      // Ensure destination directory exists
       const destDir = path.dirname(destPath);
       fs.mkdirSync(destDir, { recursive: true });
 
-      // Write optimized file
       fs.writeFileSync(destPath, outputBuffer);
 
       const originalFormatted = formatSize(originalSize).padStart(9);
@@ -363,21 +404,24 @@ async function runOptimize(argv) {
       );
 
       optimized++;
-      totalReduction += reduction;
     } catch (err) {
       errors++;
+      totalOptimizedBytes += originalSize;
       console.log(
         `  ${c.red}✗${c.reset} ${c.foreground}${paddedName}${c.reset}  ${c.red}Error: ${err.message}${c.reset}`
       );
     }
   }
 
-  const avgReduction = optimized > 0 ? (totalReduction / optimized).toFixed(1) : '0.0';
+  const bytesSaved = Math.max(0, totalOriginalBytes - totalOptimizedBytes);
+  const overallReduction = totalOriginalBytes > 0
+    ? (((totalOriginalBytes - totalOptimizedBytes) / totalOriginalBytes) * 100).toFixed(1)
+    : '0.0';
 
   console.log('');
   console.log(`  ${c.border}${'─'.repeat(80)}${c.reset}`);
   console.log(
-    `  ${c.green}✓ Done${c.reset} ${c.muted}·${c.reset} ${c.foreground}${optimized} optimized${c.reset} ${c.muted}·${c.reset} ${c.muted}${errors} error${errors === 1 ? '' : 's'}${c.reset} ${c.muted}·${c.reset} ${c.green}${avgReduction}% avg reduction${c.reset}`
+    `  ${c.green}✓ Done${c.reset} ${c.muted}·${c.reset} ${c.foreground}${optimized} optimized${c.reset} ${c.muted}·${c.reset} ${c.muted}${errors} error${errors === 1 ? '' : 's'}${c.reset} ${c.muted}·${c.reset} ${c.green}${overallReduction}% total reduction${c.reset} ${c.muted}(${formatSize(bytesSaved)} saved)${c.reset}`
   );
   console.log('');
 }
@@ -391,6 +435,7 @@ function runServer() {
   printHeader();
   console.log(`  ${c.cyan}● Server running on port ${PORT}${c.reset}`);
   console.log(`  ${c.muted}● POST /optimize to process files${c.reset}`);
+  console.log(`  ${c.muted}● GET /metrics for real-time ROI telemetry${c.reset}`);
   console.log('');
 
   app.listen(PORT);
@@ -406,6 +451,5 @@ if (subcommand === 'optimize') {
     process.exitCode = 1;
   });
 } else {
-  // No subcommand (or unrecognized) → start Express server (backward compatible)
   runServer();
 }

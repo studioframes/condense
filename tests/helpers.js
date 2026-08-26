@@ -1,4 +1,5 @@
 const assert = require('assert');
+const sharp = require('sharp');
 
 // Create minimal PNG buffer (1x1 pixel, red)
 function createTestImagePNG() {
@@ -38,8 +39,30 @@ function createTestImageJPEG() {
   ]);
 }
 
+async function createSolidImage(width = 64, height = 64, color = { r: 120, g: 150, b: 200 }, format = 'png') {
+  let instance = sharp({
+    create: {
+      width,
+      height,
+      channels: 3,
+      background: color,
+    },
+  });
+
+  if (format === 'jpeg' || format === 'jpg') {
+    instance = instance.jpeg();
+  } else if (format === 'webp') {
+    instance = instance.webp();
+  } else {
+    instance = instance.png();
+  }
+
+  return instance.toBuffer();
+}
+
 module.exports = {
   assert,
   createTestImagePNG,
   createTestImageJPEG,
+  createSolidImage,
 };

@@ -10,6 +10,14 @@ We welcome contibutions to the documentation. All changes to the files inside th
 - [api.md](api.md) — Integration options for the SDK, HTTP API, and CLI
 - [examples.md](examples.md) — Ready-to-use code snippets for common workflows
 
+## Deep-Dive Feature Guides
+
+- [pipelines.md](pipelines.md) — Fluent chainable pipeline API, presets, and custom recipes
+- [perceptual-tuning.md](perceptual-tuning.md) — SSIM & PSNR perceptual image optimization and responsive picture matrix generation
+- [binary-processors.md](binary-processors.md) — In-memory ZIP archives, SVG icon spritesheets, font table stripping, and PDF minification
+- [worker-pool.md](worker-pool.md) — Multi-threaded worker pools and non-blocking background execution
+- [telemetry.md](telemetry.md) — Real-time tracking of bytes saved, ROI financial metrics, and carbon reduction
+
 ## Operational and implementation guides
 
 - [architecture.md](architecture.md) — How the request flow and service layers are organized

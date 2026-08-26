@@ -3,7 +3,14 @@
 const WASM_MAGIC = Buffer.from([0x00, 0x61, 0x73, 0x6d]);
 const OUT_MIME = 'application/wasm';
 
-const STRIP_NAMES = new Set(['name', 'producers', 'sourceMappingURL']);
+const STRIP_NAMES = new Set([
+  'name',
+  'producers',
+  'sourceMappingURL',
+  'target_features',
+  'external_debug_info',
+  'build_id',
+]);
 
 function readLEB128(buf, offset) {
   let value = 0;
@@ -45,22 +52,35 @@ function shouldStripCustomSection(sectionName, method) {
     return true;
   }
 
-  if (sectionName.startsWith('.debug')) {
+  if (sectionName.startsWith('.debug') || sectionName.startsWith('debug_')) {
+    return true;
+  }
+
+  if (method === 'balanced' && (sectionName.startsWith('metadata.') || sectionName.startsWith('reloc.'))) {
     return true;
   }
 
   return false;
 }
 
-function optimizeWasm(buffer, method) {
+/**
+ * Deep WebAssembly binary optimization and custom section pruning.
+ *
+ * @param {Buffer} buffer - Raw WASM binary buffer
+ * @param {'quality'|'balanced'|'extreme'} method - Optimization tier
+ * @returns {{ buffer: Buffer, outMime: string, stats?: Object }}
+ */
+function optimizeWasm(buffer, method = 'quality') {
   try {
     if (buffer.length < 4 || !buffer.subarray(0, 4).equals(WASM_MAGIC)) {
       throw new Error('Invalid WebAssembly binary: missing magic bytes');
     }
 
+    const originalSize = buffer.length;
     const version = buffer.subarray(4, 8);
     let offset = 8;
     const keptSections = [];
+    let strippedCustomSections = 0;
 
     while (offset < buffer.length) {
       const sectionId = buffer[offset];
@@ -73,13 +93,14 @@ function optimizeWasm(buffer, method) {
       offset += sectionSize;
 
       if (sectionId === 0) {
-        // Custom section — read the name to decide whether to strip
+        // Custom section — inspect section name to decide whether to strip
         const { value: nameLen, bytesRead: nameLenBytes } = readLEB128(payload, 0);
         const sectionName = payload
           .subarray(nameLenBytes, nameLenBytes + nameLen)
           .toString('utf-8');
 
         if (shouldStripCustomSection(sectionName, method)) {
+          strippedCustomSections++;
           continue;
         }
       }
@@ -87,7 +108,7 @@ function optimizeWasm(buffer, method) {
       keptSections.push({ sectionId, payload });
     }
 
-    // Rebuild binary
+    // Rebuild binary parts with exact LEB128 sizing
     const parts = [WASM_MAGIC, version];
 
     for (const section of keptSections) {
@@ -96,9 +117,20 @@ function optimizeWasm(buffer, method) {
       parts.push(idBuf, sizeBuf, section.payload);
     }
 
+    const outputBuffer = Buffer.concat(parts);
+    const savingsPercent = originalSize > 0
+      ? Number((((originalSize - outputBuffer.length) / originalSize) * 100).toFixed(1))
+      : 0;
+
     return {
-      buffer: Buffer.concat(parts),
+      buffer: outputBuffer,
       outMime: OUT_MIME,
+      stats: {
+        originalSize,
+        optimizedSize: outputBuffer.length,
+        savingsPercent,
+        strippedCustomSections,
+      },
     };
   } catch (error) {
     if (error.message.startsWith('Invalid WebAssembly binary')) {

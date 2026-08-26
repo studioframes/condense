@@ -4,17 +4,13 @@
 [![downloads](https://conbadges.pages.dev/api/npm/dt/@studioframes/condense)](https://www.npmjs.com/package/@studioframes/condense)
 [![License](https://conbadges.pages.dev/api/badge?label=license&value=Apache-2.0)](./LICENSE)
 
-**The fast, stateless file optimization engine for Node.js**
+**The fast, all-in-one, stateless file optimization engine.**
 
 ## Introduction
 
 Condense provides fast, in-memory optimization for media, code, and binaries. It exists to offer low-latency, stateless processing for server-side and serverless environments where temporary disk I/O is undesirable or unavailable. Unlike traditional tools that rely on intermediate temporary files, Condense processes uploads and assets using Buffers and Streams, returning optimized Buffers or Streams ready to send in responses.
 
 ## Install
-
-Condense requires Node.js v20.9.0 or higher.
-
-> Condense doesn't support any other Javascript runtime other than Node.js yet.
 
 Install with your preferred package manager:
 
@@ -41,11 +37,12 @@ pnpm add @studioframes/condense
 ```bash
 bun add @studioframes/condense
 ```
+
 ### System Requirements
 
 - **Node.js** ≥ 20.9.0
 - **Memory** ~50MB base + file size
-- **CPU** Single-threaded; use clustering for parallelism
+- **CPU** Single-threaded by default; multi-threaded worker pool supported via `WorkerPool`
 - **OS** Linux/macOS/Windows
 
 ## Quick Links
@@ -57,7 +54,7 @@ bun add @studioframes/condense
 - [npm](https://www.npmjs.com/package/@studioframes/condense)
 
 **Internal Resources:**
-- [Docs](https://github.com/studioframes/condense/blob/main/docs/README.md)
+- [Docs](./docs/README.md)
 - [Changelog](./CHANGELOG.md)
 - [Code of Conduct](./CODE_OF_CONDUCT.md)
 - [Commands](./COMMANDS.md)
@@ -75,32 +72,28 @@ bun add @studioframes/condense
 - [Why Condense?](#why-condense)
 - [Features](#features)
   - [In-Memory Processing](#in-memory-processing)
+  - [Fluent Pipeline API](#fluent-pipeline-api)
+  - [Perceptual Image Compression (SSIM/PSNR)](#perceptual-image-compression)
+  - [Enterprise Binary & Archive Optimization](#enterprise-binary--archive-optimization)
+  - [Cross-Document Token Mangling](#cross-document-token-mangling)
+  - [Multi-Threaded Worker Pool](#multi-threaded-worker-pool)
+  - [Enterprise Telemetry & ROI](#enterprise-telemetry--roi)
   - [Comprehensive Format Support](#comprehensive-format-support)
-  - [Intelligent Resizing](#intelligent-resizing)
-  - [Media Utilities](#media-utilities)
-  - [Multiple Integration Points](#multiple-integration-points)
   - [Smart Ignore Directives](#smart-ignore-directives)
   - [Optional LRU Caching](#optional-lru-caching)
-  - [Health & Diagnostics](#health--diagnostics)
 - [Quick Start](#quick-start)
 - [Use Cases](#use-cases)
-  - [Web APIs](#web-apis)
-  - [Serverless Functions](#serverless-functions)
-  - [Build Tools](#build-tools)
-  - [Media Platforms](#media-platforms)
-  - [Edge Runtimes](#edge-runtimes)
 - [Usage](#usage)
-  - [Quick Start Reference](#quick-start-reference)
-  - [Environment Variables](#environment-variables)
-  - [Examples](#examples)
-    - [CLI Usage](#cli-usage)
-    - [Express Middleware](#express-middleware)
-    - [Programmatic Helper SDK](#programmatic-helper-sdk)
+  - [Fluent Pipeline](#fluent-pipeline)
+  - [Perceptual Tuning](#perceptual-tuning)
+  - [SVG Spritesheets](#svg-spritesheets)
+  - [ZIP Archives](#zip-archives)
+  - [Express Middleware](#express-middleware)
+  - [CLI Usage](#cli-usage)
 - [Optimization Methods](#optimization-methods)
 - [API Reference](#api-reference-selected)
 - [Benchmarks](#benchmarks)
 - [Documentation](#documentation)
-- [Code of Conduct](#code-of-conduct)
 - [Contributing](#contributing-to-condense)
 - [License](#license)
 
@@ -125,97 +118,58 @@ More over, Condense is/has:
 ## Features
 
 ### In-Memory Processing
-No temporary disk writes. Processes files entirely using Buffers and Streams, returning optimized data ready to send in responses. Supports explicit MP4 faststart when needed.
+Zero temporary disk writes by default. Condense processes files entirely using Buffers and Streams, returning optimized data ready to transmit in HTTP responses or save directly to object storage.
+
+### Fluent Pipeline API
+Chain complex multi-step transformations with an intuitive builder interface:
 
 ```javascript
-const { optimizeImage } = require('@studioframes/condense');
+const { createPipeline } = require('@studioframes/condense');
 
-// Input Buffer → optimize → output Buffer
-const { buffer: optimized, outMime } = await optimizeImage(
-  inputBuffer,
-  'image/png',
-  'balanced'
-);
-// Ready to send directly in HTTP response
+const resultBuffer = await createPipeline(rawBuffer, 'image/jpeg')
+  .preset('web-hero')
+  .toBuffer();
 ```
 
-### Comprehensive Format Support
-Optimize images (PNG, JPEG, WebP, AVIF, GIF, SVG), audio (MP3, WAV), video (MP4), code/markup (HTML, CSS, JS, TS, JSX, TSX, JSON, XML, YAML, GraphQL), and WebAssembly binaries—all in one engine.
-
-### Intelligent Resizing
-Dynamic image resizing with `width`, `height`, and `fit` parameters (contain, cover, fill). Automatically chooses optimal output format based on content and mode.
+### Perceptual Image Compression (SSIM / PSNR)
+Binary search optimizer targeting mathematically verifiable structural similarity (SSIM) and peak signal-to-noise ratio (PSNR) to maximize byte savings while preserving visual fidelity:
 
 ```javascript
-const { optimizeImage } = require('@studioframes/condense');
+const { optimizePerceptualImage } = require('@studioframes/condense');
 
-const resized = await optimizeImage(buffer, 'image/png', 'balanced', {
-  width: 1920,
-  height: 1080,
-  fit: 'cover' // or 'contain', 'fill'
+const { buffer, ssim, finalQuality } = await optimizePerceptualImage(buffer, 'image/jpeg', {
+  targetSsim: 0.95,
+  format: 'webp',
 });
 ```
 
-### Media Utilities
-Extract video thumbnails at any timestamp and generate standard MP4 faststart files for streaming. Built on ffmpeg-static for reliable cross-platform support.
+### Enterprise Binary & Archive Optimization
+- **ZIP Archives (`optimizeZip`)**: In-memory recursive decompression, multi-format asset optimization, and maximum DEFLATE repacking.
+- **SVG Spritesheet Packer (`packSvgSprites`)**: Consolidates separate SVG icons into a unified `<symbol>` sheet.
+- **Font Table Stripper (`optimizeFont`)**: Drops redundant metadata tables (`DSIG`, `hdmx`, `LTSH`, `PCLT`) from TTF/OTF/WOFF binaries.
+- **PDF Compression (`optimizePdf`)**: In-memory comment stripping and stream minification.
 
-```javascript
-const { extractVideoThumbnail } = require('@studioframes/condense');
+### Cross-Document Token Mangling
+Coordinately shorten CSS class names and element IDs across interconnected HTML, CSS, and JavaScript files (`mangleTokens`).
 
-// Extract thumbnail at 5 seconds
-const { buffer: thumb } = await extractVideoThumbnail(videoBuffer, 5);
-```
+### Multi-Threaded Worker Pool
+Offload CPU-intensive compression jobs to background `worker_threads` with automatic thread pooling and main-thread fallback (`WorkerPool`, `getWorkerPool`).
 
-### Multiple Integration Points
-Use as Express middleware for HTTP APIs, standalone CLI tool with beautiful terminal UI, or programmatic SDK. Choose the integration that fits your workflow.
+### Enterprise Telemetry & ROI
+Real-time tracking of total processed files, bandwidth saved, estimated financial cost reduction ($USD), and carbon savings ($\text{gCO}_2$).
 
-```javascript
-const express = require('express');
-const { condenseApp } = require('@studioframes/condense');
-
-const app = express();
-app.use('/optimize', condenseApp); // Ready to accept file uploads
-```
+### Comprehensive Format Support
+Optimize images (PNG, JPEG, WebP, AVIF, GIF, SVG), audio/video (MP3, WAV, MP4), code/markup (HTML, CSS, JS, TS, JSX, TSX, JSON, XML, YAML, GraphQL, SCSS, LESS), fonts, PDFs, and WebAssembly binaries.
 
 ### Smart Ignore Directives
 
-Use ignore directives to prevent minification for a file or a specific region.
+Use ignore directives to prevent minification for a file or a specific region:
 
 - `html`: add `data-condense-ignore` to any element (or `<html>` to ignore the whole document).
-- Code (`js`, `css`, `ts`, `jsx`, `tsx`, `less`, `scss`): add the comment `/* condense-ignore */` anywhere in the file to bypass minification.
-
-#### Examples
-
-#### `html`
-
-```html
-<div data-condense-ignore>
-  <pre>
-    Preserved spacing and content here
-  </pre>
-</div>
-```
-
-#### `js`/`ts`
-
-```javascript
-/* condense-ignore */
-function legacyCode() {
-  // This file will not be altered
-  var x = 10;
-}
-```
+- Code (`js`, `css`, `ts`, `jsx`, `tsx`, `less`, `scss`): add `/* condense-ignore */` anywhere in the file to bypass minification.
 
 ### Optional LRU Caching
-Enable built-in LRU cache to avoid re-processing frequently optimized assets. Controlled via `CONDENSE_CACHE=true` environment variable with configurable cache size.
-
-```bash
-# Enable caching for repeated optimizations
-export CONDENSE_CACHE=true
-export CONDENSE_CACHE_SIZE=100  # number of cached items
-```
-
-### Health & Diagnostics
-Monitor system health with the `/health` API endpoint. Reports CPU load, memory usage, optimization queue status, and system capabilities in real-time.
+Enable built-in LRU cache to avoid re-processing frequently requested assets via `CONDENSE_CACHE=true`.
 
 ## Quick Start
 
@@ -374,35 +328,48 @@ app.listen(8080, () => {
 });
 ```
 
-#### Programmatic Helper SDK
+#### Programmatic Helper SDK & Fluent Pipeline
 
 ```javascript
 const {
+  createPipeline,
+  optimizePerceptualImage,
+  packSvgSprites,
+  optimizeZip,
+  optimizeFont,
   optimizeImage,
   optimizeText,
   optimizeMediaStream,
   optimizeEsbuild,
 } = require('@studioframes/condense');
 
-// 1. Optimize an Image Buffer (returns Buffer)
-const { buffer: imgBuffer, outMime: imgMime } = await optimizeImage(
+// 1. Fluent Chainable Pipeline
+const condensedBuffer = await createPipeline(rawImageBuffer, 'image/jpeg')
+  .preset('web-hero')
+  .toBuffer();
+
+// 2. Perceptual Image Optimizer (Binary-search SSIM)
+const { buffer: webpBuf, ssim, finalQuality } = await optimizePerceptualImage(
   rawImageBuffer,
-  'image/png',
-  'extreme'
+  'image/jpeg',
+  { targetSsim: 0.95, format: 'webp' }
 );
 
-// 2. Optimize an HTML / CSS / JS Buffer (returns Buffer)
-const { buffer: textBuffer, outMime: textMime } = await optimizeText(
-  rawHtmlBuffer,
-  'text/html',
-  'balanced'
-);
+// 3. In-Memory SVG Spritesheet Packing
+const spritesheet = packSvgSprites([
+  { id: 'icon-home', content: '<svg viewBox="0 0 24 24"><path d="..."/></svg>' },
+  { id: 'icon-user', content: '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/></svg>' }
+]);
 
-// 3. Optimize Audio / Video (returns PassThrough Stream)
-const { stream, outMime: mediaMime } = optimizeMediaStream(rawVideoBuffer, 'video/mp4', 'quality');
+// 4. In-Memory Recursive ZIP Archive Optimizer
+const { buffer: zipBuf, processedFiles } = await optimizeZip(rawZipBuffer, { method: 'extreme' });
 
-// 4. Optimize TypeScript/React (returns Buffer)
-const { buffer: tsBuffer, outMime: tsMime } = await optimizeEsbuild(rawTsBuffer, '.tsx', 'quality');
+// 5. SFNT / WOFF Font Table Stripper
+const { buffer: fontBuf, droppedTables } = await optimizeFont(rawFontBuffer, 'font/ttf');
+
+// 6. Direct Buffer / Stream Optimization
+const { buffer: imgBuffer } = await optimizeImage(rawImageBuffer, 'image/png', 'balanced');
+const { stream: mediaStream } = optimizeMediaStream(rawVideoBuffer, 'video/mp4', 'quality');
 ```
 
 ## Optimization Methods

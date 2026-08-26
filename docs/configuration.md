@@ -1,42 +1,52 @@
 # Configuration Guide
 
-Condense uses a small set of configuration patterns that are easy to understand in both local development and production deployments.
+Condense provides clean configuration options spanning environment variables, request parameters, presets, and worker pools.
 
-## Request-level options
+## Environment Variables
 
-The HTTP endpoint and programmatic helpers support a few relevant options depending on the content type:
+| Variable | Default | Description |
+| :--- | :--- | :--- |
+| `PORT` | `3000` | Port for the standalone HTTP server / microservice. |
+| `CONDENSE_CACHE` | `false` | When set to `'true'`, activates the LRU cache for static assets. |
+| `CONDENSE_CACHE_MAX` | `500` | Maximum number of items in the in-memory LRU cache. |
+| `CONDENSE_WORKERS` | CPU count | Default number of threads to spawn for `WorkerPool`. |
 
-- method: quality, balanced, or extreme
-- width, height, fit: image resizing controls
-- keepMetadata and keepFormat: preserve image metadata or format when possible
-- faststart and thumbnail: media-specific controls for video processing
-- targetFormat: request a preferred output image format when supported
+## Built-In Optimization Presets
 
-## Environment variables
+Condense v1.0.0 includes built-in presets for common production scenarios:
 
-Condense currently uses the following environment-oriented pattern:
+- **`web-hero`**: High-fidelity hero images (WebP/AVIF, target SSIM 0.96, balanced compression).
+- **`avatar-thumbnail`**: Compact square avatars (256x256 cover fit, WebP, quality 75).
+- **`production-bundle`**: Extreme code & script minification with comment and console removal.
+- **`ultra-archive`**: Aggressive in-memory ZIP compression (level 9) with recursive asset optimization.
+- **`email-safe`**: Conservative HTML and JPEG optimizations compatible with legacy email clients.
+- **`social-share`**: 1200x630 social preview card generation.
 
-- CONDENSE_CACHE=true enables the optional LRU cache for non-streaming formats
+### Registering Custom Presets
 
-When cache support is enabled, repeated optimization of the same content can be served from memory instead of reprocessing it.
+```javascript
+const { presetService } = require('@studioframes/condense');
 
-## CLI options
-
-Common CLI flags include:
-
-- optimize: run the optimization workflow
-- -m, --method: choose an optimization mode
-- -o, --output: write the optimized output to a directory
-
-Example:
-
-```bash
-npx @studioframes/condense optimize ./demo -o ./dist -m balanced
+presetService.registerPreset('my-custom-recipe', {
+  image: {
+    format: 'webp',
+    targetSsim: 0.94,
+    method: 'balanced',
+  },
+  text: {
+    method: 'extreme',
+  },
+});
 ```
 
-## Practical guidance
+## Request-Level Options (`POST /optimize`)
 
-- Use quality for assets where visual fidelity matters most
-- Use balanced for most default production use cases
-- Use extreme when file size is more important than output fidelity
-- Keep request parameters explicit when building APIs so downstream clients understand what will change
+When using the HTTP API:
+
+- `method`: `'quality'`, `'balanced'`, or `'extreme'`
+- `preset`: Apply a named preset (e.g. `'web-hero'`)
+- `targetSsim`: Floating-point SSIM target (e.g. `0.95`)
+- `width`, `height`, `fit`: Dimension resizing (`'cover'`, `'contain'`, `'fill'`, `'inside'`, `'outside'`)
+- `faststart`: Set to `'true'` to enable progressive MP4 streaming
+- `thumbnail`: Set to `'true'` to extract a single video frame as a JPEG thumbnail
+

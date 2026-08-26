@@ -37,12 +37,22 @@ Because Condense is distributed as an npm package, you must maintain compatibili
 
 Condense uses Node's built-in test framework. Tests live in the `tests/` directory and cover:
 
-- **imageService.test.js** — Image optimization (PNG, JPEG, quality/balanced/extreme modes)
+- **imageService.test.js** — Image optimization, perceptual SSIM search, responsive matrix generation
 - **textService.test.js** — Code/markup minification (JS, CSS, HTML, XML, YAML, ignore directives)
 - **mediaService.test.js** — Media streaming (audio/video processing, error handling)
 - **esbuildService.test.js** — TypeScript and React minification tests
 - **wasmService.test.js** — WebAssembly stripping tests
 - **cacheService.test.js** — LRU caching tests
+- **archiveService.test.js** — In-memory ZIP archive decompression and recompression
+- **fontService.test.js** — SFNT/WOFF OpenType font metadata table stripping
+- **pdfService.test.js** — In-memory PDF comment and stream compression
+- **pipelineService.test.js** — Fluent chainable pipeline processing
+- **presetService.test.js** — Preset resolution and custom recipe registration
+- **ssimService.test.js** — SSIM and PSNR image quality calculations
+- **svgSpriteService.test.js** — SVG symbol spritesheet packing
+- **telemetryService.test.js** — Telemetry, byte savings, ROI, and carbon tracking
+- **tokenManglingService.test.js** — Coordinated HTML/CSS/JS token shortening
+- **workerPool.test.js** — Worker thread pool parallel task dispatching
 - **helpers.js** — Shared test utilities
 
 Tests are development-only and excluded from published npm packages via `.npmignore`.

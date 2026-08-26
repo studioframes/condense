@@ -15,12 +15,14 @@ Fixes # (issue)
 
 Because this package is published as an npm package, please confirm you have verified your changes against the following:
 
-- [ ] Tested via the standalone CLI (`npx @studioframes/condense` or `npm start`)
+- [ ] Tested via the standalone CLI (`npx @studioframes/condense optimize ...` or `npm start`)
 - [ ] Tested as an Express middleware import (`condenseApp`)
-- [ ] Tested programmatically (`optimizeImage`, `optimizeText`, `optimizeMediaStream`, or `optimizeEsbuild`)
+- [ ] Tested programmatically (e.g., `createPipeline`, `optimizeImage`, `optimizePerceptualImage`, `optimizeZip`, `optimizeFont`, `optimizeText`, `optimizeMediaStream`, `optimizeEsbuild`)
+- [ ] Passed `npm test` and `npm run lint`
 
 ## Architecture Checklist
 
-- [ ] My changes write zero files to local storage (strictly RAM-only).
+- [ ] My changes write zero temporary files to local storage (strictly RAM-only).
 - [ ] No Express dependencies are required inside the `src/services` logic.
+- [ ] Preserves stateless in-memory buffer/stream architectures.
 - [ ] If dealing with HTML/CSS/JS, the `data-condense-ignore` / `/* condense-ignore */` rules are correctly preserved.

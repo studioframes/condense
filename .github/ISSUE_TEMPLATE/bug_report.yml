@@ -27,7 +27,7 @@ body:
     attributes:
       label: Package Version
       description: Which version of Condense are you using?
-      placeholder: 'e.g. 0.3.11'
+      placeholder: 'e.g. 1.0.0'
     validations:
       required: false
 
@@ -36,7 +36,7 @@ body:
     attributes:
       label: Asset Type / MIME Type
       description: What file or MIME type causes the issue?
-      placeholder: 'e.g. image/png, text/html, video/mp4'
+      placeholder: 'e.g. image/png, text/html, video/mp4, font/ttf, application/zip'
     validations:
       required: true
 

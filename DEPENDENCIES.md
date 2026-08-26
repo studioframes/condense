@@ -9,6 +9,7 @@ This document summarizes the direct dependencies used by Condense and the role e
 | clean-css            | Minifies CSS assets and strips unnecessary whitespace and comments.                             |
 | esbuild              | Transpiles and bundles modern JavaScript and TypeScript, including JSX/TSX support.             |
 | express              | Provides the HTTP server and middleware layer for the API and upload routes.                    |
+| fflate               | Fast, pure in-memory ZIP archive decompression and high-ratio DEFLATE recompression.             |
 | ffmpeg-static        | Supplies the FFmpeg binary used by the media pipeline for video and audio processing.           |
 | html-minifier-terser | Minifies HTML content while preserving safe output and removing unnecessary markup.             |
 | htmlparser2          | Parses HTML and related markup so the text pipeline can inspect and transform content reliably. |
