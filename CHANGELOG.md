@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.17 (2026-08-26)
+
+### DevDependencies
+
+- [`2ca7d6e`](https://github.com/studioframes/condense/commit/56c5fd4) Update `eslint` from `10.8.1` to `10.9.0`
+
 ## v0.3.16 (2026-08-21)
 
 ### Dependencies

@@ -2,7 +2,7 @@
 
 This document outlines the planned evolution of Condense from current release through v1.0 and beyond.
 
-## Current Release: v0.3.16
+## Current Release: v0.3.17
 
 **Status:** Production-ready with core features complete
 **Released:** August 2026
@@ -21,7 +21,7 @@ This document outlines the planned evolution of Condense from current release th
 - In-Memory LRU Cache for static asset performance
 - System Health Diagnostics API (`/health`)
 
-## v0.5.0 (Sep/Oct 2026)
+## v0.5.0 (N/A)
 
 ### Performance & Optimization
 
@@ -48,7 +48,7 @@ This document outlines the planned evolution of Condense from current release th
 - Multi-bitrate DASH/HLS preparation
 - JSON schema validation
 
-## v1.0.0 (Nov/Dec 2026)
+## v1.0.0 (Aug 2026)
 
 ### Stability & Maturity
 
