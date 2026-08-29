@@ -1,10 +1,14 @@
-[![logo](https://github.com/user-attachments/assets/63c325d3-7511-4f56-8642-e40eab63ffd2)](https://condense.js.org)
+<div align="center">
+
+[<img width="700" alt="Condense Banner" src="https://github.com/user-attachments/assets/183e732e-4381-49eb-949b-7b806c201095" />](https://condense.js.org)
 
 [![npm](https://conbadges.pages.dev/api/npm/v/@studioframes/condense)](https://www.npmjs.com/package/@studioframes/condense)
 [![downloads](https://conbadges.pages.dev/api/npm/dt/@studioframes/condense)](https://www.npmjs.com/package/@studioframes/condense)
 [![License](https://conbadges.pages.dev/api/badge?label=license&value=Apache-2.0)](./LICENSE)
 
 **The fast, all-in-one, stateless file optimization engine.**
+
+</div>
 
 ## Introduction
 
@@ -99,13 +103,22 @@ bun add @studioframes/condense
 
 ## Why Condense?
 
-| Feature | Condense | ImageMin | FFmpeg | Sharp | Terser |
+| Feature | Condense | ImageMin | Sharp | Terser | FFmpeg |
 |---------|:---:|:---:|:---:|:---:|:---:|
-| **In-memory processing** | ✅ | ❌ | ❌ | 🔹 | ✅ |
-| **No temp files** | ✅ | ❌ | ❌ | ❌ | ✅ |
-| **Images + Media + Code + WASM** | ✅ | ❌ | ❌ | ❌ | ❌ |
-| **Express middleware** | ✅ | ❌ | ❌ | ❌ | ❌ |
-| **Serverless-ready** | ✅ | ❌ | ❌ | 🔹 | ✅ |
+| **Stateless in-memory processing** | ✅ | ❌ | 🟡 | ✅ | ❌ |
+| **Multi-Format Unified Engine** | ✅ | 🟡 | ❌ | ❌ | 🟡 |
+| **Serverless & Edge friendly** | ✅ | ❌ | 🟡 | ✅ | ❌ |
+| **Intelligent image resizing & fit** | ✅ | ❌ | ✅ | ❌ | ✅ |
+| **Faststart MP4 moov atom streaming** | ✅ | ❌ | ❌ | ❌ | ✅ |
+| **AST-free code minification** | ✅ | ❌ | ❌ | 🟡 | ❌ |
+| **Perceptual image compression (SSIM / PSNR)** | ✅ | ❌ | 🟡 | ❌ | ❌ |
+| **In-memory recursive ZIP archive repacking** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **SVG spritesheet & font table stripper** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Cross-document token mangling** | ✅ | ❌ | ❌ | 🟡 | ❌ |
+| **Multi-threaded worker pool offloading** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Enterprise telemetry & ROI tracking** | ✅ | ❌ | ❌ | ❌ | ❌ |
+| **Smart ignore directives** | ✅ | ❌ | ❌ | 🟡 | ❌ |
+| **Optional LRU in-memory caching** | ✅ | ❌ | ❌ | ❌ | ❌ |
 
 **Bottom line:** Condense is 2-5x faster than tools that write temporary files to disk.
 
