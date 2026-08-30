@@ -57,7 +57,7 @@ bun add @studioframes/condense
 - [npm](https://www.npmjs.com/package/@studioframes/condense)
 
 **Internal Resources:**
-- [Docs](https://github.com/studioframes/condense/blob/main/docs/README.md)
+- [Docs](https://github.com/studioframes/condense/blob/v0.x/docs/README.md)
 - [Changelog](./CHANGELOG.md)
 - [Code of Conduct](./CODE_OF_CONDUCT.md)
 - [Commands](./COMMANDS.md)
@@ -434,7 +434,7 @@ Short explanation: uploads are received into memory (Buffers or Streams), proces
 
 ## Benchmarks
 
-Below are the benchmark results of processing our sample suite through the `Condense` pipeline using the `quality`, `balanced` and `extreme` methods on demo files (Node.js v24, 2-core CPU). See [`demo`](https://github.com/studioframes/Condense/tree/main/demo) directory to learn more.
+Below are the benchmark results of processing our sample suite through the `Condense` pipeline using the `quality`, `balanced` and `extreme` methods on demo files (Node.js v24, 2-core CPU). See [`demo`](https://github.com/studioframes/Condense/tree/v0.x/demo) directory to learn more.
 
 | File Name       | Original | Quality | Balanced | Extreme | Max Reduction | Time (Q/B/E) |
 | --------------- | --------- | -------- | --------- | --------- | ------------- | ------------ |
@@ -466,12 +466,12 @@ If you prefer to browse the source files directly here on GitHub, you can start 
 
 ## Code of Conduct
 
-We expect all project participants to adhere to our newly established, repository-specific code of conduct. Please read [the full text](https://github.com/studioframes/Condense/blob/main/CODE_OF_CONDUCT.md) so that you can understand what actions will and will not be tolerated.
+We expect all project participants to adhere to our newly established, repository-specific code of conduct. Please read [the full text](https://github.com/studioframes/Condense/blob/v0.x/CODE_OF_CONDUCT.md) so that you can understand what actions will and will not be tolerated.
 
 ## Contributing to Condense
 
-We welcome contributions from everyone. Read our [contributing guide](https://github.com/studioframes/Condense/blob/main/CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to Condense.
+We welcome contributions from everyone. Read our [contributing guide](https://github.com/studioframes/Condense/blob/v0.x/CONTRIBUTING.md) to learn about our development process, how to propose bugfixes and improvements, and how to build and test your changes to Condense.
 
 ## License
 
-This project is managed by Studio Frames and is licensed under the Apache License 2.0. See [LICENSE](https://github.com/studioframes/Condense/blob/main/LICENSE) for the full text.
+This project is managed by Studio Frames and is licensed under the Apache License 2.0. See [LICENSE](https://github.com/studioframes/Condense/blob/v0.x/LICENSE) for the full text.
