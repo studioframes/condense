@@ -1,4 +1,4 @@
-name: Publish to npm
+name: Publish to npm (v0.x)
 
 on:
   release:
@@ -40,4 +40,4 @@ jobs:
           rm -f CODE_OF_CONDUCT.md CONTRIBUTING.md RELEASES.md
 
       - name: Publish to npm Registry with Provenance
-        run: npm publish --access public --provenance
+        run: npm publish --access public --provenance --tag v0.x
