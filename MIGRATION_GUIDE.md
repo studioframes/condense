@@ -4,17 +4,9 @@ This guide summarizes the changes developers should expect when upgrading Conden
 
 ## Security support and upgrade priority
 
-Before planning a migration, use the latest supported release. According to [SECURITY.md](./SECURITY.md), the recommended target for upgrades is the latest stable release, currently **1.0.0**.
+Before planning a migration, use the latest supported release. According to [SECURITY.md](./SECURITY.md), the recommended target for upgrades is the latest stable release, currently **1.0.1**. View [SECURITY.md](./SECURITY.md) for more info.
 
-| Version            | Status         | Supported | Notes                                                                                                                                                                |
-| ------------------ | -------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **1.0.x**          | **Active**     | ✅        | Current stable major release. Features Pillars 1, 2, 3, Perceptual Tuning, Worker Pools, Pipelines, SVG Sprites, and Archive Optimizers.                             |
-| **0.3.2 - 0.3.17** | **Maintenance**| ✅        | Supported for security fixes. Users are encouraged to upgrade to v1.0.0.                                                                                            |
-| **0.3.0 - 0.3.1**  | **Deprecated** | ❌        | Unsupported due to security vulnerabilities patched in [v0.3.2](https://github.com/studioframes/Condense/releases/tag/v0.3.2).                                      |
-| **0.2.x**          | **Deprecated** | ❌        | End of life. Please migrate directly to v1.0.0.                                                                                                                      |
-| **0.1.x**          | **Deprecated** | ❌        | End of life.                                                                                                                                                         |
-
-## Upgrading from 0.3.x to 1.0.0
+## Upgrading from 0.3.x to 1.0.x
 
 ### Key Highlights
 - **100% Backward-Compatible SDK**: All existing function signatures (`optimizeImage`, `optimizeText`, `optimizeMediaStream`, `optimizeEsbuild`, `optimizeWasm`, `condenseApp`) continue to work seamlessly.
@@ -49,7 +41,7 @@ const { buffer, ssim, finalQuality } = await optimizePerceptualImage(rawImage, '
 console.log(`Optimized to WebP at quality ${finalQuality} with SSIM ${ssim}`);
 ```
 
-## 0.2.x to 0.3.0
+## 0.2.x to 0.3.x
 
 ### CLI changes
 
@@ -76,7 +68,7 @@ npx @studioframes/condense optimize ./src -o ./dist -m balanced
   - HTML: `data-condense-ignore`
   - Code: `/* condense-ignore */`
 
-## 0.1.x to 0.2.0
+## 0.1.x to 0.2.x
 
 - Existing integrations should continue to work without code changes.
 - New optional query parameters are available for image resizing and media handling, including `width`, `height`, `fit`, `thumbnail`, and `faststart`.

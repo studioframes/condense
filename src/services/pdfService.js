@@ -5,6 +5,102 @@ const zlib = require('zlib');
 const PDF_MAGIC = Buffer.from('%PDF-');
 
 /**
+ * Strips XML Metadata packets (<?xpacket ... ?>) from PDF in linear time without regex backtracking.
+ *
+ * @param {string} str - Raw PDF binary string
+ * @returns {string} Cleaned PDF binary string
+ */
+function stripXmpPackets(str) {
+  let result = '';
+  let cursor = 0;
+  const lower = str.toLowerCase();
+  const startMarker = '<?xpacket';
+  const endMarker = '?xpacket';
+
+  while (cursor < str.length) {
+    const startIdx = lower.indexOf(startMarker, cursor);
+    if (startIdx === -1) {
+      result += str.slice(cursor);
+      break;
+    }
+
+    result += str.slice(cursor, startIdx);
+
+    const endPacketIdx = lower.indexOf(endMarker, startIdx + startMarker.length);
+    if (endPacketIdx === -1) {
+      result += str.slice(startIdx);
+      break;
+    }
+
+    const closeTagIdx = str.indexOf('?>', endPacketIdx);
+    if (closeTagIdx === -1) {
+      result += str.slice(startIdx);
+      break;
+    }
+
+    cursor = closeTagIdx + 2;
+  }
+
+  return result;
+}
+
+/**
+ * Finds all stream ... endstream blocks in a PDF binary string in linear time.
+ *
+ * @param {string} binaryStr - PDF binary string
+ * @returns {Array<{ start: number, end: number, inner: string }>}
+ */
+function findPdfStreams(binaryStr) {
+  const matches = [];
+  let cursor = 0;
+  const len = binaryStr.length;
+
+  while (cursor < len) {
+    const streamIdx = binaryStr.indexOf('stream', cursor);
+    if (streamIdx === -1) break;
+
+    // Check for newline following 'stream' (\r\n, \n, or \r)
+    let dataStart = -1;
+    if (binaryStr.startsWith('\r\n', streamIdx + 6)) {
+      dataStart = streamIdx + 8;
+    } else if (binaryStr.charCodeAt(streamIdx + 6) === 10 || binaryStr.charCodeAt(streamIdx + 6) === 13) {
+      dataStart = streamIdx + 7;
+    }
+
+    if (dataStart === -1) {
+      cursor = streamIdx + 6;
+      continue;
+    }
+
+    const endStreamIdx = binaryStr.indexOf('endstream', dataStart);
+    if (endStreamIdx === -1) {
+      break;
+    }
+
+    // Exclude trailing newline before 'endstream'
+    let dataEnd = endStreamIdx;
+    if (dataEnd > dataStart && binaryStr.charCodeAt(dataEnd - 1) === 10) {
+      dataEnd--;
+      if (dataEnd > dataStart && binaryStr.charCodeAt(dataEnd - 1) === 13) {
+        dataEnd--;
+      }
+    } else if (dataEnd > dataStart && binaryStr.charCodeAt(dataEnd - 1) === 13) {
+      dataEnd--;
+    }
+
+    matches.push({
+      start: streamIdx,
+      end: endStreamIdx + 9,
+      inner: binaryStr.slice(dataStart, dataEnd),
+    });
+
+    cursor = endStreamIdx + 9;
+  }
+
+  return matches;
+}
+
+/**
  * Optimizes an in-memory PDF document by compressing FlateDecode object streams,
  * stripping comments and redundant metadata, and compacting structures.
  *
@@ -23,9 +119,9 @@ function optimizePdf(pdfBuffer, options = {}) {
   let pdfString = pdfBuffer.toString('binary');
   let streamsProcessed = 0;
 
-  // 1. Strip XML Metadata packets (<?xpacket begin ... ?xpacket end="w"?>) in extreme/balanced mode
+  // 1. Strip XML Metadata packets in extreme/balanced mode
   if (method === 'extreme' || method === 'balanced') {
-    pdfString = pdfString.replace(/<\?xpacket[\s\S]*?\?xpacket\s*end="[rw]"\?>/gi, '');
+    pdfString = stripXmpPackets(pdfString);
   }
 
   // 2. Strip single-line comments (except PDF header and binary markers)
@@ -48,18 +144,8 @@ function optimizePdf(pdfBuffer, options = {}) {
 
   const workingDoc = Buffer.from(cleanedLines.join('\n'), 'binary');
 
-  // 3. Find and optimize stream ... endstream blocks
-  const streamRegex = /stream\r?\n([\s\S]*?)\r?\nendstream/g;
-  const matches = [];
-  let match;
-
-  while ((match = streamRegex.exec(workingDoc.toString('binary'))) !== null) {
-    matches.push({
-      start: match.index,
-      end: match.index + match[0].length,
-      inner: match[1],
-    });
-  }
+  // 3. Find and optimize stream ... endstream blocks in linear time
+  const matches = findPdfStreams(workingDoc.toString('binary'));
 
   // If streams were found, process FlateDecode streams
   for (const m of matches) {

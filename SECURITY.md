@@ -7,10 +7,14 @@ We actively monitor and patch vulnerabilities in `@studioframes/condense`. Pleas
 | Version            | Status         | Supported | Notes                                                                                                                                                                |
 | ------------------ | -------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **1.0.x**          | **Active**     | ✅        | Current stable major release. Features complete Pillars 1, 2, 3 suites.                                                                                              |
-| **0.3.2 - 0.3.17** | **Maintenance**| ✅        | Critical security fixes only. We recommend upgrading to 1.x.                                                                                                      |
-| **0.3.0 - 0.3.1**  | **Deprecated** | ❌        | Unsupported due to security vulnerabilities that have been patched in [v0.3.2](https://github.com/studioframes/Condense/releases/tag/v0.3.2).                       |
+| **0.3.2 - 0.3.17** | **Maintenance**| ✅        | Critical security fixes only. We recommend upgrading to 1.x.                                                                                                         |
+| **0.3.0 - 0.3.1**  | **Deprecated** | ❌        | Unsupported due to security vulnerabilities that have been patched in [v0.3.2](https://github.com/studioframes/Condense/releases/tag/v0.3.2).                        |
 | **0.2.x**          | **Deprecated** | ❌        | End of life.                                                                                                                                                         |
 | **0.1.x**          | **Deprecated** | ❌        | End of life.                                                                                                                                                         |
+
+> [!CAUTION]
+> **v1.0.0** contains security vulnerabilities that have been fixed in [**v1.0.1**](./CHANGELOG.md#v101-2026-08-30).
+> We recommend upgrading to **v1.0.x**. Use v1.0.0 at your own risk, if you don't wish to upgrade.
 
 ## Our Security Guarantees
 

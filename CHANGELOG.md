@@ -2,6 +2,23 @@
 
 # v1.x
 
+## v1.0.1 (2026-08-30)
+
+### Fixes & Security
+
+- PDF Stream Scanning ReDoS Mitigation (`pdfService`): Replaced polynomial backtracking regular expression (`stream...endstream`) on uncontrolled binary stream data with an $O(N)$ linear-time index scanner (`findPdfStreams`) to eliminate Denial of Service risks on malicious or malformed streams (CodeQL #12).
+- PDF XMP Packet Parser ReDoS Mitigation (`pdfService`): Replaced regular expression extraction of XML metadata packets (`<?xpacket ... ?>`) with a non-backtracking linear scanner (`stripXmpPackets`) preventing polynomial execution on adversarial repeated prefixes (CodeQL #11).
+- [`e59b3d3`](https://github.com/studioframes/condense/commit/e59b3d3) SVG Inner Markup Comment Sanitization (`svgSpriteService`): Implemented recursive iterative sanitization loop when stripping XML declarations, DOCTYPEs, and comments (`<!-- ... -->`) to resolve incomplete multi-character sanitization and prevent nested comment element injection (CodeQL #13).
+
+### Dependencies
+
+- [`88722ca`](https://github.com/studioframes/condense/commit/88722ca) Update `js-yaml` from `5.3.0` to `5.4.0`
+- [`264a3e3`](https://github.com/studioframes/condense/commit/264a3e3) Update `svgo` from `4.0.2` to `4.1.0`
+
+### DevDependencies
+
+- [`1002531`](https://github.com/studioframes/condense/commit/1002531) Update `@types/node` from `26.2.0` to `26.3.0`
+
 ## v1.0.0 (2026-08-26)
 
 ### Added

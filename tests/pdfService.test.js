@@ -31,3 +31,31 @@ test('pdfService - strips comments and XML metadata packets from PDF', () => {
   assert.ok(!outputStr.includes('xmpmeta'));
   assert.ok(result.buffer.length < pdfBuffer.length);
 });
+
+test('pdfService - safely handles adversarial / repeated prefixes without ReDoS', () => {
+  const adversarialPdf = [
+    '%PDF-1.4',
+    '%âãÏÓ',
+    // Repeated xpacket prefixes without matching closing tags
+    '<?xpacket '.repeat(500),
+    '<?xpacket begin="a" id="b"?>',
+    '<x:xmpmeta>meta</x:xmpmeta>',
+    '<?xpacket end="r"?>',
+    // Repeated stream markers without endstream
+    'stream\n'.repeat(500),
+    '2 0 obj',
+    '<< /Length 10 >>',
+    'stream',
+    'sample content',
+    'endstream',
+    'endobj',
+    '%%EOF',
+  ].join('\n');
+
+  const start = Date.now();
+  const result = optimizePdf(Buffer.from(adversarialPdf, 'binary'), { method: 'balanced' });
+  const elapsed = Date.now() - start;
+
+  assert.ok(elapsed < 200, `Execution took ${elapsed}ms, should be linear and < 200ms`);
+  assert.ok(Buffer.isBuffer(result.buffer));
+});
