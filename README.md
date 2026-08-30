@@ -1,20 +1,20 @@
-[![logo](https://github.com/user-attachments/assets/63c325d3-7511-4f56-8642-e40eab63ffd2)](https://condense.js.org)
+<div align="center">
+
+[<img width="700" alt="Condense Banner" src="https://github.com/user-attachments/assets/183e732e-4381-49eb-949b-7b806c201095" />](https://condense.js.org)
 
 [![npm](https://conbadges.pages.dev/api/npm/v/@studioframes/condense)](https://www.npmjs.com/package/@studioframes/condense)
 [![downloads](https://conbadges.pages.dev/api/npm/dt/@studioframes/condense)](https://www.npmjs.com/package/@studioframes/condense)
 [![License](https://conbadges.pages.dev/api/badge?label=license&value=Apache-2.0)](./LICENSE)
 
-**The fast, stateless file optimization engine for Node.js**
+**The fast, all-in-one, stateless file optimization engine.**
+
+</div>
 
 ## Introduction
 
 Condense provides fast, in-memory optimization for media, code, and binaries. It exists to offer low-latency, stateless processing for server-side and serverless environments where temporary disk I/O is undesirable or unavailable. Unlike traditional tools that rely on intermediate temporary files, Condense processes uploads and assets using Buffers and Streams, returning optimized Buffers or Streams ready to send in responses.
 
 ## Install
-
-Condense requires Node.js v20.9.0 or higher.
-
-> Condense doesn't support any other Javascript runtime other than Node.js yet.
 
 Install with your preferred package manager:
 
