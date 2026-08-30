@@ -25,10 +25,16 @@ function extractViewBox(svgString) {
  * Extracts the inner XML content from an SVG string (between <svg...> and </svg>)
  */
 function extractInnerSvg(svgString) {
-  const cleaned = svgString
-    .replace(/<\?xml[^>]*\?>/gi, '')
-    .replace(/<!DOCTYPE[^>]*>/gi, '')
-    .replace(/<!--[\s\S]*?-->/g, '');
+  let cleaned = svgString;
+  let previous;
+
+  do {
+    previous = cleaned;
+    cleaned = cleaned
+      .replace(/<\?xml[^>]*\?>/gi, '')
+      .replace(/<!DOCTYPE[^>]*>/gi, '')
+      .replace(/<!--[\s\S]*?-->/g, '');
+  } while (cleaned !== previous);
 
   const startMatch = cleaned.match(/<svg[^>]*>/i);
   if (!startMatch) return '';
