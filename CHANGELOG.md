@@ -4,12 +4,12 @@
 
 ### Dependencies
 
-- [``](https://github.com/studioframes/condense/commit/) Update `js-yaml` from `5.3.0` to `5.4.0`
-- [``](https://github.com/studioframes/condense/commit/) Update `svgo` from `4.0.2` to `4.1.0`
+- [`f7e5a93`](https://github.com/studioframes/condense/commit/f7e5a93) Update `js-yaml` from `5.3.0` to `5.4.0`
+- [`f7e5a93`](https://github.com/studioframes/condense/commit/f7e5a93) Update `svgo` from `4.0.2` to `4.1.0`
 
 ### DevDependencies
 
-- [``](https://github.com/studioframes/condense/commit/) Update `@types/node` from `26.2.0` to `26.3.0`
+- [`f7e5a93`](https://github.com/studioframes/condense/commit/f7e5a93) Update `@types/node` from `26.2.0` to `26.3.0`
 
 ## v0.3.17 (2026-08-26)
 
