@@ -6,8 +6,8 @@
 
 ### Fixes & Security
 
-- PDF Stream Scanning ReDoS Mitigation (`pdfService`): Replaced polynomial backtracking regular expression (`stream...endstream`) on uncontrolled binary stream data with an $O(N)$ linear-time index scanner (`findPdfStreams`) to eliminate Denial of Service risks on malicious or malformed streams (CodeQL #12).
-- PDF XMP Packet Parser ReDoS Mitigation (`pdfService`): Replaced regular expression extraction of XML metadata packets (`<?xpacket ... ?>`) with a non-backtracking linear scanner (`stripXmpPackets`) preventing polynomial execution on adversarial repeated prefixes (CodeQL #11).
+- [`39bd252`](https://github.com/studioframes/condense/commit/39bd252) PDF Stream Scanning ReDoS Mitigation (`pdfService`): Replaced polynomial backtracking regular expression (`stream...endstream`) on uncontrolled binary stream data with an $O(N)$ linear-time index scanner (`findPdfStreams`) to eliminate Denial of Service risks on malicious or malformed streams (CodeQL #12).
+- [`39bd252`](https://github.com/studioframes/condense/commit/39bd252) PDF XMP Packet Parser ReDoS Mitigation (`pdfService`): Replaced regular expression extraction of XML metadata packets (`<?xpacket ... ?>`) with a non-backtracking linear scanner (`stripXmpPackets`) preventing polynomial execution on adversarial repeated prefixes (CodeQL #11).
 - [`e59b3d3`](https://github.com/studioframes/condense/commit/e59b3d3) SVG Inner Markup Comment Sanitization (`svgSpriteService`): Implemented recursive iterative sanitization loop when stripping XML declarations, DOCTYPEs, and comments (`<!-- ... -->`) to resolve incomplete multi-character sanitization and prevent nested comment element injection (CodeQL #13).
 
 ### Dependencies
