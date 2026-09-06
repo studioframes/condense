@@ -2,6 +2,20 @@
 
 # v1.x
 
+## v1.0.2 (2026-09-06)
+
+### Dependencies
+
+- [`b91b98a`](https://github.com/studioframes/condense/commit/b91b98a) Update `sharp` from `0.35.3` to `0.35.4`
+- [`a97f65d`](https://github.com/studioframes/condense/commit/a97f65d) Update `terser` from `5.50.0` to `5.51.2`
+- [`bbb199e`](https://github.com/studioframes/condense/commit/bbb199e) Update `js-yaml` from `5.4.0` to `5.4.1`
+- [`be3a9a6`](https://github.com/studioframes/condense/commit/be3a9a6) Update `multer` from `2.2.0` to `2.3.0`
+- [`76f9742`](https://github.com/studioframes/condense/commit/76f9742) Update `qs` from `6.15.3` to `6.16.0`
+
+### DevDependencies
+
+- [`2324d3f`](https://github.com/studioframes/condense/commit/2324d3f) Update `@types/node` from `26.3.0` to `26.4.0`
+
 ## v1.0.1 (2026-08-30)
 
 ### Fixes & Security
@@ -42,6 +56,17 @@
 - [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) Updated documentation, examples, and CLI commands for all new capabilities.
 
 # v0.x
+
+## v0.3.18 (2026-08-30)
+
+### Dependencies
+
+- [`f7e5a93`](https://github.com/studioframes/condense/commit/f7e5a93) Update `js-yaml` from `5.3.0` to `5.4.0`
+- [`f7e5a93`](https://github.com/studioframes/condense/commit/f7e5a93) Update `svgo` from `4.0.2` to `4.1.0`
+
+### DevDependencies
+
+- [`f7e5a93`](https://github.com/studioframes/condense/commit/f7e5a93) Update `@types/node` from `26.2.0` to `26.3.0`
 
 ## v0.3.17 (2026-08-26)
 

@@ -4,7 +4,7 @@ This guide summarizes the changes developers should expect when upgrading Conden
 
 ## Security support and upgrade priority
 
-Before planning a migration, use the latest supported release. According to [SECURITY.md](./SECURITY.md), the recommended target for upgrades is the latest stable release, currently **1.0.1**. View [SECURITY.md](./SECURITY.md) for more info.
+Before planning a migration, use the latest supported release. According to [SECURITY.md](./SECURITY.md), the recommended target for upgrades is the latest stable release. View [SECURITY.md](./SECURITY.md) for more info.
 
 ## Upgrading from 0.3.x to 1.0.x
 
