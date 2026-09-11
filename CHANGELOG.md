@@ -2,6 +2,13 @@
 
 # v1.x
 
+## v1.0.3 (2026-09-11)
+
+### DevDependencies
+
+- [`f3b6085`](https://github.com/studioframes/condense/commit/f3b6085) Update `@types/node` from `26.4.0` to `26.5.0`
+- [`4e4afa5`](https://github.com/studioframes/condense/commit/4e4afa5) Update `eslint` from `10.9.0` to `10.10.0`
+
 ## v1.0.2 (2026-09-06)
 
 ### Dependencies
