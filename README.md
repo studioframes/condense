@@ -169,7 +169,7 @@ Coordinately shorten CSS class names and element IDs across interconnected HTML,
 Offload CPU-intensive compression jobs to background `worker_threads` with automatic thread pooling and main-thread fallback (`WorkerPool`, `getWorkerPool`).
 
 ### Enterprise Telemetry & ROI
-Real-time tracking of total processed files, bandwidth saved, estimated financial cost reduction ($USD), and carbon savings ($\text{gCO}_2$).
+Real-time tracking of total processed files, bandwidth saved, estimated financial cost reduction (USD), and carbon savings (gCO₂).
 
 ### Comprehensive Format Support
 Optimize images (PNG, JPEG, WebP, AVIF, GIF, SVG), audio/video (MP3, WAV, MP4), code/markup (HTML, CSS, JS, TS, JSX, TSX, JSON, XML, YAML, GraphQL, SCSS, LESS), fonts, PDFs, and WebAssembly binaries.
