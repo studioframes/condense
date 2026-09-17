@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.3.19 (2026-09-17)
+
+### Dependencies
+
+- [`094321`](https://github.com/studioframes/condense/commit/094321) Update `js-yaml` from `5.4.0` to `5.4.2`
+- [`094321`](https://github.com/studioframes/condense/commit/094321) Update `multer` from `2.2.0` to `2.4.0`
+- [`094321`](https://github.com/studioframes/condense/commit/094321) Update `sharp` from `0.35.3` to `0.35.4`
+- [`094321`](https://github.com/studioframes/condense/commit/094321) Update `terser` from `5.50.0` to `5.51.2`
+
+### DevDependencies
+
+- [`094321`](https://github.com/studioframes/condense/commit/094321) Update `@types/node` from `26.3.0` to `26.5.1`
+- [`094321`](https://github.com/studioframes/condense/commit/094321) Update `eslint` from `10.9.0` to `10.10.0`
+
 ## v0.3.18 (2026-08-30)
 
 ### Dependencies
