@@ -12,8 +12,8 @@ We actively monitor and patch vulnerabilities in `@studioframes/condense`. Pleas
 | **0.1.x**          | **Deprecated** | ❌        | End of life.                                                                                                                                                         |
 
 > [!CAUTION]
-> **v1.0.1** contains a security vulnerability that has been fixed (via dependency version bump) in [**v1.0.2**](./CHANGELOG.md#v102-2026-09-06).
-> **v1.0.0** contains security vulnerabilities that have been fixed in [**v1.0.1**](./CHANGELOG.md#v101-2026-08-30).
+> **v1.0.1** contains a security vulnerability that has been fixed in [**v1.0.2**](./CHANGELOG.md#v102-2026-09-06).<br>
+> **v1.0.0** contains security vulnerabilities that have been fixed in [**v1.0.1**](./CHANGELOG.md#v101-2026-08-30).<br>
 > **v0.3.0** (Deprecated) and **v0.3.1** (Deprecated) contains security vulnerabilities that have been fixed in [**v0.3.2**](./CHANGELOG.md#v032-2026-06-27).
 
 ## Our Security Guarantees
