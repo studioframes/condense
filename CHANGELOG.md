@@ -2,6 +2,17 @@
 
 # v1.x
 
+## v1.0.4 (2026-09-17)
+
+### Dependencies
+
+- [`3248814`](https://github.com/studioframes/condense/commit/3248814) Update `js-yaml` from `5.4.1` to `5.4.2`
+- [`fd466e0`](https://github.com/studioframes/condense/commit/fd466e0) Update `multer` from `2.3.0` to `2.4.0`
+
+### DevDependencies
+
+- [`4de1e3c`](https://github.com/studioframes/condense/commit/4de1e3c) Update `@types/node` from `26.5.0` to `26.5.1`
+
 ## v1.0.3 (2026-09-11)
 
 ### DevDependencies
@@ -44,17 +55,17 @@
 
 ### Added
 
-- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) **Perceptual Image Compression (`optimizePerceptualImage`)**: Binary search quality tuner guided by Structural Similarity Index (SSIM) and Peak Signal-to-Noise Ratio (PSNR) metrics to maximize file size reduction while mathematically preserving perceptual fidelity above target thresholds.
-- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) **Responsive Image Matrix (`generateResponsiveMatrix`)**: Multi-breakpoint responsive image set generator outputting WebP and AVIF variants along with optimized HTML5 `<picture>` markup.
-- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) **Cross-Document Token Mangling (`mangleTokens`)**: Coordinated shortening of HTML class names and IDs across interconnected HTML, CSS, and JS files to save network payload size while maintaining selector integrity.
-- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) **In-Memory SVG Spritesheet Packing (`packSvgSprites`)**: Bundles individual SVG icons into clean, consolidated `<svg><defs><symbol>` spritesheets with preserved `viewBox` coordinates.
-- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) **In-Memory ZIP / Archive Optimizer (`optimizeZip`)**: Pure in-memory ZIP decompression, parallel recursive asset optimization (images, code, fonts, binaries), and repacking with maximum DEFLATE compression using `fflate`.
-- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) **SFNT & WOFF Font Table Stripper (`optimizeFont`)**: Strips non-essential metadata tables (`DSIG`, `hdmx`, `LTSH`, `PCLT`) from OpenType/TrueType binaries with automatic table directory recalculation.
-- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) **In-Memory PDF Optimizer (`optimizePdf`)**: In-memory PDF minification stripping comments, XML metadata packets, and recompresses text/stream objects.
-- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) **Fluent Chainable Pipeline API (`createPipeline`)**: Builder pattern API (`.preset()`, `.resize()`, `.perceptual()`, `.toBuffer()`, `.toStream()`) for composing multi-step optimization flows.
-- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) **Multi-Threaded Worker Pool (`WorkerPool`, `getWorkerPool`)**: Background thread pool leveraging Node.js `worker_threads` for non-blocking parallel optimization with seamless fallback for single-threaded environments.
-- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) **Preset Engine (`presetService`)**: Built-in production presets (`web-hero`, `avatar-thumbnail`, `production-bundle`, `ultra-archive`, `email-safe`, `social-share`) with custom preset registration support.
-- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) **Enterprise Telemetry & ROI Tracking (`telemetryService`)**: Real-time tracking of processed files, bytes saved, estimated financial cost savings ($USD), and carbon reduction ($\text{gCO}_2$).
+- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) Perceptual Image Compression (`optimizePerceptualImage`): Binary search quality tuner guided by Structural Similarity Index (SSIM) and Peak Signal-to-Noise Ratio (PSNR) metrics to maximize file size reduction while mathematically preserving perceptual fidelity above target thresholds.
+- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) Responsive Image Matrix (`generateResponsiveMatrix`): Multi-breakpoint responsive image set generator outputting WebP and AVIF variants along with optimized HTML5 `<picture>` markup.
+- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) Cross-Document Token Mangling (`mangleTokens`): Coordinated shortening of HTML class names and IDs across interconnected HTML, CSS, and JS files to save network payload size while maintaining selector integrity.
+- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) In-Memory SVG Spritesheet Packing (`packSvgSprites`): Bundles individual SVG icons into clean, consolidated `<svg><defs><symbol>` spritesheets with preserved `viewBox` coordinates.
+- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) In-Memory ZIP / Archive Optimizer (`optimizeZip`): Pure in-memory ZIP decompression, parallel recursive asset optimization (images, code, fonts, binaries), and repacking with maximum DEFLATE compression using `fflate`.
+- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) SFNT & WOFF Font Table Stripper (`optimizeFont`): Strips non-essential metadata tables (`DSIG`, `hdmx`, `LTSH`, `PCLT`) from OpenType/TrueType binaries with automatic table directory recalculation.
+- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) In-Memory PDF Optimizer (`optimizePdf`): In-memory PDF minification stripping comments, XML metadata packets, and recompresses text/stream objects.
+- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) Fluent Chainable Pipeline API (`createPipeline`): Builder pattern API (`.preset()`, `.resize()`, `.perceptual()`, `.toBuffer()`, `.toStream()`) for composing multi-step optimization flows.
+- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) Multi-Threaded Worker Pool (`WorkerPool`, `getWorkerPool`): Background thread pool leveraging Node.js `worker_threads` for non-blocking parallel optimization with seamless fallback for single-threaded environments.
+- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) Preset Engine (`presetService`): Built-in production presets (`web-hero`, `avatar-thumbnail`, `production-bundle`, `ultra-archive`, `email-safe`, `social-share`) with custom preset registration support.
+- [`bcd7182`](https://github.com/studioframes/condense/commit/bcd7182) Enterprise Telemetry & ROI Tracking (`telemetryService`): Real-time tracking of processed files, bytes saved, estimated financial cost savings ($USD), and carbon reduction ($\text{gCO}_2$).
 
 ### Changed
 
