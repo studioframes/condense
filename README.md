@@ -3,8 +3,8 @@
 [<img width="700" alt="Condense Banner" src="https://github.com/user-attachments/assets/183e732e-4381-49eb-949b-7b806c201095" />](https://condense.js.org)
 
 [![npm](https://conbadges.pages.dev/api/npm/v/@studioframes/condense?height=35&fontSize=16)](https://www.npmjs.com/package/@studioframes/condense)
-[![downloads](https://conbadges.pages.dev/api/npm/dt/%40studioframes%2Fcondense?color=%23FF3D1F&fontSize=14&height=35)](https://www.npmjs.com/package/@studioframes/condense)
-[![License](https://conbadges.pages.dev/api/badge?label=license&value=Apache-2.0&height=35&fontSize=14)](./LICENSE)
+[![downloads](https://conbadges.pages.dev/api/npm/dt/%40studioframes%2Fcondense?color=%23FF3D1F&fontSize=16&height=35)](https://www.npmjs.com/package/@studioframes/condense)
+[![License](https://conbadges.pages.dev/api/badge?label=license&value=Apache-2.0&height=35&fontSize=16)](./LICENSE)
 
 **The fast, all-in-one, stateless file optimization engine.**
 
