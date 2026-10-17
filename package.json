@@ -1,6 +1,6 @@
 {
   "name": "@studioframes/condense",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Condense is the fast, all-in-one, stateless file optimization engine.",
   "main": "src/index.js",
   "bin": {
