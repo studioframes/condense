@@ -2,6 +2,24 @@
 
 # v1.x
 
+## v1.0.5 (2026-10-17)
+
+### Fixes & Security
+
+- [`7304168`](https://github.com/studioframes/condense/commit/7304168) Updated `express` and transitive dependency `proxy-addr` to resolve a critical IP spoofing vulnerability via IPv4-mapped IPv6 trust subnets.
+
+### Dependencies
+
+- [`7304168`](https://github.com/studioframes/condense/commit/7304168) Update `js-yaml` from `5.4.2` to `5.5.0`
+- [`7304168`](https://github.com/studioframes/condense/commit/7304168) Update `express` from `5.2.1` to `5.3.0`
+- [`7304168`](https://github.com/studioframes/condense/commit/7304168) Update `lru-cache` from `11.5.2` to `11.5.3`
+
+### DevDependencies
+
+- [`7304168`](https://github.com/studioframes/condense/commit/7304168) Update `@types/node` from `26.5.1` to `26.6.5`
+- [`7304168`](https://github.com/studioframes/condense/commit/7304168) Update `eslint` from `10.10.0` to `10.13.0`
+- [`7304168`](https://github.com/studioframes/condense/commit/7304168) Update `prettier` from `3.9.6` to `3.9.10`
+
 ## v1.0.4 (2026-09-17)
 
 ### Dependencies
