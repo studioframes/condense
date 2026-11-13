@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.3.20 (2026-11-13)
+
+### Dependencies
+
+- [`7069848`](https://github.com/studioframes/condense/commit/7069848) Update `js-yaml` from `5.4.2` to `5.5.0`
+- [`7069848`](https://github.com/studioframes/condense/commit/7069848) Update `multer` from `2.4.0` to `2.5.0`
+- [`7069848`](https://github.com/studioframes/condense/commit/7069848) Update `sharp` from `0.35.4` to `0.35.5`
+- [`7069848`](https://github.com/studioframes/condense/commit/7069848) Update `lru-cache` from `11.5.2` to `11.5.3`
+- [`7069848`](https://github.com/studioframes/condense/commit/7069848) Update `express` from `5.2.1` to `5.3.0`
+
+### DevDependencies
+
+- [`7069848`](https://github.com/studioframes/condense/commit/7069848) Update `@types/node` from `26.5.1` to `26.6.6`
+- [`7069848`](https://github.com/studioframes/condense/commit/7069848) Update `eslint` from `10.10.0` to `9.35.5`
+- [`7069848`](https://github.com/studioframes/condense/commit/7069848) Update `prettier` from `3.9.6` to `3.10.1`
+
 ## v0.3.19 (2026-09-17)
 
 ### Dependencies
