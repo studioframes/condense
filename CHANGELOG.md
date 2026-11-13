@@ -109,6 +109,36 @@
 
 # v0.x
 
+## v0.3.20 (2026-11-13)
+
+### Dependencies
+
+- [`a4276f7`](https://github.com/studioframes/condense/commit/a4276f7) Update `js-yaml` from `5.4.2` to `5.5.0`
+- [`a4276f7`](https://github.com/studioframes/condense/commit/a4276f7) Update `multer` from `2.4.0` to `2.5.0`
+- [`a4276f7`](https://github.com/studioframes/condense/commit/a4276f7) Update `sharp` from `0.35.4` to `0.35.5`
+- [`a4276f7`](https://github.com/studioframes/condense/commit/a4276f7) Update `lru-cache` from `11.5.2` to `11.5.3`
+- [`a4276f7`](https://github.com/studioframes/condense/commit/a4276f7) Update `express` from `5.2.1` to `5.3.0`
+
+### DevDependencies
+
+- [`a4276f7`](https://github.com/studioframes/condense/commit/a4276f7) Update `@types/node` from `26.5.1` to `26.6.6`
+- [`a4276f7`](https://github.com/studioframes/condense/commit/a4276f7) Update `eslint` from `10.10.0` to `9.35.5`
+- [`a4276f7`](https://github.com/studioframes/condense/commit/a4276f7) Update `prettier` from `3.9.6` to `3.10.1`
+
+## v0.3.19 (2026-09-17)
+
+### Dependencies
+
+- [`7069848`](https://github.com/studioframes/condense/commit/7069848) Update `js-yaml` from `5.4.0` to `5.4.2`
+- [`7069848`](https://github.com/studioframes/condense/commit/7069848) Update `multer` from `2.2.0` to `2.4.0`
+- [`7069848`](https://github.com/studioframes/condense/commit/7069848) Update `sharp` from `0.35.3` to `0.35.4`
+- [`7069848`](https://github.com/studioframes/condense/commit/7069848) Update `terser` from `5.50.0` to `5.51.2`
+
+### DevDependencies
+
+- [`7069848`](https://github.com/studioframes/condense/commit/7069848) Update `@types/node` from `26.3.0` to `26.5.1`
+- [`7069848`](https://github.com/studioframes/condense/commit/7069848) Update `eslint` from `10.9.0` to `10.10.0`
+
 ## v0.3.18 (2026-08-30)
 
 ### Dependencies
