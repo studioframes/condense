@@ -6,17 +6,17 @@
 
 ### Fixes & Security
 
-- [`123`](https://github.com/studioframes/condense/commit/123) Updated `multer` to resolve a Denial of Service via a pending asynchronous fileFilter after request teardown.
+- [`86bf481`](https://github.com/studioframes/condense/commit/86bf481) Updated `multer` to resolve a Denial of Service via a pending asynchronous fileFilter after request teardown.
 
 ### Dependencies
 
-- [`123`](https://github.com/studioframes/condense/commit/123) Update `multer` from `2.4.0` to `2.5.0`
+- [`86bf481`](https://github.com/studioframes/condense/commit/86bf481) Update `multer` from `2.4.0` to `2.5.0`
 
 ### DevDependencies
 
-- [`123`](https://github.com/studioframes/condense/commit/123) Update `@types/node` from `26.6.5` to `26.6.6`
-- [`123`](https://github.com/studioframes/condense/commit/123) Update `eslint` from `10.13.0` to `9.35.9`
-- [`123`](https://github.com/studioframes/condense/commit/123) Update `prettier` from `3.9.10` to `3.10.1`
+- [`86bf481`](https://github.com/studioframes/condense/commit/86bf481) Update `@types/node` from `26.6.5` to `26.6.6`
+- [`86bf481`](https://github.com/studioframes/condense/commit/86bf481) Update `eslint` from `10.13.0` to `9.35.9`
+- [`86bf481`](https://github.com/studioframes/condense/commit/86bf481) Update `prettier` from `3.9.10` to `3.10.1`
 
 ## v1.0.5 (2026-10-17)
 
